@@ -222,8 +222,8 @@
                 บรรทัดที่ 1 (ตัวหนา สีขาว)
               </label>
               <div class="flex items-center gap-2">
-                <span id="line1SizeVal" class="text-[10px] text-slate-400 font-mono">60px</span>
-                <input id="sliderLine1Size" type="range" min="32" max="92" value="60" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
+                <span id="line1SizeVal" class="text-[10px] text-slate-400 font-mono">54px</span>
+                <input id="sliderLine1Size" type="range" min="30" max="90" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
               </div>
             </div>
             <input type="text" id="inputLine1" value="ปักหมุด 14-15 พ.ย. นี้" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-sm text-white font-bold focus:outline-none focus:border-rose-500">
@@ -238,8 +238,8 @@
               </label>
               <div class="flex items-center gap-2">
                 <input type="color" id="inputLine2Color" value="#F6C852" class="w-5 h-5 rounded cursor-pointer bg-transparent border-0" title="เลือกสีข้อความ">
-                <span id="line2SizeVal" class="text-[10px] text-slate-400 font-mono">66px</span>
-                <input id="sliderLine2Size" type="range" min="32" max="96" value="66" class="w-16 accent-amber-400 h-1 bg-slate-800 rounded">
+                <span id="line2SizeVal" class="text-[10px] text-slate-400 font-mono">58px</span>
+                <input id="sliderLine2Size" type="range" min="30" max="90" value="58" class="w-16 accent-amber-400 h-1 bg-slate-800 rounded">
               </div>
             </div>
             <input type="text" id="inputLine2" value="The Hua Hin Expo 2026" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-sm text-amber-300 font-bold focus:outline-none focus:border-amber-400">
@@ -253,8 +253,8 @@
                 บรรทัดที่ 3 (คำโปรยเสริม / สถานที่ / บริบท)
               </label>
               <div class="flex items-center gap-2">
-                <span id="line3SizeVal" class="text-[10px] text-slate-400 font-mono">42px</span>
-                <input id="sliderLine3Size" type="range" min="20" max="60" value="42" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
+                <span id="line3SizeVal" class="text-[10px] text-slate-400 font-mono">36px</span>
+                <input id="sliderLine3Size" type="range" min="20" max="60" value="36" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
               </div>
             </div>
             <input type="text" id="inputLine3" value="ที่ศูนย์การค้าบลูพอร์ต หัวหิน" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-rose-500">
@@ -336,11 +336,11 @@
               <div class="flex justify-between text-xs text-slate-400">
                 <label class="flex items-center gap-1.5 text-slate-200 cursor-pointer">
                   <input type="checkbox" id="checkTopGradient" checked class="accent-[#b31929] rounded">
-                  <span id="lblGradientShadow">เงาดำไล่เฉดรองหลังตัวหนังสือ</span>
+                  <span id="lblGradientShadow">เงาดำไล่เฉดด้านล่าง (Bottom Shadow)</span>
                 </label>
-                <span id="gradientHeightVal" class="font-mono text-slate-300">48%</span>
+                <span id="gradientHeightVal" class="font-mono text-slate-300">54%</span>
               </div>
-              <input id="sliderGradientHeight" type="range" min="20" max="80" step="1" value="48" class="w-full accent-rose-600 cursor-pointer h-1 bg-slate-800 rounded-lg">
+              <input id="sliderGradientHeight" type="range" min="20" max="80" step="1" value="54" class="w-full accent-rose-600 cursor-pointer h-1 bg-slate-800 rounded-lg">
             </div>
           </div>
         </div>
@@ -437,16 +437,13 @@
 
   <!-- JAVASCRIPT ENGINE -->
   <script>
-    // Initialize Lucide Icons
     lucide.createIcons();
 
-    // DOM Elements
     const canvas = document.getElementById('coverCanvas');
     const ctx = canvas.getContext('2d');
     const canvasDimensionBadge = document.getElementById('canvasDimensionBadge');
     const dropZone = document.getElementById('dropZone');
 
-    // Controls
     const imageUpload = document.getElementById('imageUpload');
     const customLogoUpload = document.getElementById('customLogoUpload');
     const checkEnableTextOverlay = document.getElementById('checkEnableTextOverlay');
@@ -502,9 +499,8 @@
     const toastMessage = document.getElementById('toastMessage');
     const toastText = document.getElementById('toastText');
 
-    // Application State - Default to 4:5 with BOTTOM layout (matching the Hua Hin Expo example)
     let currentRatio = "4:5";
-    let textPosition = "bottom"; // 'top' or 'bottom'
+    let textPosition = "bottom"; 
     let canvasWidth = 1080;
     let canvasHeight = 1350;
 
@@ -517,7 +513,6 @@
     let customLogoImg = new Image();
     let hasCustomLogo = false;
 
-    // Interactive Dragging on Canvas
     let isDragging = false;
     let startPointerX = 0;
     let startPointerY = 0;
@@ -532,7 +527,6 @@
       }, 3000);
     }
 
-    // Toggle 4:5 Headline Placement (Top vs Bottom)
     function setTextPosition(pos) {
       textPosition = pos;
       if (pos === 'bottom') {
@@ -553,7 +547,6 @@
     btnLayoutTop.addEventListener('click', () => setTextPosition('top'));
     btnLayoutBottom.addEventListener('click', () => setTextPosition('bottom'));
 
-    // Set Aspect Ratio Presets
     function setAspectRatio(ratio) {
       currentRatio = ratio;
       if (ratio === "4:5") {
@@ -569,7 +562,6 @@
         canvasWidth = 1200;
         canvasHeight = 675;
         canvasDimensionBadge.textContent = "1200 × 675 px (16:9 ปกเว็บคลีน)";
-        // 16:9 Mode: Default to CLEAN (No text, no gradient shadow, only Clean photo + Logo)
         checkEnableTextOverlay.checked = false;
         checkTopGradient.checked = false;
         sliderLogoSize.value = "88";
@@ -603,7 +595,6 @@
       renderCover();
     }
 
-    // Update UI elements depending on text overlay toggle and placement
     function updateModeUI() {
       const hasText = checkEnableTextOverlay.checked;
       if (!hasText) {
@@ -622,14 +613,12 @@
       }
     }
 
-    // Create Initial Elegant News Sample Background
     function generateInitialNewsScenery() {
       const off = document.createElement('canvas');
       off.width = 1600;
       off.height = 2000;
       const octx = off.getContext('2d');
 
-      // Realistic event stage / conference warm lighting backdrop (Hua Hin Expo style)
       const bgGrad = octx.createLinearGradient(0, 0, 0, off.height);
       bgGrad.addColorStop(0, '#101622');
       bgGrad.addColorStop(0.35, '#231828');
@@ -638,7 +627,6 @@
       octx.fillStyle = bgGrad;
       octx.fillRect(0, 0, off.width, off.height);
 
-      // Warm spotlight on speakers
       const spot = octx.createRadialGradient(off.width * 0.5, off.height * 0.45, 80, off.width * 0.5, off.height * 0.45, 600);
       spot.addColorStop(0, 'rgba(255, 235, 220, 0.45)');
       spot.addColorStop(0.5, 'rgba(230, 110, 140, 0.25)');
@@ -646,7 +634,6 @@
       octx.fillStyle = spot;
       octx.fillRect(0, 0, off.width, off.height);
 
-      // Backdrop Stage Banner Text "WHY HUA HIN"
       octx.fillStyle = "rgba(255, 255, 255, 0.12)";
       octx.font = "900 140px 'Kanit', sans-serif";
       octx.textAlign = "center";
@@ -655,7 +642,6 @@
       octx.fillStyle = "rgba(179, 25, 41, 0.22)";
       octx.fillText("THE EXPO", off.width * 0.5, off.height * 0.38);
 
-      // Audience silhouettes at the front bottom
       octx.fillStyle = '#070a0e';
       for (let i = 0; i < 7; i++) {
         const x = off.width * 0.15 + i * (off.width * 0.12);
@@ -673,15 +659,12 @@
       newsImage.src = off.toDataURL('image/jpeg', 0.95);
     }
 
-    // MAIN RENDER FUNCTION
     function renderCover() {
       ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
-      // Background Base Fill
       ctx.fillStyle = "#0c1017";
       ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-      // 1. Draw Background Photo with Scale & Offset
       if (isNewsImageLoaded && newsImage.width > 0) {
         const imgRatio = newsImage.width / newsImage.height;
         const targetRatio = canvasWidth / canvasHeight;
@@ -703,24 +686,21 @@
         ctx.drawImage(newsImage, posX, posY, finalW, finalH);
       }
 
-      // 2. Draw Shadow Gradient Overlay (Top or Bottom based on textPosition)
       if (checkTopGradient.checked) {
         const pct = parseInt(sliderGradientHeight.value, 10) / 100;
         const gradHeight = canvasHeight * pct;
 
         if (textPosition === 'bottom') {
-          // Bottom Gradient (rising up from bottom to darken the lower area)
           const grad = ctx.createLinearGradient(0, canvasHeight, 0, canvasHeight - gradHeight);
           grad.addColorStop(0, "rgba(5, 7, 10, 0.98)");
-          grad.addColorStop(0.35, "rgba(7, 9, 13, 0.90)");
-          grad.addColorStop(0.68, "rgba(8, 11, 16, 0.60)");
-          grad.addColorStop(0.88, "rgba(8, 11, 16, 0.20)");
+          grad.addColorStop(0.35, "rgba(7, 9, 13, 0.92)");
+          grad.addColorStop(0.68, "rgba(8, 11, 16, 0.65)");
+          grad.addColorStop(0.88, "rgba(8, 11, 16, 0.25)");
           grad.addColorStop(1, "rgba(8, 11, 16, 0)");
 
           ctx.fillStyle = grad;
           ctx.fillRect(0, canvasHeight - gradHeight, canvasWidth, gradHeight);
         } else {
-          // Top Gradient (falling down from top)
           const grad = ctx.createLinearGradient(0, 0, 0, gradHeight);
           grad.addColorStop(0, "rgba(5, 7, 10, 0.96)");
           grad.addColorStop(0.35, "rgba(7, 9, 13, 0.88)");
@@ -733,23 +713,19 @@
         }
       }
 
-      // 3. Draw Khaowang Daily Logo (Top-Right Default)
       if (checkShowLogo.checked) {
         drawKhaowangLogo();
       }
 
-      // 4. Draw Typography & Vertical Red Accent Bar (Only if enabled)
       if (checkEnableTextOverlay.checked) {
         drawTypographyAndAccent();
       }
 
-      // 5. Draw Photo Credit Line
       if (checkEnableTextOverlay.checked || inputCredit.value.trim().length > 0) {
         drawCredit();
       }
     }
 
-    // RENDER OFFICIAL CIRCULAR LOGO SUBMARK
     function drawKhaowangLogo() {
       const logoSize = parseInt(sliderLogoSize.value, 10);
       const marginX = currentRatio === "16:9" ? 48 : (currentRatio === "4:5" ? 64 : 54);
@@ -767,7 +743,7 @@
       } else if (pos === 'bottom-right') {
         x = canvasWidth - marginX - logoSize;
         y = canvasHeight - marginY - logoSize;
-      } else { // bottom-left
+      } else { 
         x = marginX;
         y = canvasHeight - marginY - logoSize;
       }
@@ -775,26 +751,21 @@
       ctx.save();
 
       if (hasCustomLogo && customLogoImg.width > 0) {
-        // Draw user uploaded custom transparent logo
         ctx.drawImage(customLogoImg, x, y, logoSize, logoSize);
       } else {
-        // Render Official Khaowang Daily Crimson Circle
         const centerX = x + logoSize / 2;
         const centerY = y + logoSize / 2;
         const radius = logoSize / 2;
 
-        // Shadow behind circular badge
         ctx.shadowColor = "rgba(0, 0, 0, 0.65)";
         ctx.shadowBlur = 18;
         ctx.shadowOffsetY = 4;
 
-        // Crimson Red Circle (#b31929)
         ctx.beginPath();
         ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
         ctx.fillStyle = "#b31929";
         ctx.fill();
 
-        // Crisp border ring
         ctx.strokeStyle = "rgba(255, 255, 255, 0.22)";
         ctx.lineWidth = Math.max(1.5, logoSize * 0.02);
         ctx.stroke();
@@ -802,7 +773,6 @@
         ctx.shadowBlur = 0;
         ctx.shadowOffsetY = 0;
 
-        // Stacked White Bold Typography: "เขาวัง" on top, "เดลี่" below
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillStyle = "#ffffff";
@@ -810,11 +780,9 @@
         const fontSizeTop = Math.round(logoSize * 0.28);
         const fontSizeBottom = Math.round(logoSize * 0.29);
         
-        // Line 1: เขาวัง
         ctx.font = `800 ${fontSizeTop}px 'Kanit', sans-serif`;
         ctx.fillText("เขาวัง", centerX, centerY - (logoSize * 0.13));
 
-        // Line 2: เดลี่
         ctx.font = `800 ${fontSizeBottom}px 'Kanit', sans-serif`;
         ctx.fillText("เดลี่", centerX, centerY + (logoSize * 0.17));
       }
@@ -822,7 +790,6 @@
       ctx.restore();
     }
 
-    // RENDER 3-LINE TYPOGRAPHY & VERTICAL RED ACCENT BAR (TOP OR BOTTOM SUPPORT)
     function drawTypographyAndAccent() {
       const marginX = currentRatio === "4:5" ? 76 : 60;
       const yOffset = parseInt(sliderTextTop.value, 10);
@@ -840,24 +807,20 @@
       const hasLine2 = line2Text.length > 0;
       const hasLine3 = line3Text.length > 0;
 
-      // Calculate approximate total text height to anchor nicely
       const totalBlockHeight = (hasLine1 ? line1Size * 1.3 : 0) + 
                                (hasLine2 ? line2Size * 1.3 : 0) + 
                                (hasLine3 ? line3Size * 1.3 : 0);
 
-      // Determine Starting Y
       let startY = 0;
       if (textPosition === 'bottom') {
-        // Bottom Layout: anchor ~130px above bottom margin
-        const bottomMargin = currentRatio === "4:5" ? 140 : 110;
+        // ดันจุดยึดล่างให้ลอยสูงขึ้นพ้นขอบ (240px จากขอบล่าง) ป้องกันบรรทัดที่ 3 จม
+        const bottomMargin = currentRatio === "4:5" ? 240 : 160;
         startY = (canvasHeight - bottomMargin - totalBlockHeight) + yOffset;
       } else {
-        // Top Layout: anchor ~140px below top margin
         const topMargin = currentRatio === "4:5" ? 140 : 100;
         startY = topMargin + yOffset;
       }
 
-      // Spacing & line positions
       let currentY = startY;
       let line1Y = 0;
       let line2Y = 0;
@@ -878,7 +841,6 @@
         currentY = line3Y + 12;
       }
 
-      // 1. Draw Vertical Red Accent Stripe aligned with the text block
       const showAccent = checkAccentBar.checked;
       const accentWidth = currentRatio === "4:5" ? 18 : 14;
       const textIndentX = showAccent ? (marginX + accentWidth + 24) : marginX;
@@ -897,7 +859,6 @@
         ctx.restore();
       }
 
-      // 2. Render Text Lines with crisp drop shadow
       ctx.save();
       ctx.textAlign = "left";
       ctx.textBaseline = "alphabetic";
@@ -905,21 +866,18 @@
       ctx.shadowBlur = 12;
       ctx.shadowOffsetY = 3;
 
-      // Line 1: White bold (e.g. "ปักหมุด 14-15 พ.ย. นี้")
       if (hasLine1) {
         ctx.font = `800 ${line1Size}px '${selectedFont}', sans-serif`;
         ctx.fillStyle = "#ffffff";
         ctx.fillText(line1Text, textIndentX, line1Y);
       }
 
-      // Line 2: Warm Gold bold (e.g. "The Hua Hin Expo 2026")
       if (hasLine2) {
         ctx.font = `800 ${line2Size}px '${selectedFont}', sans-serif`;
         ctx.fillStyle = inputLine2Color.value;
         ctx.fillText(line2Text, textIndentX, line2Y);
       }
 
-      // Line 3: Medium subtitle (e.g. "ที่ศูนย์การค้าบลูพอร์ต หัวหิน")
       if (hasLine3) {
         ctx.font = `500 ${line3Size}px '${selectedFont}', sans-serif`;
         ctx.fillStyle = "#f1f5f9";
@@ -930,14 +888,12 @@
       ctx.restore();
     }
 
-    // DRAW PHOTO CREDIT FOOTER (Adaptive based on text position)
     function drawCredit() {
       const credit = inputCredit.value.trim();
       if (!credit) return;
 
       const marginX = currentRatio === "4:5" ? 64 : 54;
-      // If text is at bottom, place credit subtly at bottom right or just above bottom edge
-      const bottomY = canvasHeight - (currentRatio === "4:5" ? 36 : 28);
+      const bottomY = canvasHeight - (currentRatio === "4:5" ? 48 : 28);
 
       ctx.save();
       ctx.textAlign = "right";
@@ -949,9 +905,6 @@
       ctx.restore();
     }
 
-    // EVENT LISTENERS & USER INTERACTIONS
-
-    // 1. Ratio switch buttons
     document.querySelectorAll('.ratio-btn').forEach(btn => {
       btn.addEventListener('click', () => setAspectRatio(btn.dataset.ratio));
     });
@@ -961,7 +914,6 @@
       renderCover();
     });
 
-    // 2. Photo Upload & Drag/Drop
     function handleImageFile(file) {
       if (!file) return;
       const reader = new FileReader();
@@ -988,7 +940,6 @@
 
     imageUpload.addEventListener('change', (e) => handleImageFile(e.target.files[0]));
 
-    // Drag and Drop on Preview
     dropZone.addEventListener('dragover', (e) => {
       e.preventDefault();
       dropZone.classList.add('border-rose-500', 'bg-slate-900');
@@ -1006,7 +957,6 @@
       }
     });
 
-    // 3. Custom Logo Upload
     customLogoUpload.addEventListener('change', (e) => {
       const file = e.target.files[0];
       if (file) {
@@ -1025,7 +975,6 @@
       }
     });
 
-    // 4. Sliders Listeners
     sliderZoom.addEventListener('input', (e) => {
       imgScale = parseFloat(e.target.value);
       zoomVal.textContent = Math.round(imgScale * 100) + '%';
@@ -1089,7 +1038,6 @@
       renderCover();
     });
 
-    // 5. Input Text Listeners
     [inputLine1, inputLine2, inputLine3, inputCredit].forEach(el => {
       el.addEventListener('input', renderCover);
     });
@@ -1099,7 +1047,6 @@
       el.addEventListener('input', renderCover);
     });
 
-    // Quick Templates
     document.querySelectorAll('.tpl-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         if (btn.dataset.layout) {
@@ -1112,7 +1059,6 @@
       });
     });
 
-    // 6. Direct Canvas Dragging (Mouse & Touch)
     function onPointerStart(cx, cy) {
       isDragging = true;
       startPointerX = cx - imgOffsetX;
@@ -1152,7 +1098,6 @@
 
     window.addEventListener('touchend', onPointerEnd);
 
-    // 7. Export & Download Handlers
     function getExportFilename(extension) {
       const now = new Date();
       const pad = (n) => String(n).padStart(2, '0');
@@ -1179,7 +1124,6 @@
     btnDownloadTopJpg.addEventListener('click', () => downloadFile('jpg'));
     btnDownloadPng.addEventListener('click', () => downloadFile('png'));
 
-    // 8. Clipboard Copy
     btnCopyImage.addEventListener('click', () => {
       try {
         canvas.toBlob((blob) => {
@@ -1203,7 +1147,6 @@
       }
     });
 
-    // Start App on Window Load
     window.onload = function() {
       setAspectRatio("4:5");
       setTextPosition("bottom");
