@@ -8,7 +8,7 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Thai Google Fonts: Bai Jamjuree, Prompt, Kanit, Sarabun -->
+  <!-- Thai Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Kanit:wght@400;500;600;700;800;900&family=Prompt:wght@400;500;600;700;800&family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
@@ -94,7 +94,7 @@
   <!-- MAIN WORKSPACE -->
   <main class="flex-1 flex flex-col lg:flex-row overflow-hidden">
     
-    <!-- LEFT PANEL: Canvas Display Viewport (Fit Screen บนมือถือ) -->
+    <!-- LEFT PANEL: Canvas Display Viewport -->
     <section class="flex-1 bg-slate-950 p-2 sm:p-5 lg:p-6 flex flex-col items-center justify-center relative overflow-hidden border-b lg:border-b-0 lg:border-r border-slate-800/80 min-h-[350px]">
       
       <!-- Meta Information -->
@@ -104,24 +104,36 @@
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
           </span>
-          <span class="font-medium text-slate-300 text-[11px] sm:text-xs">Live Preview (Fit Screen)</span>
+          <span class="font-medium text-slate-300 text-[11px] sm:text-xs" id="modeTitle">Live Preview (BBC Format)</span>
         </div>
         <div id="canvasDimensionBadge" class="px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800 text-slate-300 font-mono text-[10px] sm:text-[11px]">
           1080 × 1350 px (4:5)
         </div>
       </div>
 
-      <!-- Canvas Frame (Auto Fit Screen) -->
-      <div id="dropZone" class="w-full max-w-xs sm:max-w-md lg:max-w-2xl flex items-center justify-center shadow-2xl rounded-2xl overflow-hidden border border-slate-800/90 bg-slate-900/60 p-1 backdrop-blur transition" style="max-height: 42vh; max-width: 90%; aspect-ratio: 4/5;">
+      <!-- Canvas Frame (Auto Fit Screen + Drag & Drop Direct Target) -->
+      <div id="dropZone" class="w-full max-w-xs sm:max-w-md lg:max-w-3xl flex items-center justify-center shadow-2xl rounded-2xl overflow-hidden border-2 border-dashed border-slate-700/80 hover:border-rose-500/70 bg-slate-900/60 p-1 backdrop-blur transition relative group cursor-pointer" style="max-height: 48vh; aspect-ratio: 4/5;">
         <canvas id="coverCanvas" class="max-w-full max-h-full object-contain rounded-xl cursor-grab active:cursor-grabbing select-none" style="display: block;"></canvas>
+        
+        <!-- Drag & Drop Overlay Hint on Desktop -->
+        <div id="dropOverlay" class="absolute inset-0 bg-slate-950/85 backdrop-blur-sm flex flex-col items-center justify-center gap-2 opacity-0 pointer-events-none transition duration-200">
+          <i data-lucide="upload-cloud" class="w-12 h-12 text-rose-500 animate-bounce"></i>
+          <span class="text-sm font-bold text-white">ปล่อยรูปภาพที่นี่เพื่ออัปโหลด</span>
+        </div>
       </div>
 
-      <!-- Quick Tips -->
-      <div class="w-full max-w-xs sm:max-w-md lg:max-w-2xl flex items-center justify-between mt-2 px-3 text-[10px] sm:text-xs text-slate-400">
-        <span>💡 แตะเลื่อนบนรูปเพื่อจัดตำแหน่งภาพ</span>
-        <button id="btnResetPhotoPos" class="text-rose-400 hover:text-rose-300 underline font-medium cursor-pointer">
-          จัดรูปกึ่งกลาง
-        </button>
+      <!-- Quick Tips & Direct Upload -->
+      <div class="w-full max-w-xs sm:max-w-md lg:max-w-3xl flex items-center justify-between mt-2 px-3 text-[10px] sm:text-xs text-slate-400">
+        <span class="hidden sm:inline">💡 ลากไฟล์รูปมาวางบนกรอบ หรือแตะเลื่อนรูปเพื่อจัดตำแหน่ง</span>
+        <span class="sm:hidden">💡 แตะเลื่อนบนรูปเพื่อจัดตำแหน่งภาพ</span>
+        <div class="flex items-center gap-3">
+          <label for="imageUpload" class="text-rose-400 hover:text-rose-300 font-semibold cursor-pointer underline flex items-center gap-1">
+            <i data-lucide="image-plus" class="w-3.5 h-3.5"></i> เปลี่ยนรูปภาพ
+          </label>
+          <button id="btnResetPhotoPos" class="text-slate-400 hover:text-white underline cursor-pointer">
+            กึ่งกลาง
+          </button>
+        </div>
       </div>
     </section>
 
@@ -153,7 +165,13 @@
           </div>
         </div>
 
-        <!-- 4:5 Position Presets (สลับบน - ล่าง สไตล์ BBC) -->
+        <!-- 16:9 Clean Notice Banner -->
+        <div id="cleanNotice169" class="hidden p-3 rounded-xl border border-emerald-500/30 bg-emerald-950/20 text-emerald-300 text-xs flex items-center gap-2">
+          <i data-lucide="check-circle" class="w-4 h-4 shrink-0 text-emerald-400"></i>
+          <span>โหมด 16:9 แสดงภาพคลีน 100% พร้อมโลโก้เขาวังเดลี่ซ้ายบน (ซ่อนตัวหนังสือทั้งหมดอัตโนมัติ)</span>
+        </div>
+
+        <!-- 4:5 Position Presets -->
         <div id="textPlacementBox" class="space-y-2 p-3 rounded-xl border border-slate-800 bg-slate-950/70">
           <div class="flex items-center justify-between">
             <label class="text-xs font-bold text-slate-200 flex items-center gap-1.5">
@@ -164,16 +182,16 @@
           <div class="grid grid-cols-2 gap-2">
             <button type="button" id="btnLayoutTop" class="layout-preset-btn active-layout flex items-center justify-center gap-2 p-2 rounded-lg border border-rose-500 bg-rose-500/20 text-rose-200 font-bold text-xs transition">
               <i data-lucide="arrow-up-to-line" class="w-3.5 h-3.5"></i>
-              <span>พาดหัวบน (แบบมัมมี่)</span>
+              <span>พาดหัวบน</span>
             </button>
             <button type="button" id="btnLayoutBottom" class="layout-preset-btn flex items-center justify-center gap-2 p-2 rounded-lg border border-slate-700 bg-slate-800/60 text-slate-300 font-bold text-xs hover:bg-slate-800 transition">
               <i data-lucide="arrow-down-to-line" class="w-3.5 h-3.5"></i>
-              <span>พาดหัวล่าง (แบบอาหาร)</span>
+              <span>พาดหัวล่าง</span>
             </button>
           </div>
         </div>
 
-        <div class="h-px bg-slate-800"></div>
+        <div id="typographyDivider" class="h-px bg-slate-800"></div>
 
         <!-- 2. Typography Layout Settings -->
         <div id="typographySection" class="space-y-4">
@@ -305,8 +323,8 @@
               </div>
             </div>
 
-            <!-- Gradient Shadow -->
-            <div class="pt-2 border-t border-slate-800/80 space-y-2">
+            <!-- Gradient Shadow (เฉพาะ 4:5 และ 1:1) -->
+            <div id="gradientSectionBox" class="pt-2 border-t border-slate-800/80 space-y-2">
               <div class="flex justify-between text-xs text-slate-400">
                 <label class="flex items-center gap-1.5 text-slate-200 cursor-pointer">
                   <input type="checkbox" id="checkTopGradient" checked class="accent-[#b31929] rounded">
@@ -364,8 +382,8 @@
           </div>
         </div>
 
-        <!-- 5. Photo Credit Footer (BBC Vertical Style: Right Edge) -->
-        <div class="space-y-2 bg-slate-950/70 p-3.5 rounded-xl border border-slate-800">
+        <!-- 5. Photo Credit Footer (ซ่อนใน 16:9) -->
+        <div id="creditBoxSection" class="space-y-2 bg-slate-950/70 p-3.5 rounded-xl border border-slate-800">
           <div class="flex items-center justify-between">
             <label class="text-xs text-slate-200 font-semibold flex items-center gap-1.5">
               <i data-lucide="camera" class="w-3.5 h-3.5 text-slate-400"></i>
@@ -410,12 +428,20 @@
     const ctx = canvas.getContext('2d');
     const canvasDimensionBadge = document.getElementById('canvasDimensionBadge');
     const dropZone = document.getElementById('dropZone');
+    const dropOverlay = document.getElementById('dropOverlay');
+    const modeTitle = document.getElementById('modeTitle');
 
     const imageUpload = document.getElementById('imageUpload');
     const customLogoUpload = document.getElementById('customLogoUpload');
     const textPlacementBox = document.getElementById('textPlacementBox');
     const btnLayoutTop = document.getElementById('btnLayoutTop');
     const btnLayoutBottom = document.getElementById('btnLayoutBottom');
+
+    const cleanNotice169 = document.getElementById('cleanNotice169');
+    const typographySection = document.getElementById('typographySection');
+    const typographyDivider = document.getElementById('typographyDivider');
+    const gradientSectionBox = document.getElementById('gradientSectionBox');
+    const creditBoxSection = document.getElementById('creditBoxSection');
 
     const sliderZoom = document.getElementById('sliderZoom');
     const zoomVal = document.getElementById('zoomVal');
@@ -465,7 +491,7 @@
     const toastText = document.getElementById('toastText');
 
     let currentRatio = "4:5";
-    let textPosition = "top"; // ตั้งค่าเริ่มต้นเป็น "พาดหัวบน" ตามตัวอย่าง
+    let textPosition = "top";
     let canvasWidth = 1080;
     let canvasHeight = 1350;
 
@@ -511,38 +537,73 @@
     btnLayoutTop.addEventListener('click', () => setTextPosition('top'));
     btnLayoutBottom.addEventListener('click', () => setTextPosition('bottom'));
 
+    // การเปลี่ยนสัดส่วน (16:9 เป็นภาพคลีน 100%)
     function setAspectRatio(ratio) {
       currentRatio = ratio;
       if (ratio === "4:5") {
         canvasWidth = 1080;
         canvasHeight = 1350;
         canvasDimensionBadge.textContent = "1080 × 1350 px (4:5 BBC)";
-        checkTopGradient.checked = true;
+        modeTitle.textContent = "Live Preview (BBC Format)";
         sliderLogoSize.value = "110";
         logoSizeVal.textContent = "110px";
-        textPlacementBox.classList.remove('hidden');
         dropZone.style.aspectRatio = "4/5";
+
+        // แสดงแผงพาดหัวและตัวหนังสือ
+        cleanNotice169.classList.add('hidden');
+        textPlacementBox.classList.remove('hidden');
+        typographySection.classList.remove('hidden');
+        typographyDivider.classList.remove('hidden');
+        gradientSectionBox.classList.remove('hidden');
+        creditBoxSection.classList.remove('hidden');
+
       } else if (ratio === "16:9") {
         canvasWidth = 1200;
         canvasHeight = 675;
-        canvasDimensionBadge.textContent = "1200 × 675 px (16:9 ปกเว็บ)";
-        checkTopGradient.checked = false;
-        sliderLogoSize.value = "85";
-        logoSizeVal.textContent = "85px";
-        textPlacementBox.classList.add('hidden');
+        canvasDimensionBadge.textContent = "1200 × 675 px (16:9 ปกเว็บคลีน)";
+        modeTitle.textContent = "Live Preview (16:9 Clean Photo)";
+        sliderLogoSize.value = "90";
+        logoSizeVal.textContent = "90px";
         dropZone.style.aspectRatio = "16/9";
+
+        // ซ่อนตัวหนังสือทั้งหมดใน 16:9 (ภาพคลีน + โลโก้เท่านั้น)
+        cleanNotice169.classList.remove('hidden');
+        textPlacementBox.classList.add('hidden');
+        typographySection.classList.add('hidden');
+        typographyDivider.classList.add('hidden');
+        gradientSectionBox.classList.add('hidden');
+        creditBoxSection.classList.add('hidden');
+
       } else if (ratio === "1:1") {
         canvasWidth = 1080;
         canvasHeight = 1080;
         canvasDimensionBadge.textContent = "1080 × 1080 px (1:1 จัตุรัส)";
-        textPlacementBox.classList.remove('hidden');
+        modeTitle.textContent = "Live Preview (1:1 Square)";
         dropZone.style.aspectRatio = "1/1";
+
+        cleanNotice169.classList.add('hidden');
+        textPlacementBox.classList.remove('hidden');
+        typographySection.classList.remove('hidden');
+        typographyDivider.classList.remove('hidden');
+        gradientSectionBox.classList.remove('hidden');
+        creditBoxSection.classList.remove('hidden');
       }
 
       sliderTextTop.value = "0";
       textTopVal.textContent = "0px";
       canvas.width = canvasWidth;
       canvas.height = canvasHeight;
+
+      document.querySelectorAll('.ratio-btn').forEach(btn => {
+        if (btn.dataset.ratio === ratio) {
+          btn.classList.add('active-ratio', 'border-rose-600', 'bg-rose-600/15', 'text-rose-200');
+          btn.classList.remove('border-slate-700', 'bg-slate-800/70', 'text-slate-300');
+        } else {
+          btn.classList.remove('active-ratio', 'border-rose-600', 'bg-rose-600/15', 'text-rose-200');
+          btn.classList.add('border-slate-700', 'bg-slate-800/70', 'text-slate-300');
+        }
+      });
+
       renderCover();
     }
 
@@ -551,7 +612,7 @@
       ctx.fillStyle = "#0c1017";
       ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-      // 1. Draw Background Image (Cover mode)
+      // 1. วาดรูปภาพพื้นหลัง (ขยายเต็มกรอบแบบ Cover)
       if (isNewsImageLoaded && newsImage.width > 0) {
         const imgRatio = newsImage.width / newsImage.height;
         const targetRatio = canvasWidth / canvasHeight;
@@ -573,52 +634,48 @@
         ctx.drawImage(newsImage, posX, posY, finalW, finalH);
       }
 
-      // 2. Gradient Shadow
-      if (checkTopGradient.checked) {
+      // 2. เงาดำไล่เฉด (จะแสดงเฉพาะโหมดที่ไม่ใช่ 16:9 คลีน)
+      if (currentRatio !== "16:9" && checkTopGradient.checked) {
         const pct = parseInt(sliderGradientHeight.value, 10) / 100;
         const gradHeight = canvasHeight * pct;
 
         if (textPosition === 'top') {
-          // เงาดำไล่จากบนลงล่าง สำหรับพาดหัวด้านบน
           const grad = ctx.createLinearGradient(0, 0, 0, gradHeight);
           grad.addColorStop(0, "rgba(5, 7, 10, 0.98)");
           grad.addColorStop(0.38, "rgba(7, 9, 13, 0.92)");
           grad.addColorStop(0.70, "rgba(8, 11, 16, 0.60)");
           grad.addColorStop(0.90, "rgba(8, 11, 16, 0.20)");
           grad.addColorStop(1, "rgba(8, 11, 16, 0)");
-
           ctx.fillStyle = grad;
           ctx.fillRect(0, 0, canvasWidth, gradHeight);
         } else {
-          // เงาดำไล่จากล่างขึ้นบน สำหรับพาดหัวด้านล่าง
           const grad = ctx.createLinearGradient(0, canvasHeight, 0, canvasHeight - gradHeight);
           grad.addColorStop(0, "rgba(5, 7, 10, 0.98)");
           grad.addColorStop(0.38, "rgba(7, 9, 13, 0.90)");
           grad.addColorStop(0.70, "rgba(8, 11, 16, 0.55)");
           grad.addColorStop(0.90, "rgba(8, 11, 16, 0.18)");
           grad.addColorStop(1, "rgba(8, 11, 16, 0)");
-
           ctx.fillStyle = grad;
           ctx.fillRect(0, canvasHeight - gradHeight, canvasWidth, gradHeight);
         }
       }
 
-      // 3. Draw Khaowang Logo (Default: Top-Left แบบ BBC)
+      // 3. วาดโลโก้เขาวังเดลี่ (ซ้ายบนเสมอ)
       if (checkShowLogo.checked) {
         drawKhaowangLogo();
       }
 
-      // 4. Draw Typography & BBC Red Bar
-      drawTypographyAndAccent();
-
-      // 5. Draw Photo Credit (Default: Vertical Right Edge แบบ BBC)
-      drawCredit();
+      // 4. วาดตัวหนังสือพาดหัวและแถบแดง (ยกเว้น 16:9 คลีน)
+      if (currentRatio !== "16:9") {
+        drawTypographyAndAccent();
+        drawCredit();
+      }
     }
 
-    // DRAW LOGO
+    // ฟังก์ชันวาดโลโก้
     function drawKhaowangLogo() {
       const logoSize = parseInt(sliderLogoSize.value, 10);
-      const marginX = currentRatio === "16:9" ? 48 : (currentRatio === "4:5" ? 64 : 54);
+      const marginX = currentRatio === "16:9" ? 52 : (currentRatio === "4:5" ? 64 : 54);
       const marginY = currentRatio === "16:9" ? 44 : (currentRatio === "4:5" ? 64 : 44);
       let x = 0;
       let y = 0;
@@ -633,7 +690,7 @@
       } else if (pos === 'bottom-left') {
         x = marginX;
         y = canvasHeight - marginY - logoSize;
-      } else { // bottom-right
+      } else {
         x = canvasWidth - marginX - logoSize;
         y = canvasHeight - marginY - logoSize;
       }
@@ -680,7 +737,7 @@
       ctx.restore();
     }
 
-    // DRAW TYPOGRAPHY & BBC RED BAR
+    // ฟังก์ชันวาดตัวหนังสือ BBC
     function drawTypographyAndAccent() {
       const marginX = currentRatio === "4:5" ? 64 : 50;
       const yOffset = parseInt(sliderTextTop.value, 10);
@@ -704,11 +761,9 @@
 
       let startY = 0;
       if (textPosition === 'top') {
-        // วางด้านบน ถัดลงมาจากโลโก้ (ระยะปลอดภัย 210px) สไตล์ตัวอย่างมัมมี่
         const topMargin = currentRatio === "4:5" ? 215 : 140;
         startY = topMargin + yOffset;
       } else {
-        // วางด้านล่าง
         const bottomMargin = currentRatio === "4:5" ? 170 : 120;
         startY = (canvasHeight - bottomMargin - totalBlockHeight) + yOffset;
       }
@@ -733,9 +788,8 @@
         currentY = line3Y + 14;
       }
 
-      // BBC Vertical Red Accent Bar (ชิดซ้ายสุด หรือประกบข้างข้อความ)
       const showAccent = checkAccentBar.checked;
-      const accentWidth = currentRatio === "4:5" ? 30 : 22; // ทรงแถบหนาตามแบบ BBC
+      const accentWidth = currentRatio === "4:5" ? 30 : 22;
       const textIndentX = showAccent ? (marginX + accentWidth + 28) : marginX;
 
       if (showAccent && (hasLine1 || hasLine2 || hasLine3)) {
@@ -750,7 +804,6 @@
         ctx.restore();
       }
 
-      // Render Text Lines
       ctx.save();
       ctx.textAlign = "left";
       ctx.textBaseline = "alphabetic";
@@ -779,7 +832,7 @@
       ctx.restore();
     }
 
-    // DRAW PHOTO CREDIT (BBC STYLE: หมุน 90 องศา แนบขอบขวา)
+    // ฟังก์ชันวาดเครดิตภาพ
     function drawCredit() {
       const credit = inputCredit.value.trim();
       if (!credit) return;
@@ -787,13 +840,11 @@
       ctx.save();
 
       if (checkVerticalCredit.checked) {
-        // BBC Vertical Style: ชิดขอบขวา หมุนแนวตั้ง 90 องศา
         const posX = canvasWidth - (currentRatio === "4:5" ? 44 : 32);
-        // หากวางพาดหัวบน เครดิตจะอยู่กึ่งกลางเยื้องไปทางล่าง (เหมือนตัวอย่าง)
         const posY = textPosition === 'top' ? (canvasHeight * 0.65) : (canvasHeight * 0.42);
 
         ctx.translate(posX, posY);
-        ctx.rotate(-Math.PI / 2); // หมุนตัวหนังสือขึ้น 90 องศา
+        ctx.rotate(-Math.PI / 2);
         ctx.textAlign = "center";
         ctx.font = "600 14px 'Prompt', sans-serif";
         ctx.fillStyle = "rgba(255, 255, 255, 0.60)";
@@ -815,11 +866,7 @@
       ctx.restore();
     }
 
-    // EVENT LISTENERS
-    document.querySelectorAll('.ratio-btn').forEach(btn => {
-      btn.addEventListener('click', () => setAspectRatio(btn.dataset.ratio));
-    });
-
+    // จัดการเลือกไฟล์รูปภาพ
     function handleImageFile(file) {
       if (!file) return;
       const reader = new FileReader();
@@ -838,6 +885,7 @@
           panXVal.textContent = "0";
           panYVal.textContent = "0";
           renderCover();
+          showToast("อัปโหลดรูปภาพสำเร็จ!");
         };
         img.src = event.target.result;
       };
@@ -846,6 +894,36 @@
 
     imageUpload.addEventListener('change', (e) => handleImageFile(e.target.files[0]));
 
+    // Drag & Drop File โดยตรงบนกรอบพรีวิวของ Desktop
+    ['dragenter', 'dragover'].forEach(eventName => {
+      window.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        dropOverlay.classList.remove('opacity-0', 'pointer-events-none');
+        dropOverlay.classList.add('opacity-100');
+      }, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      window.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        dropOverlay.classList.remove('opacity-100');
+        dropOverlay.classList.add('opacity-0', 'pointer-events-none');
+      }, false);
+    });
+
+    window.addEventListener('drop', (e) => {
+      e.preventDefault();
+      if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) {
+        handleImageFile(e.dataTransfer.files[0]);
+      }
+    });
+
+    // คลิกที่ขอบกรอบเพื่ออัปโหลดรูปภาพได้เช่นกัน
+    dropZone.addEventListener('dblclick', () => {
+      imageUpload.click();
+    });
+
+    // Touch & Mouse Drag บน Canvas เพื่อเลื่อนรูป
     function getCanvasPointerCoords(e) {
       const rect = canvas.getBoundingClientRect();
       const scaleX = canvasWidth / rect.width;
@@ -895,6 +973,11 @@
 
     window.addEventListener('touchend', onPointerEnd);
 
+    // Event Listeners สัดส่วน
+    document.querySelectorAll('.ratio-btn').forEach(btn => {
+      btn.addEventListener('click', () => setAspectRatio(btn.dataset.ratio));
+    });
+
     customLogoUpload.addEventListener('change', (e) => {
       const file = e.target.files[0];
       if (file) {
@@ -905,7 +988,7 @@
             customLogoImg = img;
             hasCustomLogo = true;
             renderCover();
-            showToast("อัปโหลดไฟล์โลโก้ PNG เรียบร้อยแล้ว");
+            showToast("อัปโหลดไฟล์โลโก้ PNG สำเร็จ");
           };
           img.src = event.target.result;
         };
@@ -991,8 +1074,8 @@
       const dateStr = `${now.getFullYear()}${pad(now.getMonth() + 1)}${pad(now.getDate())}`;
       const timeStr = `${pad(now.getHours())}${pad(now.getMinutes())}`;
       const ratioTag = currentRatio.replace(':', 'x');
-      const layoutTag = currentRatio === '4:5' ? `-${textPosition}` : '';
-      return `khaowangdaily-bbc-${ratioTag}${layoutTag}-${dateStr}-${timeStr}.${extension}`;
+      const layoutTag = currentRatio !== '16:9' ? `-${textPosition}` : '-clean';
+      return `khaowangdaily-${ratioTag}${layoutTag}-${dateStr}-${timeStr}.${extension}`;
     }
 
     function downloadFile(format) {
@@ -1029,12 +1112,11 @@
       }
     });
 
-    // เริ่มต้นระบบด้วยโหมดพาดหัวด้านบน (Top Layout)
+    // เริ่มต้นระบบ
     window.onload = function() {
       setAspectRatio("4:5");
       setTextPosition("top");
-      
-      // ภาพจำลองบรรยากาศน้ำแข็งโบราณ
+
       const off = document.createElement('canvas');
       off.width = 1080;
       off.height = 1350;
