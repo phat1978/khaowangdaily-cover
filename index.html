@@ -64,9 +64,7 @@
 
   <!-- TOP HEADER NAV -->
   <header class="border-b border-slate-800/90 bg-slate-900/95 backdrop-blur sticky top-0 z-50 px-4 lg:px-8 py-2.5 flex items-center justify-between shadow-md">
-    <!-- Brand Title -->
     <div class="flex items-center gap-3">
-      <!-- Circular Khaowang Daily Vector Submark Icon -->
       <div class="w-10 h-10 rounded-full bg-[#b31929] flex flex-col items-center justify-center shadow-lg shadow-rose-950/40 text-white font-black leading-none p-1 border border-white/20 select-none shrink-0">
         <span class="text-[9px] font-bold tracking-tighter" style="font-family:'Kanit', sans-serif;">เขาวัง</span>
         <span class="text-[9px] font-bold tracking-tighter mt-[-1px]" style="font-family:'Kanit', sans-serif;">เดลี่</span>
@@ -80,9 +78,8 @@
       </div>
     </div>
 
-    <!-- Quick Export Actions -->
     <div class="flex items-center gap-2">
-      <button id="btnCopyImage" class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-xl text-slate-200 bg-slate-800 hover:bg-slate-750 border border-slate-700 transition shadow-sm active:scale-95" title="คัดลอกรูปภาพเพื่อวางลงโพสต์ Facebook ได้ทันที">
+      <button id="btnCopyImage" class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-xl text-slate-200 bg-slate-800 hover:bg-slate-750 border border-slate-700 transition shadow-sm active:scale-95" title="คัดลอกรูปภาพ">
         <i data-lucide="copy" class="w-4 h-4 text-rose-400"></i>
         <span class="hidden md:inline">คัดลอกภาพ</span>
       </button>
@@ -97,31 +94,32 @@
   <!-- MAIN WORKSPACE -->
   <main class="flex-1 flex flex-col lg:flex-row overflow-hidden">
     
-    <!-- LEFT PANEL: Canvas Display Viewport -->
-    <section class="flex-1 bg-slate-950 p-3 sm:p-5 lg:p-6 flex flex-col items-center justify-center relative overflow-auto border-b lg:border-b-0 lg:border-r border-slate-800/80 min-h-[380px]">
+    <!-- LEFT PANEL: Canvas Display Viewport (ปรับแก้ Fit Screen ที่นี่) -->
+    <section class="flex-1 bg-slate-950 p-2 sm:p-5 lg:p-6 flex flex-col items-center justify-center relative overflow-hidden border-b lg:border-b-0 lg:border-r border-slate-800/80 min-h-[360px]">
       
-      <!-- Meta Information & Hint Bar -->
-      <div class="w-full max-w-2xl flex items-center justify-between mb-2 text-xs text-slate-400">
+      <!-- Meta Info -->
+      <div class="w-full max-w-md lg:max-w-2xl flex items-center justify-between mb-1.5 text-xs text-slate-400 px-2">
         <div class="flex items-center gap-2">
           <span class="relative flex h-2 w-2">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
           </span>
-          <span class="font-medium text-slate-300">Live Preview</span>
+          <span class="font-medium text-slate-300 text-[11px] sm:text-xs">Live Preview</span>
         </div>
-        <div id="canvasDimensionBadge" class="px-2.5 py-0.5 rounded-md bg-slate-900 border border-slate-800 text-slate-300 font-mono text-[11px]">
+        <div id="canvasDimensionBadge" class="px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800 text-slate-300 font-mono text-[10px] sm:text-[11px]">
           1080 × 1350 px (4:5)
         </div>
       </div>
 
-      <!-- Main Canvas Frame with subtle drop shadow -->
-      <div id="dropZone" class="w-full max-w-2xl flex items-center justify-center shadow-2xl rounded-2xl overflow-hidden border border-slate-800/90 bg-slate-900/90 relative p-1 lg:p-2 backdrop-blur transition">
-        <canvas id="coverCanvas" class="max-w-full max-h-[72vh] object-contain rounded-xl shadow-2xl cursor-grab active:cursor-grabbing select-none"></canvas>
+      <!-- Container บังคับ Fit Screen 100% เสมอ -->
+      <div id="dropZone" class="w-full max-w-xs sm:max-w-md lg:max-w-2xl flex items-center justify-center shadow-2xl rounded-2xl overflow-hidden border border-slate-800/90 bg-slate-900/50 p-1 backdrop-blur transition aspect-[4/5]" style="max-height: 42vh; max-width: 90%;">
+        <!-- canvas จะมี max-h-full และ max-w-full เพื่อบีบตัวเองให้พอดีกับกรอบ preview เสมอ -->
+        <canvas id="coverCanvas" class="max-w-full max-h-full object-contain rounded-xl cursor-grab active:cursor-grabbing select-none" style="display: block;"></canvas>
       </div>
 
-      <!-- Interactive Help & Quick Center Action -->
-      <div class="w-full max-w-2xl flex items-center justify-between mt-2.5 px-1 text-[11px] sm:text-xs text-slate-400">
-        <span>💡 ลากเมาส์หรือแตะเลื่อนบนภาพ เพื่อจัดตำแหน่งรูปข่าว</span>
+      <!-- Quick Action -->
+      <div class="w-full max-w-xs sm:max-w-md lg:max-w-2xl flex items-center justify-between mt-2 px-3 text-[10px] sm:text-xs text-slate-400">
+        <span>💡 แตะเลื่อนบนรูปเพื่อจัดตำแหน่ง</span>
         <button id="btnResetPhotoPos" class="text-rose-400 hover:text-rose-300 underline font-medium cursor-pointer">
           จัดรูปภาพกึ่งกลาง
         </button>
@@ -193,7 +191,7 @@
 
         <div class="h-px bg-slate-800"></div>
 
-        <!-- 2. Typography Layout Settings (Exact 3-Line System) -->
+        <!-- 2. Typography Layout Settings -->
         <div id="typographySection" class="space-y-4 transition-all duration-200">
           <div class="flex items-center justify-between">
             <label class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
@@ -284,9 +282,9 @@
           <div class="space-y-1.5">
             <span class="text-[11px] text-slate-400">เทมเพลตข้อความด่วน:</span>
             <div class="flex flex-wrap gap-1.5" id="templatePresets">
-              <button type="button" class="tpl-btn px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-[11px] rounded-lg text-slate-300" data-layout="bottom" data-l1="ปักหมุด 14-15 พ.ย. นี้" data-l2="The Hua Hin Expo 2026" data-l3="ที่ศูนย์การค้าบลูพอร์ต หัวหิน">บลูพอร์ต หัวหิน (ล่าง)</button>
-              <button type="button" class="tpl-btn px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-[11px] rounded-lg text-slate-300" data-layout="top" data-l1="4 วัน 2.9 ตัน" data-l2="ทำไมต้อง “สั่งพักน้ำ”" data-l3="เมื่อชาวประมงยอมหยุด ก่อนเปิดจับช่วง 2">ประมงเพชรบุรี (บน)</button>
-              <button type="button" class="tpl-btn px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-[11px] rounded-lg text-slate-300" data-layout="bottom" data-l1="เขาวังเมืองเพชร" data-l2="แสงสีเสียง “ตระการตา”" data-l3="เปิดงานพระนครคีรีครั้งที่ 38 นักท่องเที่ยวเนืองแน่น">งานพระนครคีรี (ล่าง)</button>
+              <button type="button" class="tpl-btn px-2.5 py-1 bg-slate-800 hover:bg-slate-750 text-[11px] rounded-lg text-slate-300" data-layout="bottom" data-l1="ปักหมุด 14-15 พ.ย. นี้" data-l2="The Hua Hin Expo 2026" data-l3="ที่ศูนย์การค้าบลูพอร์ต หัวหิน">บลูพอร์ต หัวหิน (ล่าง)</button>
+              <button type="button" class="tpl-btn px-2.5 py-1 bg-slate-800 hover:bg-slate-750 text-[11px] rounded-lg text-slate-300" data-layout="top" data-l1="4 วัน 2.9 ตัน" data-l2="ทำไมต้อง “สั่งพักน้ำ”" data-l3="เมื่อชาวประมงยอมหยุด ก่อนเปิดจับช่วง 2">ประมงเพชรบุรี (บน)</button>
+              <button type="button" class="tpl-btn px-2.5 py-1 bg-slate-800 hover:bg-slate-750 text-[11px] rounded-lg text-slate-300" data-layout="bottom" data-l1="เขาวังเมืองเพชร" data-l2="แสงสีเสียง “ตระการตา”" data-l3="เปิดงานพระนครคีรีครั้งที่ 38 นักท่องเที่ยวเนืองแน่น">งานพระนครคีรี (ล่าง)</button>
             </div>
           </div>
         </div>
@@ -371,7 +369,6 @@
               </div>
             </div>
 
-            <!-- Custom Logo Upload option -->
             <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between">
               <span class="text-[11px] text-slate-400">หรือใช้ไฟล์ PNG ของตัวเอง:</span>
               <label for="customLogoUpload" class="cursor-pointer text-[11px] font-semibold text-rose-300 hover:text-white bg-slate-800 border border-slate-700 px-2.5 py-1 rounded-lg transition">
@@ -380,7 +377,6 @@
               <input type="file" id="customLogoUpload" accept="image/*" class="hidden">
             </div>
 
-            <!-- Logo Position & Size -->
             <div class="grid grid-cols-2 gap-3 pt-2">
               <div>
                 <label class="text-[11px] text-slate-400 block mb-1">ตำแหน่งโลโก้</label>
@@ -547,6 +543,7 @@
     btnLayoutTop.addEventListener('click', () => setTextPosition('top'));
     btnLayoutBottom.addEventListener('click', () => setTextPosition('bottom'));
 
+    // ปรับแก้ไข aspect ratio และปรับ aspect ของ dropZone Preview ตัวครอบ
     function setAspectRatio(ratio) {
       currentRatio = ratio;
       if (ratio === "4:5") {
@@ -558,6 +555,7 @@
         sliderLogoSize.value = "120";
         logoSizeVal.textContent = "120px";
         textPlacementBox.classList.remove('hidden');
+        dropZone.style.aspectRatio = "4/5"; // ยืดเป็น 4:5
       } else if (ratio === "16:9") {
         canvasWidth = 1200;
         canvasHeight = 675;
@@ -567,11 +565,13 @@
         sliderLogoSize.value = "88";
         logoSizeVal.textContent = "88px";
         textPlacementBox.classList.add('hidden');
+        dropZone.style.aspectRatio = "16/9"; // บีบเป็น 16:9
       } else if (ratio === "1:1") {
         canvasWidth = 1080;
         canvasHeight = 1080;
         canvasDimensionBadge.textContent = "1080 × 1080 px (1:1 จัตุรัส)";
         textPlacementBox.classList.remove('hidden');
+        dropZone.style.aspectRatio = "1/1"; // เป็นสี่เหลี่ยมจัตุรัส
       }
 
       sliderTextTop.value = "0";
@@ -665,6 +665,7 @@
       ctx.fillStyle = "#0c1017";
       ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
+      // บังคับรูปให้เต็มจอแบบ Cover เสมอ ไม่มีขอบดำ
       if (isNewsImageLoaded && newsImage.width > 0) {
         const imgRatio = newsImage.width / newsImage.height;
         const targetRatio = canvasWidth / canvasHeight;
@@ -813,8 +814,7 @@
 
       let startY = 0;
       if (textPosition === 'bottom') {
-        // ดันจุดยึดล่างให้ลอยสูงขึ้นพ้นขอบ (240px จากขอบล่าง) ป้องกันบรรทัดที่ 3 จม
-        const bottomMargin = currentRatio === "4:5" ? 240 : 160;
+        const bottomMargin = currentRatio === "4:5" ? 210 : 130;
         startY = (canvasHeight - bottomMargin - totalBlockHeight) + yOffset;
       } else {
         const topMargin = currentRatio === "4:5" ? 140 : 100;
@@ -940,22 +940,68 @@
 
     imageUpload.addEventListener('change', (e) => handleImageFile(e.target.files[0]));
 
-    dropZone.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      dropZone.classList.add('border-rose-500', 'bg-slate-900');
-    });
-
-    dropZone.addEventListener('dragleave', () => {
-      dropZone.classList.remove('border-rose-500', 'bg-slate-900');
-    });
-
-    dropZone.addEventListener('drop', (e) => {
-      e.preventDefault();
-      dropZone.classList.remove('border-rose-500', 'bg-slate-900');
-      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-        handleImageFile(e.dataTransfer.files[0]);
+    // สัมผัส Drag & Drop บนหน้าจอแบบ Fit
+    function getCanvasPointerCoords(e) {
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvasWidth / rect.width;
+      const scaleY = canvasHeight / rect.height;
+      
+      let clientX, clientY;
+      if (e.touches && e.touches.length > 0) {
+        clientX = e.touches[0].clientX;
+        clientY = e.touches[0].clientY;
+      } else {
+        clientX = e.clientX;
+        clientY = e.clientY;
       }
-    });
+      
+      return {
+        x: (clientX - rect.left) * scaleX,
+        y: (clientY - rect.top) * scaleY
+      };
+    }
+
+    function onPointerStart(e) {
+      isDragging = true;
+      const coords = getCanvasPointerCoords(e);
+      startPointerX = coords.x - imgOffsetX;
+      startPointerY = coords.y - imgOffsetY;
+    }
+
+    function onPointerMove(e) {
+      if (!isDragging) return;
+      const coords = getCanvasPointerCoords(e);
+      imgOffsetX = coords.x - startPointerX;
+      imgOffsetY = coords.y - startPointerY;
+      
+      sliderPanX.value = Math.max(-800, Math.min(800, imgOffsetX));
+      sliderPanY.value = Math.max(-800, Math.min(800, imgOffsetY));
+      panXVal.textContent = Math.round(imgOffsetX);
+      panYVal.textContent = Math.round(imgOffsetY);
+      renderCover();
+    }
+
+    function onPointerEnd() {
+      isDragging = false;
+    }
+
+    canvas.addEventListener('mousedown', onPointerStart);
+    window.addEventListener('mousemove', onPointerMove);
+    window.addEventListener('mouseup', onPointerEnd);
+
+    canvas.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        onPointerStart(e);
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (isDragging && e.touches.length === 1) {
+        onPointerMove(e);
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchend', onPointerEnd);
 
     customLogoUpload.addEventListener('change', (e) => {
       const file = e.target.files[0];
@@ -1059,45 +1105,6 @@
       });
     });
 
-    function onPointerStart(cx, cy) {
-      isDragging = true;
-      startPointerX = cx - imgOffsetX;
-      startPointerY = cy - imgOffsetY;
-    }
-
-    function onPointerMove(cx, cy) {
-      if (!isDragging) return;
-      imgOffsetX = cx - startPointerX;
-      imgOffsetY = cy - startPointerY;
-      sliderPanX.value = Math.max(-800, Math.min(800, imgOffsetX));
-      sliderPanY.value = Math.max(-800, Math.min(800, imgOffsetY));
-      panXVal.textContent = Math.round(imgOffsetX);
-      panYVal.textContent = Math.round(imgOffsetY);
-      renderCover();
-    }
-
-    function onPointerEnd() {
-      isDragging = false;
-    }
-
-    canvas.addEventListener('mousedown', (e) => onPointerStart(e.clientX, e.clientY));
-    window.addEventListener('mousemove', (e) => onPointerMove(e.clientX, e.clientY));
-    window.addEventListener('mouseup', onPointerEnd);
-
-    canvas.addEventListener('touchstart', (e) => {
-      if (e.touches.length === 1) {
-        onPointerStart(e.touches[0].clientX, e.touches[0].clientY);
-      }
-    }, { passive: true });
-
-    window.addEventListener('touchmove', (e) => {
-      if (isDragging && e.touches.length === 1) {
-        onPointerMove(e.touches[0].clientX, e.touches[0].clientY);
-      }
-    }, { passive: true });
-
-    window.addEventListener('touchend', onPointerEnd);
-
     function getExportFilename(extension) {
       const now = new Date();
       const pad = (n) => String(n).padStart(2, '0');
@@ -1134,7 +1141,7 @@
           if (navigator.clipboard && navigator.clipboard.write) {
             const item = new ClipboardItem({ 'image/png': blob });
             navigator.clipboard.write([item]).then(() => {
-              showToast("คัดลอกรูปภาพแล้ว! วางลง Facebook (Ctrl+V) ได้ทันที");
+              showToast("คัดลอกรูปภาพแล้ว! วางลง Facebook ได้ทันที");
             }).catch(() => {
               downloadFile('jpg');
             });
