@@ -5,15 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>เขาวังเดลี่ Cover Studio - ระบบสร้างภาพปกข่าวทางการ (BBC Standard)</title>
   
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Thai Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&family=Kanit:wght@400;500;600;700;800;900&family=Prompt:wght@400;500;600;700;800&family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
   
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <script>
@@ -54,18 +51,15 @@
       background: #273147;
       border-radius: 9999px;
     }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #3b4866;
-    }
   </style>
 </head>
 
-<body class="h-full text-slate-100 flex flex-col antialiased selection:bg-[#b31929] selection:text-white">
+<body class="min-h-full lg:h-full text-slate-100 flex flex-col antialiased selection:bg-[#b31929] selection:text-white bg-slate-950">
 
   <!-- TOP HEADER NAV -->
-  <header class="border-b border-slate-800/90 bg-slate-900/95 backdrop-blur sticky top-0 z-50 px-4 lg:px-8 py-2.5 flex items-center justify-between shadow-md">
+  <header class="border-b border-slate-800/90 bg-slate-900/95 backdrop-blur sticky top-0 z-50 px-4 lg:px-8 py-2.5 flex items-center justify-between shadow-md shrink-0">
     <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-full bg-[#b31929] flex flex-col items-center justify-center shadow-lg shadow-rose-950/40 text-white font-black leading-none p-1 border border-white/20 select-none shrink-0">
+      <div class="w-10 h-10 rounded-full bg-[#b31929] flex flex-col items-center justify-center shadow-lg text-white font-black leading-none p-1 border border-white/20 select-none shrink-0">
         <span class="text-[9px] font-bold tracking-tighter" style="font-family:'Kanit', sans-serif;">เขาวัง</span>
         <span class="text-[9px] font-bold tracking-tighter mt-[-1px]" style="font-family:'Kanit', sans-serif;">เดลี่</span>
       </div>
@@ -92,13 +86,13 @@
   </header>
 
   <!-- MAIN WORKSPACE -->
-  <main class="flex-1 flex flex-col lg:flex-row overflow-hidden">
+  <main class="flex-1 flex flex-col lg:flex-row lg:overflow-hidden">
     
-    <!-- LEFT PANEL: Canvas Display Viewport (ขยายใหญ่เต็มตาแบบเดลินิวส์) -->
-    <section id="workspaceSection" class="flex-1 bg-slate-950 p-2 sm:p-4 lg:p-6 flex flex-col items-center justify-center relative overflow-hidden border-b lg:border-b-0 lg:border-r border-slate-800/80">
+    <!-- LEFT PANEL: Canvas Display Viewport (ยึดขนาดบนมือถือไม่ให้โดนบีบ และขยายเต็มตาบน Desktop) -->
+    <section id="workspaceSection" class="w-full lg:flex-1 bg-slate-950 p-3 sm:p-4 lg:p-6 flex flex-col items-center justify-center relative border-b lg:border-b-0 lg:border-r border-slate-800/80 shrink-0">
       
       <!-- Top Canvas Status Bar -->
-      <div class="w-full flex items-center justify-between mb-2 text-xs text-slate-400 px-3 max-w-5xl">
+      <div class="w-full flex items-center justify-between mb-2 text-xs text-slate-400 px-2 max-w-5xl">
         <div class="flex items-center gap-2">
           <span class="relative flex h-2 w-2">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
@@ -106,17 +100,17 @@
           </span>
           <span class="font-medium text-slate-300 text-xs sm:text-sm" id="modeTitle">Live Preview (BBC Format)</span>
         </div>
-        <div id="canvasDimensionBadge" class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 font-mono text-[11px] sm:text-xs shadow-inner">
+        <div id="canvasDimensionBadge" class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 font-mono text-[11px] sm:text-xs">
           1080 × 1350 px (4:5)
         </div>
       </div>
 
-      <!-- Main Canvas Stage (ขยายใหญ่เต็มตา สูงสุดถึง 82vh) -->
-      <div id="dropZone" class="flex-1 w-full flex items-center justify-center relative p-1 transition">
-        <div class="relative flex items-center justify-center shadow-2xl rounded-2xl overflow-hidden border border-slate-800/90 bg-slate-900/40 p-1 backdrop-blur max-w-full">
-          <canvas id="coverCanvas" class="max-w-full rounded-xl cursor-grab active:cursor-grabbing select-none shadow-2xl" style="max-height: 44vh; object-contain: contain; display: block;"></canvas>
+      <!-- Main Canvas Container -->
+      <div id="dropZone" class="w-full flex items-center justify-center relative transition py-1">
+        <div class="relative flex items-center justify-center shadow-2xl rounded-2xl overflow-hidden border border-slate-800/90 bg-slate-900/60 p-1 backdrop-blur max-w-full">
+          <canvas id="coverCanvas" class="max-w-full rounded-xl cursor-grab active:cursor-grabbing select-none shadow-2xl" style="height: auto; max-height: 38vh; display: block;"></canvas>
           
-          <!-- Desktop Drag & Drop Hover Overlay -->
+          <!-- Desktop Drag & Drop Overlay -->
           <div id="dropOverlay" class="absolute inset-0 bg-slate-950/85 backdrop-blur-sm flex flex-col items-center justify-center gap-3 opacity-0 pointer-events-none transition duration-200 z-30">
             <i data-lucide="upload-cloud" class="w-16 h-16 text-rose-500 animate-bounce"></i>
             <span class="text-base font-bold text-white tracking-wide">วางรูปภาพที่นี่เพื่อเปลี่ยนภาพข่าว</span>
@@ -124,23 +118,22 @@
         </div>
       </div>
 
-      <!-- Bottom Hint Bar -->
-      <div class="w-full flex items-center justify-between mt-2 px-3 text-xs text-slate-400 max-w-5xl">
-        <span class="hidden sm:inline">💡 ลากไฟล์รูปมาวางบนพื้นที่ หรือใช้นิ้ว/เมาส์ลากเลื่อนรูปเพื่อจัดตำแหน่ง</span>
-        <span class="sm:hidden">💡 แตะเลื่อนบนรูปเพื่อจัดตำแหน่งภาพ</span>
+      <!-- Hint Bar -->
+      <div class="w-full flex items-center justify-between mt-2 px-2 text-xs text-slate-400 max-w-5xl">
+        <span>💡 แตะหรือลากบนรูปเพื่อเลื่อนตำแหน่ง</span>
         <div class="flex items-center gap-3">
           <label for="imageUpload" class="text-rose-400 hover:text-rose-300 font-semibold cursor-pointer underline flex items-center gap-1">
-            <i data-lucide="image-plus" class="w-4 h-4"></i> เปลี่ยนรูปภาพ
+            <i data-lucide="image-plus" class="w-3.5 h-3.5"></i> เลือกรูป
           </label>
           <button id="btnResetPhotoPos" class="text-slate-400 hover:text-white underline cursor-pointer">
-            จัดกึ่งกลาง
+            กึ่งกลาง
           </button>
         </div>
       </div>
     </section>
 
-    <!-- RIGHT PANEL: Settings & Studio Controls -->
-    <aside class="w-full lg:w-[460px] xl:w-[490px] bg-slate-900 flex flex-col overflow-y-auto border-l border-slate-800/80 shrink-0">
+    <!-- RIGHT PANEL: Settings & Studio Controls (เลื่อนอิสระ) -->
+    <aside class="w-full lg:w-[460px] xl:w-[490px] bg-slate-900 flex flex-col lg:overflow-y-auto border-t lg:border-t-0 lg:border-l border-slate-800/80 shrink-0">
       <div class="p-4 lg:p-6 space-y-6">
 
         <!-- 1. Aspect Ratio Presets -->
@@ -204,7 +197,7 @@
             <span class="text-[10px] text-slate-400">สไตล์ BBC ชัดเจน</span>
           </div>
 
-          <!-- Vertical Red Accent Stripe Toggle & Color -->
+          <!-- Accent Bar -->
           <div class="flex items-center justify-between bg-slate-950/70 p-2.5 rounded-xl border border-slate-800 text-xs">
             <label class="inline-flex items-center gap-2 cursor-pointer text-slate-200 font-medium">
               <input type="checkbox" id="checkAccentBar" checked class="accent-[#b31929] w-4 h-4 rounded">
@@ -216,7 +209,7 @@
             <input type="color" id="inputAccentColor" value="#b31929" class="w-6 h-6 rounded cursor-pointer bg-transparent border-0">
           </div>
 
-          <!-- Line 1: Main Highlight -->
+          <!-- Line 1 -->
           <div class="space-y-1.5 bg-slate-950/50 p-3 rounded-xl border border-slate-800/80">
             <div class="flex items-center justify-between">
               <label class="text-xs text-white font-semibold flex items-center gap-1.5">
@@ -232,7 +225,7 @@
             <input type="text" id="inputLine1" value="เมื่อน้ำแข็งละลายเผยให้เห็นชีวิตที่เคย" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-sm text-white font-bold focus:outline-none focus:border-rose-500">
           </div>
 
-          <!-- Line 2: Second Line -->
+          <!-- Line 2 -->
           <div class="space-y-1.5 bg-slate-950/50 p-3 rounded-xl border border-slate-800/80">
             <div class="flex items-center justify-between">
               <label class="text-xs text-white font-semibold flex items-center gap-1.5">
@@ -248,7 +241,7 @@
             <input type="text" id="inputLine2" value="ถูกฝังในอดีต - นักสำรวจต้องแข่งกับ" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-sm text-white font-bold focus:outline-none focus:border-rose-500">
           </div>
 
-          <!-- Line 3: Third Line -->
+          <!-- Line 3 -->
           <div class="space-y-1.5 bg-slate-950/50 p-3 rounded-xl border border-slate-800/80">
             <div class="flex items-center justify-between">
               <label class="text-xs text-slate-200 font-semibold flex items-center gap-1.5">
@@ -325,7 +318,6 @@
               </div>
             </div>
 
-            <!-- Gradient Shadow (เฉพาะ 4:5 และ 1:1) -->
             <div id="gradientSectionBox" class="pt-2 border-t border-slate-800/80 space-y-2">
               <div class="flex justify-between text-xs text-slate-400">
                 <label class="flex items-center gap-1.5 text-slate-200 cursor-pointer">
@@ -341,7 +333,7 @@
 
         <div class="h-px bg-slate-800"></div>
 
-        <!-- 4. Logo Settings (BBC Style: Top-Left Default) -->
+        <!-- 4. Logo Settings -->
         <div class="space-y-3">
           <div class="flex items-center justify-between">
             <label class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
@@ -384,7 +376,7 @@
           </div>
         </div>
 
-        <!-- 5. Photo Credit Footer (ซ่อนใน 16:9) -->
+        <!-- 5. Photo Credit Footer -->
         <div id="creditBoxSection" class="space-y-2 bg-slate-950/70 p-3.5 rounded-xl border border-slate-800">
           <div class="flex items-center justify-between">
             <label class="text-xs text-slate-200 font-semibold flex items-center gap-1.5">
@@ -400,7 +392,7 @@
         </div>
 
         <!-- 6. Export Actions -->
-        <div class="pt-2 space-y-2">
+        <div class="pt-2 space-y-2 pb-6">
           <button id="btnDownloadJpg" class="w-full py-3.5 px-4 bg-gradient-to-r from-[#b31929] via-[#c41e3a] to-rose-600 hover:from-[#c41e3a] hover:to-rose-500 text-white font-bold rounded-xl shadow-xl shadow-rose-950/40 flex items-center justify-center gap-2 text-base active:scale-[0.98] transition-all cursor-pointer">
             <i data-lucide="download" class="w-5 h-5 stroke-[2.5]"></i>
             <span>ดาวน์โหลดภาพปก (JPG คุณภาพสูง)</span>
@@ -520,7 +512,7 @@
       }, 3000);
     }
 
-    // ปรับความสูงของ Canvas ให้เข้ากับขนาดจอ (เต็มตาบน Desktop, Fit Screen บน Mobile)
+    // กำหนดสเกลความสูงของ Canvas ให้เข้ากับอุปกรณ์
     function updateCanvasScreenSize() {
       const isDesktop = window.innerWidth >= 1024;
       if (isDesktop) {
@@ -528,14 +520,15 @@
           canvas.style.maxHeight = "64vh";
           canvas.style.maxWidth = "96%";
         } else if (currentRatio === "4:5") {
-          canvas.style.maxHeight = "78vh";
+          canvas.style.maxHeight = "80vh";
           canvas.style.maxWidth = "96%";
         } else {
           canvas.style.maxHeight = "72vh";
           canvas.style.maxWidth = "96%";
         }
       } else {
-        canvas.style.maxHeight = "44vh";
+        // บนโทรศัพท์: ล็อกความสูงพอดีจอ ให้มองเห็นและเลื่อนตั้งค่าด้านล่างได้
+        canvas.style.maxHeight = "36vh";
         canvas.style.maxWidth = "100%";
       }
     }
@@ -906,7 +899,6 @@
 
     imageUpload.addEventListener('change', (e) => handleImageFile(e.target.files[0]));
 
-    // Drag and Drop ทั่วทั้งหน้าจอ
     ['dragenter', 'dragover'].forEach(eventName => {
       window.addEventListener(eventName, (e) => {
         e.preventDefault();
