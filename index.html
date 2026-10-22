@@ -72,14 +72,14 @@
       <div>
         <div class="flex items-center gap-2">
           <span class="font-extrabold text-white text-base lg:text-lg tracking-wide">เขาวังเดลี่</span>
-          <span class="text-[11px] px-2 py-0.5 rounded-md bg-[#b31929]/20 text-rose-300 border border-rose-500/30 font-medium">BBC News Format</span>
+          <span class="text-[11px] px-2 py-0.5 rounded-md bg-[#b31929]/20 text-rose-300 border border-rose-500/30 font-medium">Cover Studio</span>
         </div>
         <p class="text-[11px] text-slate-400 hidden sm:block">สร้างภาพหน้าปกข่าว 4:5, 16:9 ตามมาตรฐานสื่อสากล</p>
       </div>
     </div>
 
     <div class="flex items-center gap-2">
-      <button id="btnCopyImage" class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-xl text-slate-200 bg-slate-800 hover:bg-slate-750 border border-slate-700 transition shadow-sm active:scale-95" title="คัดลอกรูปภาพ">
+      <button id="btnCopyImage" class="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-200 bg-slate-800 hover:bg-slate-750 border border-slate-700 transition shadow-sm active:scale-95" title="คัดลอกรูปภาพ">
         <i data-lucide="copy" class="w-4 h-4 text-rose-400"></i>
         <span class="hidden md:inline">คัดลอกภาพ</span>
       </button>
@@ -94,51 +94,53 @@
   <!-- MAIN WORKSPACE -->
   <main class="flex-1 flex flex-col lg:flex-row overflow-hidden">
     
-    <!-- LEFT PANEL: Canvas Display Viewport -->
-    <section class="flex-1 bg-slate-950 p-2 sm:p-5 lg:p-6 flex flex-col items-center justify-center relative overflow-hidden border-b lg:border-b-0 lg:border-r border-slate-800/80 min-h-[350px]">
+    <!-- LEFT PANEL: Canvas Display Viewport (ขยายใหญ่เต็มตาแบบเดลินิวส์) -->
+    <section id="workspaceSection" class="flex-1 bg-slate-950 p-2 sm:p-4 lg:p-6 flex flex-col items-center justify-center relative overflow-hidden border-b lg:border-b-0 lg:border-r border-slate-800/80">
       
-      <!-- Meta Information -->
-      <div class="w-full max-w-xs sm:max-w-md lg:max-w-2xl flex items-center justify-between mb-1.5 text-xs text-slate-400 px-2">
+      <!-- Top Canvas Status Bar -->
+      <div class="w-full flex items-center justify-between mb-2 text-xs text-slate-400 px-3 max-w-5xl">
         <div class="flex items-center gap-2">
           <span class="relative flex h-2 w-2">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
           </span>
-          <span class="font-medium text-slate-300 text-[11px] sm:text-xs" id="modeTitle">Live Preview (BBC Format)</span>
+          <span class="font-medium text-slate-300 text-xs sm:text-sm" id="modeTitle">Live Preview (BBC Format)</span>
         </div>
-        <div id="canvasDimensionBadge" class="px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800 text-slate-300 font-mono text-[10px] sm:text-[11px]">
+        <div id="canvasDimensionBadge" class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 font-mono text-[11px] sm:text-xs shadow-inner">
           1080 × 1350 px (4:5)
         </div>
       </div>
 
-      <!-- Canvas Frame (Auto Fit Screen + Drag & Drop Direct Target) -->
-      <div id="dropZone" class="w-full max-w-xs sm:max-w-md lg:max-w-3xl flex items-center justify-center shadow-2xl rounded-2xl overflow-hidden border-2 border-dashed border-slate-700/80 hover:border-rose-500/70 bg-slate-900/60 p-1 backdrop-blur transition relative group cursor-pointer" style="max-height: 48vh; aspect-ratio: 4/5;">
-        <canvas id="coverCanvas" class="max-w-full max-h-full object-contain rounded-xl cursor-grab active:cursor-grabbing select-none" style="display: block;"></canvas>
-        
-        <!-- Drag & Drop Overlay Hint on Desktop -->
-        <div id="dropOverlay" class="absolute inset-0 bg-slate-950/85 backdrop-blur-sm flex flex-col items-center justify-center gap-2 opacity-0 pointer-events-none transition duration-200">
-          <i data-lucide="upload-cloud" class="w-12 h-12 text-rose-500 animate-bounce"></i>
-          <span class="text-sm font-bold text-white">ปล่อยรูปภาพที่นี่เพื่ออัปโหลด</span>
+      <!-- Main Canvas Stage (ขยายใหญ่เต็มตา สูงสุดถึง 82vh) -->
+      <div id="dropZone" class="flex-1 w-full flex items-center justify-center relative p-1 transition">
+        <div class="relative flex items-center justify-center shadow-2xl rounded-2xl overflow-hidden border border-slate-800/90 bg-slate-900/40 p-1 backdrop-blur max-w-full">
+          <canvas id="coverCanvas" class="max-w-full rounded-xl cursor-grab active:cursor-grabbing select-none shadow-2xl" style="max-height: 44vh; object-contain: contain; display: block;"></canvas>
+          
+          <!-- Desktop Drag & Drop Hover Overlay -->
+          <div id="dropOverlay" class="absolute inset-0 bg-slate-950/85 backdrop-blur-sm flex flex-col items-center justify-center gap-3 opacity-0 pointer-events-none transition duration-200 z-30">
+            <i data-lucide="upload-cloud" class="w-16 h-16 text-rose-500 animate-bounce"></i>
+            <span class="text-base font-bold text-white tracking-wide">วางรูปภาพที่นี่เพื่อเปลี่ยนภาพข่าว</span>
+          </div>
         </div>
       </div>
 
-      <!-- Quick Tips & Direct Upload -->
-      <div class="w-full max-w-xs sm:max-w-md lg:max-w-3xl flex items-center justify-between mt-2 px-3 text-[10px] sm:text-xs text-slate-400">
-        <span class="hidden sm:inline">💡 ลากไฟล์รูปมาวางบนกรอบ หรือแตะเลื่อนรูปเพื่อจัดตำแหน่ง</span>
+      <!-- Bottom Hint Bar -->
+      <div class="w-full flex items-center justify-between mt-2 px-3 text-xs text-slate-400 max-w-5xl">
+        <span class="hidden sm:inline">💡 ลากไฟล์รูปมาวางบนพื้นที่ หรือใช้นิ้ว/เมาส์ลากเลื่อนรูปเพื่อจัดตำแหน่ง</span>
         <span class="sm:hidden">💡 แตะเลื่อนบนรูปเพื่อจัดตำแหน่งภาพ</span>
         <div class="flex items-center gap-3">
           <label for="imageUpload" class="text-rose-400 hover:text-rose-300 font-semibold cursor-pointer underline flex items-center gap-1">
-            <i data-lucide="image-plus" class="w-3.5 h-3.5"></i> เปลี่ยนรูปภาพ
+            <i data-lucide="image-plus" class="w-4 h-4"></i> เปลี่ยนรูปภาพ
           </label>
           <button id="btnResetPhotoPos" class="text-slate-400 hover:text-white underline cursor-pointer">
-            กึ่งกลาง
+            จัดกึ่งกลาง
           </button>
         </div>
       </div>
     </section>
 
     <!-- RIGHT PANEL: Settings & Studio Controls -->
-    <aside class="w-full lg:w-[490px] xl:w-[520px] bg-slate-900 flex flex-col overflow-y-auto border-l border-slate-800/80">
+    <aside class="w-full lg:w-[460px] xl:w-[490px] bg-slate-900 flex flex-col overflow-y-auto border-l border-slate-800/80 shrink-0">
       <div class="p-4 lg:p-6 space-y-6">
 
         <!-- 1. Aspect Ratio Presets -->
@@ -518,6 +520,28 @@
       }, 3000);
     }
 
+    // ปรับความสูงของ Canvas ให้เข้ากับขนาดจอ (เต็มตาบน Desktop, Fit Screen บน Mobile)
+    function updateCanvasScreenSize() {
+      const isDesktop = window.innerWidth >= 1024;
+      if (isDesktop) {
+        if (currentRatio === "16:9") {
+          canvas.style.maxHeight = "64vh";
+          canvas.style.maxWidth = "96%";
+        } else if (currentRatio === "4:5") {
+          canvas.style.maxHeight = "78vh";
+          canvas.style.maxWidth = "96%";
+        } else {
+          canvas.style.maxHeight = "72vh";
+          canvas.style.maxWidth = "96%";
+        }
+      } else {
+        canvas.style.maxHeight = "44vh";
+        canvas.style.maxWidth = "100%";
+      }
+    }
+
+    window.addEventListener('resize', updateCanvasScreenSize);
+
     function setTextPosition(pos) {
       textPosition = pos;
       if (pos === 'top') {
@@ -537,7 +561,6 @@
     btnLayoutTop.addEventListener('click', () => setTextPosition('top'));
     btnLayoutBottom.addEventListener('click', () => setTextPosition('bottom'));
 
-    // การเปลี่ยนสัดส่วน (16:9 เป็นภาพคลีน 100%)
     function setAspectRatio(ratio) {
       currentRatio = ratio;
       if (ratio === "4:5") {
@@ -547,9 +570,7 @@
         modeTitle.textContent = "Live Preview (BBC Format)";
         sliderLogoSize.value = "110";
         logoSizeVal.textContent = "110px";
-        dropZone.style.aspectRatio = "4/5";
 
-        // แสดงแผงพาดหัวและตัวหนังสือ
         cleanNotice169.classList.add('hidden');
         textPlacementBox.classList.remove('hidden');
         typographySection.classList.remove('hidden');
@@ -564,9 +585,7 @@
         modeTitle.textContent = "Live Preview (16:9 Clean Photo)";
         sliderLogoSize.value = "90";
         logoSizeVal.textContent = "90px";
-        dropZone.style.aspectRatio = "16/9";
 
-        // ซ่อนตัวหนังสือทั้งหมดใน 16:9 (ภาพคลีน + โลโก้เท่านั้น)
         cleanNotice169.classList.remove('hidden');
         textPlacementBox.classList.add('hidden');
         typographySection.classList.add('hidden');
@@ -579,7 +598,6 @@
         canvasHeight = 1080;
         canvasDimensionBadge.textContent = "1080 × 1080 px (1:1 จัตุรัส)";
         modeTitle.textContent = "Live Preview (1:1 Square)";
-        dropZone.style.aspectRatio = "1/1";
 
         cleanNotice169.classList.add('hidden');
         textPlacementBox.classList.remove('hidden');
@@ -593,6 +611,8 @@
       textTopVal.textContent = "0px";
       canvas.width = canvasWidth;
       canvas.height = canvasHeight;
+
+      updateCanvasScreenSize();
 
       document.querySelectorAll('.ratio-btn').forEach(btn => {
         if (btn.dataset.ratio === ratio) {
@@ -612,7 +632,6 @@
       ctx.fillStyle = "#0c1017";
       ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-      // 1. วาดรูปภาพพื้นหลัง (ขยายเต็มกรอบแบบ Cover)
       if (isNewsImageLoaded && newsImage.width > 0) {
         const imgRatio = newsImage.width / newsImage.height;
         const targetRatio = canvasWidth / canvasHeight;
@@ -634,7 +653,6 @@
         ctx.drawImage(newsImage, posX, posY, finalW, finalH);
       }
 
-      // 2. เงาดำไล่เฉด (จะแสดงเฉพาะโหมดที่ไม่ใช่ 16:9 คลีน)
       if (currentRatio !== "16:9" && checkTopGradient.checked) {
         const pct = parseInt(sliderGradientHeight.value, 10) / 100;
         const gradHeight = canvasHeight * pct;
@@ -660,19 +678,16 @@
         }
       }
 
-      // 3. วาดโลโก้เขาวังเดลี่ (ซ้ายบนเสมอ)
       if (checkShowLogo.checked) {
         drawKhaowangLogo();
       }
 
-      // 4. วาดตัวหนังสือพาดหัวและแถบแดง (ยกเว้น 16:9 คลีน)
       if (currentRatio !== "16:9") {
         drawTypographyAndAccent();
         drawCredit();
       }
     }
 
-    // ฟังก์ชันวาดโลโก้
     function drawKhaowangLogo() {
       const logoSize = parseInt(sliderLogoSize.value, 10);
       const marginX = currentRatio === "16:9" ? 52 : (currentRatio === "4:5" ? 64 : 54);
@@ -737,7 +752,6 @@
       ctx.restore();
     }
 
-    // ฟังก์ชันวาดตัวหนังสือ BBC
     function drawTypographyAndAccent() {
       const marginX = currentRatio === "4:5" ? 64 : 50;
       const yOffset = parseInt(sliderTextTop.value, 10);
@@ -832,7 +846,6 @@
       ctx.restore();
     }
 
-    // ฟังก์ชันวาดเครดิตภาพ
     function drawCredit() {
       const credit = inputCredit.value.trim();
       if (!credit) return;
@@ -866,7 +879,6 @@
       ctx.restore();
     }
 
-    // จัดการเลือกไฟล์รูปภาพ
     function handleImageFile(file) {
       if (!file) return;
       const reader = new FileReader();
@@ -894,7 +906,7 @@
 
     imageUpload.addEventListener('change', (e) => handleImageFile(e.target.files[0]));
 
-    // Drag & Drop File โดยตรงบนกรอบพรีวิวของ Desktop
+    // Drag and Drop ทั่วทั้งหน้าจอ
     ['dragenter', 'dragover'].forEach(eventName => {
       window.addEventListener(eventName, (e) => {
         e.preventDefault();
@@ -918,12 +930,6 @@
       }
     });
 
-    // คลิกที่ขอบกรอบเพื่ออัปโหลดรูปภาพได้เช่นกัน
-    dropZone.addEventListener('dblclick', () => {
-      imageUpload.click();
-    });
-
-    // Touch & Mouse Drag บน Canvas เพื่อเลื่อนรูป
     function getCanvasPointerCoords(e) {
       const rect = canvas.getBoundingClientRect();
       const scaleX = canvasWidth / rect.width;
@@ -973,7 +979,6 @@
 
     window.addEventListener('touchend', onPointerEnd);
 
-    // Event Listeners สัดส่วน
     document.querySelectorAll('.ratio-btn').forEach(btn => {
       btn.addEventListener('click', () => setAspectRatio(btn.dataset.ratio));
     });
@@ -1112,7 +1117,6 @@
       }
     });
 
-    // เริ่มต้นระบบ
     window.onload = function() {
       setAspectRatio("4:5");
       setTextPosition("top");
@@ -1134,6 +1138,7 @@
         renderCover();
       };
       newsImage.src = off.toDataURL('image/jpeg', 0.9);
+      updateCanvasScreenSize();
     };
   </script>
 </body>
