@@ -66,7 +66,7 @@
       <div>
         <div class="flex items-center gap-2">
           <span class="font-extrabold text-white text-base lg:text-lg tracking-wide">เขาวังเดลี่</span>
-          <span class="text-[11px] px-2 py-0.5 rounded-md bg-[#b31929]/20 text-rose-300 border border-rose-500/30 font-medium">Cover Studio</span>
+          <span class="text-[11px] px-2 py-0.5 rounded-md bg-[#b31929]/20 text-rose-300 border border-rose-500/30 font-medium">Cover Studio Pro</span>
         </div>
         <p class="text-[11px] text-slate-400 hidden sm:block">สร้างภาพหน้าปกข่าว 4:5, 16:9 ตามมาตรฐานสื่อสากล</p>
       </div>
@@ -129,7 +129,7 @@
     </section>
 
     <!-- RIGHT PANEL: Settings & Studio Controls -->
-    <aside class="w-full lg:w-[460px] xl:w-[490px] bg-slate-900 flex flex-col lg:overflow-y-auto border-t lg:border-t-0 lg:border-l border-slate-800/80 shrink-0">
+    <aside class="w-full lg:w-[470px] xl:w-[500px] bg-slate-900 flex flex-col lg:overflow-y-auto border-t lg:border-t-0 lg:border-l border-slate-800/80 shrink-0">
       <div class="p-4 lg:p-6 space-y-6">
 
         <!-- 1. Aspect Ratio Presets -->
@@ -183,13 +183,13 @@
 
         <div id="typographyDivider" class="h-px bg-slate-800"></div>
 
-        <!-- 2. Typography Layout Settings -->
+        <!-- 2. Typography Layout Settings (รองรับสูงสุด 4 บรรทัด) -->
         <div id="typographySection" class="space-y-4">
           <div class="flex items-center justify-between">
             <label class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
-              <i data-lucide="type" class="w-4 h-4 text-[#b31929]"></i> ข้อความพาดหัวข่าว
+              <i data-lucide="type" class="w-4 h-4 text-[#b31929]"></i> ข้อความพาดหัวข่าว (1-4 บรรทัด)
             </label>
-            <span class="text-[10px] text-slate-400">สไตล์ BBC ชัดเจน</span>
+            <span class="text-[10px] text-slate-400">เว้นว่างเพื่อซ่อนบรรทัดได้</span>
           </div>
 
           <div class="flex items-center justify-between bg-slate-950/70 p-2.5 rounded-xl border border-slate-800 text-xs">
@@ -212,11 +212,11 @@
               </label>
               <div class="flex items-center gap-2">
                 <input type="color" id="inputLine1Color" value="#ffffff" class="w-5 h-5 rounded cursor-pointer bg-transparent border-0" title="เลือกสีข้อความ">
-                <span id="line1SizeVal" class="text-[10px] text-slate-400 font-mono">60px</span>
-                <input id="sliderLine1Size" type="range" min="30" max="100" value="60" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
+                <span id="line1SizeVal" class="text-[10px] text-slate-400 font-mono">54px</span>
+                <input id="sliderLine1Size" type="range" min="30" max="100" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
               </div>
             </div>
-            <input type="text" id="inputLine1" value="ปลาน็อกน้ำเกยหาดชะอำ" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-sm text-white font-bold focus:outline-none focus:border-rose-500">
+            <input type="text" id="inputLine1" value="เกม Call of Duty ภาคใหม่" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-sm text-white font-bold focus:outline-none focus:border-rose-500">
           </div>
 
           <!-- Line 2 -->
@@ -228,11 +228,11 @@
               </label>
               <div class="flex items-center gap-2">
                 <input type="color" id="inputLine2Color" value="#ffffff" class="w-5 h-5 rounded cursor-pointer bg-transparent border-0" title="เลือกสีข้อความ">
-                <span id="line2SizeVal" class="text-[10px] text-slate-400 font-mono">60px</span>
-                <input id="sliderLine2Size" type="range" min="30" max="100" value="60" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
+                <span id="line2SizeVal" class="text-[10px] text-slate-400 font-mono">54px</span>
+                <input id="sliderLine2Size" type="range" min="30" max="100" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
               </div>
             </div>
-            <input type="text" id="inputLine2" value="ยังกินได้ไหม" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-sm text-white font-bold focus:outline-none focus:border-rose-500">
+            <input type="text" id="inputLine2" value="จินตนาการสถานการณ์เกาหลีเหนือ" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-sm text-white font-bold focus:outline-none focus:border-rose-500">
           </div>
 
           <!-- Line 3 -->
@@ -244,11 +244,27 @@
               </label>
               <div class="flex items-center gap-2">
                 <input type="color" id="inputLine3Color" value="#ffffff" class="w-5 h-5 rounded cursor-pointer bg-transparent border-0" title="เลือกสีข้อความ">
-                <span id="line3SizeVal" class="text-[10px] text-slate-400 font-mono">60px</span>
-                <input id="sliderLine3Size" type="range" min="20" max="100" value="60" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
+                <span id="line3SizeVal" class="text-[10px] text-slate-400 font-mono">54px</span>
+                <input id="sliderLine3Size" type="range" min="20" max="100" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
               </div>
             </div>
-            <input type="text" id="inputLine3" value="อันตรายหรือไม่?" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-sm text-white font-bold focus:outline-none focus:border-rose-500">
+            <input type="text" id="inputLine3" value="บุกเกาหลีใต้ เหตุการณ์เช่นนี้" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-sm text-white font-bold focus:outline-none focus:border-rose-500">
+          </div>
+
+          <!-- Line 4 (NEW) -->
+          <div class="space-y-1.5 bg-slate-950/50 p-3 rounded-xl border border-slate-800/80">
+            <div class="flex items-center justify-between">
+              <label class="text-xs text-rose-300 font-semibold flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-rose-400 inline-block"></span>
+                บรรทัดที่ 4 (คำถาม / ขยายความเสริม)
+              </label>
+              <div class="flex items-center gap-2">
+                <input type="color" id="inputLine4Color" value="#ffffff" class="w-5 h-5 rounded cursor-pointer bg-transparent border-0" title="เลือกสีข้อความ">
+                <span id="line4SizeVal" class="text-[10px] text-slate-400 font-mono">54px</span>
+                <input id="sliderLine4Size" type="range" min="20" max="100" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
+              </div>
+            </div>
+            <input type="text" id="inputLine4" value="มีโอกาสเกิดขึ้นจริงได้หรือไม่ ?" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-sm text-white font-bold focus:outline-none focus:border-rose-500" placeholder="เว้นว่างได้ถ้ามีเพียง 3 บรรทัด">
           </div>
 
           <!-- Font & Y-Offset -->
@@ -274,7 +290,7 @@
 
         <div class="h-px bg-slate-800"></div>
 
-        <!-- 3. Photo Manipulation (เพิ่มระบบปรับระนาบองศา) -->
+        <!-- 3. Photo Manipulation (หมุนภาพ & ซูม & แพน) -->
         <div class="space-y-3">
           <div class="flex items-center justify-between">
             <label class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
@@ -287,7 +303,6 @@
           </div>
 
           <div class="bg-slate-950/70 p-3.5 rounded-xl border border-slate-800 space-y-3">
-            <!-- Zoom -->
             <div>
               <div class="flex justify-between text-xs text-slate-400 mb-1">
                 <span>ซูมภาพ (Zoom)</span>
@@ -296,7 +311,7 @@
               <input id="sliderZoom" type="range" min="0.5" max="3" step="0.05" value="1" class="w-full accent-rose-600 cursor-pointer h-1.5 bg-slate-800 rounded-lg">
             </div>
 
-            <!-- หมุนและปรับระดับระนาบองศา (Straighten & Rotation) -->
+            <!-- Straighten & Rotation -->
             <div class="pt-2 border-t border-slate-800/80 space-y-2">
               <div class="flex items-center justify-between">
                 <span class="text-xs text-slate-300 font-semibold flex items-center gap-1.5">
@@ -306,7 +321,6 @@
               </div>
               <input id="sliderRotate" type="range" min="-45" max="45" step="0.5" value="0" class="w-full accent-rose-600 cursor-pointer h-1.5 bg-slate-800 rounded-lg">
               
-              <!-- ปุ่มหมุนด่วน -->
               <div class="grid grid-cols-3 gap-2 pt-1">
                 <button type="button" id="btnRotateLeft90" class="py-1 px-2 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 rounded-lg text-[11px] flex items-center justify-center gap-1">
                   <i data-lucide="rotate-ccw" class="w-3 h-3"></i> -90°
@@ -320,7 +334,7 @@
               </div>
             </div>
 
-            <!-- เลื่อน X / Y -->
+            <!-- Pan X / Y -->
             <div class="grid grid-cols-2 gap-3 pt-1 border-t border-slate-800/80">
               <div>
                 <div class="flex justify-between text-[11px] text-slate-400 mb-1">
@@ -345,9 +359,9 @@
                   <input type="checkbox" id="checkTopGradient" checked class="accent-[#b31929] rounded">
                   <span id="lblGradientShadow">เงาดำไล่เฉดด้านล่าง (Bottom Shadow)</span>
                 </label>
-                <span id="gradientHeightVal" class="font-mono text-slate-300">58%</span>
+                <span id="gradientHeightVal" class="font-mono text-slate-300">62%</span>
               </div>
-              <input id="sliderGradientHeight" type="range" min="20" max="85" step="1" value="58" class="w-full accent-rose-600 cursor-pointer h-1 bg-slate-800 rounded-lg">
+              <input id="sliderGradientHeight" type="range" min="20" max="85" step="1" value="62" class="w-full accent-rose-600 cursor-pointer h-1 bg-slate-800 rounded-lg">
             </div>
           </div>
         </div>
@@ -397,20 +411,40 @@
           </div>
         </div>
 
-        <!-- 5. Photo Credit Footer (เพิ่มตัวปรับขนาดตัวหนังสือ) -->
+        <!-- 5. Photo Credit Suite (ปรับทิศทาง + แถบรองหลัง + สีตัวหนังสือ) -->
         <div id="creditBoxSection" class="space-y-3 bg-slate-950/70 p-3.5 rounded-xl border border-slate-800">
           <div class="flex items-center justify-between">
             <label class="text-xs text-slate-200 font-semibold flex items-center gap-1.5">
-              <i data-lucide="camera" class="w-3.5 h-3.5 text-slate-400"></i>
+              <i data-lucide="camera" class="w-3.5 h-3.5 text-rose-400"></i>
               <span>เครดิตเจ้าของรูป (Photo Credit)</span>
             </label>
-            <label class="flex items-center gap-1.5 text-[11px] text-slate-400 cursor-pointer">
-              <input type="checkbox" id="checkVerticalCredit" checked class="accent-[#b31929] rounded">
-              <span>แนวตั้งชิดขวา (แบบ BBC)</span>
-            </label>
+            <span class="text-[10px] text-slate-400">ปรับหลบหลีกภาพ</span>
           </div>
           
-          <input type="text" id="inputCredit" value="ภาพ : ทีมข่าวเขาวังเดลี่" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-rose-500" placeholder="ใส่เครดิตภาพ">
+          <input type="text" id="inputCredit" value="INFINITY WARD / ACTIVISION / GETTY" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-rose-500" placeholder="ใส่เครดิตภาพ หรือเว้นว่างได้">
+
+          <!-- ตำแหน่งการวางเครดิต -->
+          <div class="grid grid-cols-2 gap-3 pt-1">
+            <div>
+              <label class="text-[11px] text-slate-400 block mb-1">ทิศทางการวางเครดิต</label>
+              <select id="selectCreditPos" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-2 py-1.5 text-xs text-slate-200 focus:outline-none">
+                <option value="vertical-right-bottom" selected>แนวตั้ง ชิดขวาล่าง (BBC)</option>
+                <option value="vertical-right-top">แนวตั้ง ชิดขวาบน</option>
+                <option value="horizontal-bottom-right">แนวนอน ชิดขวาล่าง</option>
+                <option value="horizontal-bottom-left">แนวนอน ชิดซ้ายล่าง</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="text-[11px] text-slate-400 block mb-1">สีตัวหนังสือ & แถบรอง</label>
+              <select id="selectCreditStyle" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-2 py-1.5 text-xs text-slate-200 focus:outline-none">
+                <option value="white-plain" selected>ตัวหนังสือสีขาว (เงาดำ)</option>
+                <option value="black-plain">ตัวหนังสือสีดำ (เงาขาว)</option>
+                <option value="white-badge">ตัวขาว + แถบดำโปร่งแสง</option>
+                <option value="black-badge">ตัวดำ + แถบขาวโปร่งแสง</option>
+              </select>
+            </div>
+          </div>
 
           <!-- ตัวปรับขนาดฟอนต์เครดิตภาพ -->
           <div class="pt-1">
@@ -487,6 +521,8 @@
 
     const checkAccentBar = document.getElementById('checkAccentBar');
     const inputAccentColor = document.getElementById('inputAccentColor');
+    
+    // Lines 1 - 4
     const inputLine1 = document.getElementById('inputLine1');
     const inputLine1Color = document.getElementById('inputLine1Color');
     const sliderLine1Size = document.getElementById('sliderLine1Size');
@@ -502,6 +538,11 @@
     const sliderLine3Size = document.getElementById('sliderLine3Size');
     const line3SizeVal = document.getElementById('line3SizeVal');
 
+    const inputLine4 = document.getElementById('inputLine4');
+    const inputLine4Color = document.getElementById('inputLine4Color');
+    const sliderLine4Size = document.getElementById('sliderLine4Size');
+    const line4SizeVal = document.getElementById('line4SizeVal');
+
     const selectFont = document.getElementById('selectFont');
     const sliderTextTop = document.getElementById('sliderTextTop');
     const textTopVal = document.getElementById('textTopVal');
@@ -510,8 +551,11 @@
     const selectLogoPos = document.getElementById('selectLogoPos');
     const sliderLogoSize = document.getElementById('sliderLogoSize');
     const logoSizeVal = document.getElementById('logoSizeVal');
+    
+    // Credit Controls
     const inputCredit = document.getElementById('inputCredit');
-    const checkVerticalCredit = document.getElementById('checkVerticalCredit');
+    const selectCreditPos = document.getElementById('selectCreditPos');
+    const selectCreditStyle = document.getElementById('selectCreditStyle');
     const sliderCreditSize = document.getElementById('sliderCreditSize');
     const creditSizeVal = document.getElementById('creditSizeVal');
 
@@ -524,7 +568,7 @@
     const toastText = document.getElementById('toastText');
 
     let currentRatio = "4:5";
-    let textPosition = "bottom"; // ค่าเริ่มต้นพาดหัวล่างตามที่ใช้งานจริงล่าสุด
+    let textPosition = "bottom";
     let canvasWidth = 1080;
     let canvasHeight = 1350;
 
@@ -533,7 +577,7 @@
     let imgScale = 1.0;
     let imgOffsetX = 0;
     let imgOffsetY = 0;
-    let imgRotation = 0; // องศาการหมุน
+    let imgRotation = 0;
 
     let customLogoImg = new Image();
     let hasCustomLogo = false;
@@ -663,11 +707,9 @@
       ctx.fillStyle = "#0c1017";
       ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-      // 1. วาดรูปภาพพื้นหลัง พร้อมระบบหมุนและปรับระนาบ
+      // 1. ภาพพื้นหลัง + หมุนชดเชย
       if (isNewsImageLoaded && newsImage.width > 0) {
         ctx.save();
-        
-        // จุดหมุนอยู่กึ่งกลางภาพเสมอ
         const centerX = canvasWidth / 2 + imgOffsetX;
         const centerY = canvasHeight / 2 + imgOffsetY;
         ctx.translate(centerX, centerY);
@@ -685,7 +727,6 @@
           baseH = baseW / imgRatio;
         }
 
-        // ชดเชยการหมุนเพื่อไม่ให้ติดขอบดำ (Auto-scale factor when rotated)
         const rad = Math.abs((imgRotation * Math.PI) / 180);
         const rotateCompensation = 1 + (Math.sin(rad * 2) * 0.25);
 
@@ -696,7 +737,7 @@
         ctx.restore();
       }
 
-      // 2. เงาดำไล่เฉด (เฉพาะ 4:5 และ 1:1)
+      // 2. เงาดำไล่เฉด (ความสูงตามแถบสไลเดอร์)
       if (currentRatio !== "16:9" && checkTopGradient.checked) {
         const pct = parseInt(sliderGradientHeight.value, 10) / 100;
         const gradHeight = canvasHeight * pct;
@@ -722,12 +763,12 @@
         }
       }
 
-      // 3. วาดโลโก้เขาวังเดลี่
+      // 3. โลโก้เขาวังเดลี่
       if (checkShowLogo.checked) {
         drawKhaowangLogo();
       }
 
-      // 4. วาดตัวหนังสือและเครดิตภาพ
+      // 4. พาดหัวข่าว (สูงสุด 4 บรรทัด) และ เครดิตภาพรอบทิศ
       if (currentRatio !== "16:9") {
         drawTypographyAndAccent();
         drawCredit();
@@ -798,65 +839,55 @@
       ctx.restore();
     }
 
+    // DRAW TYPOGRAPHY 1-4 LINES
     function drawTypographyAndAccent() {
       const marginX = currentRatio === "4:5" ? 64 : 50;
       const yOffset = parseInt(sliderTextTop.value, 10);
       const selectedFont = selectFont.value;
 
-      const line1Text = inputLine1.value.trim();
-      const line2Text = inputLine2.value.trim();
-      const line3Text = inputLine3.value.trim();
+      const lines = [
+        { text: inputLine1.value.trim(), size: parseInt(sliderLine1Size.value, 10), color: inputLine1Color.value },
+        { text: inputLine2.value.trim(), size: parseInt(sliderLine2Size.value, 10), color: inputLine2Color.value },
+        { text: inputLine3.value.trim(), size: parseInt(sliderLine3Size.value, 10), color: inputLine3Color.value },
+        { text: inputLine4.value.trim(), size: parseInt(sliderLine4Size.value, 10), color: inputLine4Color.value }
+      ];
 
-      const line1Size = parseInt(sliderLine1Size.value, 10);
-      const line2Size = parseInt(sliderLine2Size.value, 10);
-      const line3Size = parseInt(sliderLine3Size.value, 10);
+      const activeLines = lines.filter(l => l.text.length > 0);
+      if (activeLines.length === 0) return;
 
-      const hasLine1 = line1Text.length > 0;
-      const hasLine2 = line2Text.length > 0;
-      const hasLine3 = line3Text.length > 0;
-
-      const totalBlockHeight = (hasLine1 ? line1Size * 1.35 : 0) + 
-                               (hasLine2 ? line2Size * 1.35 : 0) + 
-                               (hasLine3 ? line3Size * 1.35 : 0);
+      let totalBlockHeight = 0;
+      activeLines.forEach((l, idx) => {
+        totalBlockHeight += (l.size * 1.32);
+      });
 
       let startY = 0;
       if (textPosition === 'top') {
         const topMargin = currentRatio === "4:5" ? 215 : 140;
         startY = topMargin + yOffset;
       } else {
-        const bottomMargin = currentRatio === "4:5" ? 170 : 120;
+        const bottomMargin = currentRatio === "4:5" ? 150 : 110;
         startY = (canvasHeight - bottomMargin - totalBlockHeight) + yOffset;
       }
 
       let currentY = startY;
-      let line1Y = 0;
-      let line2Y = 0;
-      let line3Y = 0;
+      const linePositions = [];
 
-      if (hasLine1) {
-        line1Y = currentY + line1Size * 0.85;
-        currentY = line1Y + (line1Size * 0.45);
-      }
-
-      if (hasLine2) {
-        line2Y = currentY + line2Size * 0.85;
-        currentY = line2Y + (line2Size * 0.45);
-      }
-
-      if (hasLine3) {
-        line3Y = currentY + line3Size * 0.85;
-        currentY = line3Y + 14;
-      }
+      activeLines.forEach((l) => {
+        const lineY = currentY + l.size * 0.85;
+        linePositions.push({ lineY, ...l });
+        currentY = lineY + (l.size * 0.42);
+      });
 
       const showAccent = checkAccentBar.checked;
       const accentWidth = currentRatio === "4:5" ? 30 : 22;
       const textIndentX = showAccent ? (marginX + accentWidth + 28) : marginX;
 
-      if (showAccent && (hasLine1 || hasLine2 || hasLine3)) {
+      // Draw Vertical Red Accent Bar (ยืดความสูงตามจำนวนบรรทัดที่มีจริง)
+      if (showAccent && linePositions.length > 0) {
         ctx.save();
         const barTop = startY + 4;
-        const lastLineY = hasLine3 ? line3Y : (hasLine2 ? line2Y : line1Y);
-        const barBottom = lastLineY + 12;
+        const lastLine = linePositions[linePositions.length - 1];
+        const barBottom = lastLine.lineY + 12;
         const barHeight = Math.max(50, barBottom - barTop);
 
         ctx.fillStyle = inputAccentColor.value;
@@ -864,6 +895,7 @@
         ctx.restore();
       }
 
+      // Draw All Text Lines
       ctx.save();
       ctx.textAlign = "left";
       ctx.textBaseline = "alphabetic";
@@ -871,58 +903,98 @@
       ctx.shadowBlur = 12;
       ctx.shadowOffsetY = 2;
 
-      if (hasLine1) {
-        ctx.font = `700 ${line1Size}px '${selectedFont}', sans-serif`;
-        ctx.fillStyle = inputLine1Color.value;
-        ctx.fillText(line1Text, textIndentX, line1Y);
-      }
-
-      if (hasLine2) {
-        ctx.font = `700 ${line2Size}px '${selectedFont}', sans-serif`;
-        ctx.fillStyle = inputLine2Color.value;
-        ctx.fillText(line2Text, textIndentX, line2Y);
-      }
-
-      if (hasLine3) {
-        ctx.font = `700 ${line3Size}px '${selectedFont}', sans-serif`;
-        ctx.fillStyle = inputLine3Color.value;
-        ctx.fillText(line3Text, textIndentX, line3Y);
-      }
+      linePositions.forEach((l) => {
+        ctx.font = `700 ${l.size}px '${selectedFont}', sans-serif`;
+        ctx.fillStyle = l.color;
+        ctx.fillText(l.text, textIndentX, l.lineY);
+      });
 
       ctx.restore();
     }
 
-    // ฟังก์ชันวาดเครดิตภาพ พร้อมขนาดฟอนต์ที่ปรับแต่งได้
+    // DRAW PHOTO CREDIT SUITE (รอบทิศ + ปรับสี + แถบรองหลัง)
     function drawCredit() {
       const credit = inputCredit.value.trim();
       if (!credit) return;
 
       const creditFontSize = parseInt(sliderCreditSize.value, 10);
+      const pos = selectCreditPos.value;
+      const style = selectCreditStyle.value;
 
       ctx.save();
 
-      if (checkVerticalCredit.checked) {
+      let isBlack = style === 'black-plain' || style === 'black-badge';
+      let hasBadge = style === 'white-badge' || style === 'black-badge';
+
+      let textColor = isBlack ? '#111827' : '#ffffff';
+      let shadowColor = isBlack ? 'rgba(255, 255, 255, 0.75)' : 'rgba(0, 0, 0, 0.9)';
+      let badgeBg = isBlack ? 'rgba(255, 255, 255, 0.82)' : 'rgba(10, 15, 25, 0.78)';
+
+      ctx.font = `600 ${creditFontSize}px 'Prompt', sans-serif`;
+      const textWidth = ctx.measureText(credit.toUpperCase()).width;
+
+      if (pos === 'vertical-right-bottom' || pos === 'vertical-right-top') {
+        // แนวตั้งชิดขวา หมุน 90 องศา
         const posX = canvasWidth - (currentRatio === "4:5" ? 44 : 32);
-        const posY = textPosition === 'top' ? (canvasHeight * 0.65) : (canvasHeight * 0.42);
+        let posY = (pos === 'vertical-right-top') ? (canvasHeight * 0.28) : (canvasHeight * 0.65);
 
         ctx.translate(posX, posY);
         ctx.rotate(-Math.PI / 2);
+
+        if (hasBadge) {
+          const padX = 14;
+          const padY = 6;
+          ctx.fillStyle = badgeBg;
+          ctx.beginPath();
+          ctx.roundRect(-textWidth / 2 - padX, -creditFontSize - padY / 2, textWidth + padX * 2, creditFontSize + padY * 2, 8);
+          ctx.fill();
+        }
+
         ctx.textAlign = "center";
-        ctx.font = `600 ${creditFontSize}px 'Prompt', sans-serif`;
-        ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
-        ctx.shadowColor = "rgba(0, 0, 0, 0.9)";
-        ctx.shadowBlur = 8;
+        ctx.fillStyle = textColor;
+        ctx.shadowColor = shadowColor;
+        ctx.shadowBlur = hasBadge ? 0 : 8;
         ctx.letterSpacing = "2px";
         ctx.fillText(credit.toUpperCase(), 0, 0);
+
       } else {
-        const marginX = currentRatio === "4:5" ? 64 : 54;
-        const bottomY = canvasHeight - (currentRatio === "4:5" ? 48 : 28);
-        ctx.textAlign = "right";
-        ctx.font = `500 ${creditFontSize}px 'Prompt', sans-serif`;
-        ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
-        ctx.shadowColor = "rgba(0, 0, 0, 0.9)";
-        ctx.shadowBlur = 8;
-        ctx.fillText(credit, canvasWidth - marginX, bottomY);
+        // แนวนอน (ล่างขวา หรือ ล่างซ้าย)
+        const bottomY = canvasHeight - (currentRatio === "4:5" ? 48 : 30);
+        let posX = 0;
+
+        if (pos === 'horizontal-bottom-right') {
+          const marginX = currentRatio === "4:5" ? 64 : 50;
+          posX = canvasWidth - marginX;
+          ctx.textAlign = "right";
+
+          if (hasBadge) {
+            const padX = 14;
+            const padY = 6;
+            ctx.fillStyle = badgeBg;
+            ctx.beginPath();
+            ctx.roundRect(posX - textWidth - padX, bottomY - creditFontSize - padY / 2, textWidth + padX * 2, creditFontSize + padY * 2, 8);
+            ctx.fill();
+          }
+        } else {
+          // horizontal-bottom-left
+          const marginX = currentRatio === "4:5" ? 64 : 50;
+          posX = marginX;
+          ctx.textAlign = "left";
+
+          if (hasBadge) {
+            const padX = 14;
+            const padY = 6;
+            ctx.fillStyle = badgeBg;
+            ctx.beginPath();
+            ctx.roundRect(posX - padX, bottomY - creditFontSize - padY / 2, textWidth + padX * 2, creditFontSize + padY * 2, 8);
+            ctx.fill();
+          }
+        }
+
+        ctx.fillStyle = textColor;
+        ctx.shadowColor = shadowColor;
+        ctx.shadowBlur = hasBadge ? 0 : 8;
+        ctx.fillText(credit, posX, bottomY);
       }
 
       ctx.restore();
@@ -1058,7 +1130,6 @@
       renderCover();
     });
 
-    // Rotation Event Listeners
     sliderRotate.addEventListener('input', (e) => {
       imgRotation = parseFloat(e.target.value);
       rotateVal.textContent = `${imgRotation}°`;
@@ -1123,6 +1194,11 @@
       renderCover();
     });
 
+    sliderLine4Size.addEventListener('input', (e) => {
+      line4SizeVal.textContent = e.target.value + 'px';
+      renderCover();
+    });
+
     sliderTextTop.addEventListener('input', (e) => {
       textTopVal.textContent = e.target.value + 'px';
       renderCover();
@@ -1151,11 +1227,11 @@
       renderCover();
     });
 
-    [inputLine1, inputLine2, inputLine3, inputCredit].forEach(el => {
+    [inputLine1, inputLine2, inputLine3, inputLine4, inputCredit].forEach(el => {
       el.addEventListener('input', renderCover);
     });
 
-    [checkAccentBar, inputAccentColor, inputLine1Color, inputLine2Color, inputLine3Color, checkTopGradient, checkShowLogo, selectFont, selectLogoPos, checkVerticalCredit].forEach(el => {
+    [checkAccentBar, inputAccentColor, inputLine1Color, inputLine2Color, inputLine3Color, inputLine4Color, checkTopGradient, checkShowLogo, selectFont, selectLogoPos, selectCreditPos, selectCreditStyle].forEach(el => {
       el.addEventListener('change', renderCover);
       el.addEventListener('input', renderCover);
     });
