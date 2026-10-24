@@ -40,6 +40,22 @@
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #090d16; }
     ::-webkit-scrollbar-thumb { background: #273147; border-radius: 9999px; }
+    
+    /* ควบคุมขนาด Canvas ให้ใหญ่เต็มตาบน Desktop และพอดีรอบด้านบน Mobile */
+    #coverCanvas {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 38vh;
+      object-fit: contain;
+      display: block;
+    }
+    @media (min-width: 1024px) {
+      #coverCanvas {
+        max-height: 82vh !important;
+        max-width: 95% !important;
+      }
+    }
   </style>
 </head>
 
@@ -77,25 +93,26 @@
   <!-- MAIN WORKSPACE -->
   <main class="flex-1 flex flex-col lg:flex-row lg:overflow-hidden">
     
-    <!-- LEFT PANEL: Canvas Viewport -->
-    <section id="workspaceSection" class="w-full lg:flex-1 bg-slate-950 p-3 sm:p-4 lg:p-6 flex flex-col items-center justify-center relative border-b lg:border-b-0 lg:border-r border-slate-800/80 shrink-0">
+    <!-- LEFT PANEL: Canvas Viewport (ขยายใหญ่เต็มตาบน Desktop) -->
+    <section id="workspaceSection" class="w-full lg:flex-1 bg-slate-950 p-2 sm:p-4 lg:p-6 flex flex-col items-center justify-center relative border-b lg:border-b-0 lg:border-r border-slate-800/80 shrink-0">
       
-      <div class="w-full flex items-center justify-between mb-2 text-xs text-slate-400 px-2 max-w-5xl">
+      <div class="w-full flex items-center justify-between mb-2 text-xs text-slate-400 px-3 max-w-5xl">
         <div class="flex items-center gap-2">
           <span class="relative flex h-2 w-2">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
           </span>
-          <span class="font-medium text-slate-300 text-xs sm:text-sm" id="modeTitle">Live Preview (Cover Slide)</span>
+          <span class="font-medium text-slate-300 text-xs sm:text-sm" id="modeTitle">Live Preview (ภาพปกข่าว)</span>
         </div>
         <div id="canvasDimensionBadge" class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 font-mono text-[11px] sm:text-xs">
           1080 × 1350 px (4:5)
         </div>
       </div>
 
-      <div id="dropZone" class="w-full flex items-center justify-center relative transition py-1">
-        <div class="relative flex items-center justify-center shadow-2xl rounded-2xl overflow-hidden border border-slate-800/90 bg-slate-900/60 p-1 backdrop-blur max-w-full">
-          <canvas id="coverCanvas" class="max-w-full rounded-xl cursor-grab active:cursor-grabbing select-none shadow-2xl" style="height: auto; max-height: 38vh; display: block;"></canvas>
+      <!-- Main Canvas Container (ปล่อยเต็มพื้นที่) -->
+      <div id="dropZone" class="flex-1 w-full flex items-center justify-center relative transition p-1">
+        <div class="relative flex items-center justify-center shadow-2xl rounded-2xl overflow-hidden border border-slate-800/90 bg-slate-900/40 p-1 backdrop-blur max-w-full">
+          <canvas id="coverCanvas" class="rounded-xl cursor-grab active:cursor-grabbing select-none shadow-2xl"></canvas>
           
           <div id="dropOverlay" class="absolute inset-0 bg-slate-950/85 backdrop-blur-sm flex flex-col items-center justify-center gap-3 opacity-0 pointer-events-none transition duration-200 z-30">
             <i data-lucide="upload-cloud" class="w-16 h-16 text-rose-500 animate-bounce"></i>
@@ -104,8 +121,9 @@
         </div>
       </div>
 
-      <div class="w-full flex items-center justify-between mt-2 px-2 text-xs text-slate-400 max-w-5xl">
-        <span>💡 แตะหรือลากบนรูปเพื่อเลื่อนจัดตำแหน่ง</span>
+      <div class="w-full flex items-center justify-between mt-2 px-3 text-xs text-slate-400 max-w-5xl">
+        <span class="hidden sm:inline">💡 ลากไฟล์รูปมาวาง หรือแตะเลื่อนจัดตำแหน่งรูปภาพ</span>
+        <span class="sm:hidden">💡 แตะหรือลากบนรูปเพื่อจัดตำแหน่งภาพ</span>
         <div class="flex items-center gap-3">
           <label for="imageUpload" class="text-rose-400 hover:text-rose-300 font-semibold cursor-pointer underline flex items-center gap-1">
             <i data-lucide="image-plus" class="w-3.5 h-3.5"></i> เลือกรูป
@@ -118,10 +136,10 @@
     </section>
 
     <!-- RIGHT PANEL: Controls -->
-    <aside class="w-full lg:w-[470px] xl:w-[500px] bg-slate-900 flex flex-col lg:overflow-y-auto border-t lg:border-t-0 lg:border-l border-slate-800/80 shrink-0">
+    <aside class="w-full lg:w-[460px] xl:w-[490px] bg-slate-900 flex flex-col lg:overflow-y-auto border-t lg:border-t-0 lg:border-l border-slate-800/80 shrink-0">
       <div class="p-4 lg:p-6 space-y-6">
 
-        <!-- TEMPLATE SELECTOR (6 รูปแบบตามมาตรฐาน BBC) -->
+        <!-- TEMPLATE SELECTOR -->
         <div class="space-y-2 p-3.5 rounded-2xl border border-rose-500/30 bg-slate-950/80 shadow-md">
           <label class="text-xs font-bold uppercase tracking-wider text-rose-300 flex items-center justify-between">
             <span class="flex items-center gap-1.5">
@@ -152,7 +170,7 @@
           </div>
         </div>
 
-        <!-- ASPECT RATIO (ใช้ในโหมดภาพปก) -->
+        <!-- ASPECT RATIO -->
         <div id="aspectRatioBox" class="space-y-2">
           <label class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
             <i data-lucide="proportions" class="w-4 h-4 text-[#b31929]"></i> สัดส่วนรูปภาพ
@@ -212,7 +230,7 @@
           </div>
         </div>
 
-        <!-- 3. SETTINGS: CLEAN TEXT SLIDE (ขาวล้วน) -->
+        <!-- 3. SETTINGS: CLEAN TEXT SLIDE -->
         <div id="panelCleanText" class="hidden space-y-3 p-3.5 rounded-2xl border border-slate-800 bg-slate-950/70">
           <label class="text-xs font-bold text-slate-200">ข้อความบนพื้นหลังสีขาว 100%</label>
           <textarea id="inputCleanText" rows="7" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white leading-relaxed" placeholder="พิมพ์ข้อความสรุปผลวิจัยหรือสถิติ..."></textarea>
@@ -238,7 +256,7 @@
           </div>
         </div>
 
-        <!-- PHOTO TOOLS (หมุน/ซูม/แพน) -->
+        <!-- PHOTO TOOLS -->
         <div id="photoControlsBox" class="space-y-3 bg-slate-950/70 p-3.5 rounded-xl border border-slate-800">
           <div class="flex items-center justify-between">
             <label class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
@@ -310,9 +328,9 @@
     const modeTitle = document.getElementById('modeTitle');
     const imageUpload = document.getElementById('imageUpload');
 
-    let currentTpl = "cover"; // cover, split, clean-text, quote, location
+    let currentTpl = "cover";
     let currentRatio = "4:5";
-    let coverPos = "bottom"; // top, bottom
+    let coverPos = "bottom";
     let canvasWidth = 1080;
     let canvasHeight = 1350;
 
@@ -327,7 +345,6 @@
     let startPointerX = 0;
     let startPointerY = 0;
 
-    // Default Contents
     document.getElementById('inputSplitText').value = "งานวิจัยของมหาวิทยาลัยเคมบริดจ์ในสหราชอาณาจักรพบว่า ผู้หญิงมีแนวโน้มต้องรอนานกว่าผู้ชายอย่างมีนัยสำคัญในการได้รับการวินิจฉัยโรคภูมิคุ้มกันทำลายตนเอง\n\n• ผู้หญิง 43.3% ระบุว่าอาการถูกเข้าใจผิดว่าเกิดจากจิตใจ\n• เทียบกับผู้ชายเพียง 32.7%";
     document.getElementById('inputCleanText').value = "งานวิจัยซึ่งตีพิมพ์ในวารสารทางการแพทย์ เดอะแลนเซ็ต (The Lancet)\nมีผู้เข้าร่วมกว่า 6,600 คน ส่วนใหญ่เป็นผู้หญิงจากสหราชอาณาจักร\n\nข้อจำกัดประการหนึ่งของการศึกษานี้ คือเป็นการศึกษาจากแบบสำรวจออนไลน์ ซึ่งอาศัยการรายงานประสบการณ์การได้รับการวินิจฉัยโดยผู้เข้าร่วมเอง";
     document.getElementById('inputQuoteBody').value = "ตอนนี้เราจำเป็นต้องทำการศึกษา เพื่อพัฒนาการสื่อสารระหว่างแพทย์กับผู้ป่วย และเพื่อให้การสนับสนุนผู้คนในการเยียวยาตนเอง";
@@ -354,7 +371,6 @@
         }
       });
 
-      // Show/Hide Panels
       document.getElementById('panelCover').classList.toggle('hidden', tpl !== 'cover');
       document.getElementById('panelSplit').classList.toggle('hidden', tpl !== 'split');
       document.getElementById('panelCleanText').classList.toggle('hidden', tpl !== 'clean-text');
@@ -420,7 +436,6 @@
       });
     });
 
-    // RENDER DISPATCHER
     function render() {
       ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
@@ -436,23 +451,19 @@
         renderCoverTemplate();
       }
 
-      // Draw Logo
       if (document.getElementById('selectLogoOption').value === 'show') {
         drawKhaowangLogo(currentTpl === 'clean-text');
       }
 
-      // Draw Credit
       if (currentTpl !== 'clean-text') {
         drawCredit();
       }
     }
 
-    // 1. TEMPLATE: COVER
     function renderCoverTemplate() {
       drawPhoto(0, 0, canvasWidth, canvasHeight);
 
       if (currentRatio !== "16:9") {
-        // Shadow Gradient
         const grad = ctx.createLinearGradient(0, coverPos === 'top' ? 0 : canvasHeight, 0, coverPos === 'top' ? canvasHeight * 0.6 : canvasHeight * 0.4);
         grad.addColorStop(0, "rgba(0,0,0,0.95)");
         grad.addColorStop(0.7, "rgba(0,0,0,0.45)");
@@ -460,7 +471,6 @@
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-        // Lines
         const l1 = document.getElementById('inputLine1').value.trim();
         const l2 = document.getElementById('inputLine2').value.trim();
         const l3 = document.getElementById('inputLine3').value.trim();
@@ -472,11 +482,9 @@
           const totalH = lines.length * (fontSize * 1.38);
           const startY = coverPos === 'top' ? 220 : (canvasHeight - 160 - totalH);
 
-          // Red Accent Bar
           ctx.fillStyle = "#b31929";
           ctx.fillRect(64, startY, 28, totalH);
 
-          // Text
           ctx.font = `700 ${fontSize}px 'Prompt', sans-serif`;
           ctx.fillStyle = "#ffffff";
           ctx.shadowColor = "rgba(0,0,0,0.9)";
@@ -489,7 +497,6 @@
       }
     }
 
-    // 2. TEMPLATE: SPLIT
     function renderSplitTemplate() {
       const isTopText = document.getElementById('selectSplitOrder').value === 'text-top';
       const splitH = canvasHeight * 0.52;
@@ -499,7 +506,6 @@
       const textY = isTopText ? 0 : photoH;
       const photoY = isTopText ? textH : 0;
 
-      // Draw Photo
       ctx.save();
       ctx.beginPath();
       ctx.rect(0, photoY, canvasWidth, photoH);
@@ -507,15 +513,12 @@
       drawPhoto(0, photoY, canvasWidth, photoH);
       ctx.restore();
 
-      // Draw Black Background
       ctx.fillStyle = "#000000";
       ctx.fillRect(0, textY, canvasWidth, textH);
 
-      // Split Divider Line
       ctx.fillStyle = "#1e293b";
       ctx.fillRect(0, isTopText ? textH - 2 : photoH, canvasWidth, 2);
 
-      // Text
       const raw = document.getElementById('inputSplitText').value;
       const fontSize = 38;
       const lineHeight = fontSize * 1.5;
@@ -525,13 +528,11 @@
       ctx.fillStyle = "#ffffff";
       wrapText(raw, 64, startTextY, canvasWidth - 148, lineHeight);
 
-      // Arrow
       if (document.getElementById('checkSplitArrow').checked) {
         drawNextArrow(isTopText ? textH : photoH);
       }
     }
 
-    // 3. TEMPLATE: CLEAN TEXT (พื้นหลังขาว 100%)
     function renderCleanTextTemplate() {
       ctx.fillStyle = "#ffffff";
       ctx.fillRect(0, 0, canvasWidth, canvasHeight);
@@ -545,22 +546,18 @@
       wrapText(raw, 72, 260, canvasWidth - 144, lineHeight);
     }
 
-    // 4. TEMPLATE: QUOTE (โควทคำพูด)
     function renderQuoteTemplate() {
-      // Dark Gradient Background
       const grad = ctx.createLinearGradient(0, 0, 0, canvasHeight);
       grad.addColorStop(0, "#1f242d");
       grad.addColorStop(1, "#0a0c10");
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-      // Large Quote Symbol “
       ctx.font = "800 130px 'Kanit', sans-serif";
       ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
       ctx.textAlign = "center";
       ctx.fillText("“", canvasWidth / 2, 250);
 
-      // Quote Body
       const quoteText = document.getElementById('inputQuoteBody').value;
       const fontSize = 42;
       const lineHeight = fontSize * 1.6;
@@ -569,7 +566,6 @@
       ctx.fillStyle = "#ffffff";
       wrapTextCentered(quoteText, canvasWidth / 2, 330, canvasWidth - 160, lineHeight);
 
-      // Author & Role
       const author = document.getElementById('inputQuoteAuthor').value.trim();
       const role = document.getElementById('inputQuoteRole').value.trim();
 
@@ -587,11 +583,9 @@
       ctx.textAlign = "left";
     }
 
-    // 5. TEMPLATE: LOCATION & DATE TAG
     function renderLocationTemplate() {
       drawPhoto(0, 0, canvasWidth, canvasHeight);
 
-      // Bottom Dark Gradient
       const grad = ctx.createLinearGradient(0, canvasHeight, 0, canvasHeight - 420);
       grad.addColorStop(0, "rgba(0,0,0,0.92)");
       grad.addColorStop(0.65, "rgba(0,0,0,0.45)");
@@ -601,28 +595,23 @@
 
       const locName = document.getElementById('inputLocName').value.trim();
       const locDate = document.getElementById('inputLocDate').value.trim();
-
       const startY = canvasHeight - 150;
 
-      // Red Square Box
       ctx.fillStyle = "#b31929";
       ctx.fillRect(64, startY - 32, 28, 28);
 
-      // Location Name
       ctx.font = "700 48px 'Prompt', sans-serif";
       ctx.fillStyle = "#ffffff";
       ctx.shadowColor = "rgba(0,0,0,0.9)";
       ctx.shadowBlur = 10;
       ctx.fillText(locName, 108, startY - 6);
 
-      // Date Tag
       ctx.font = "600 28px 'Prompt', sans-serif";
       ctx.fillStyle = "rgba(255,255,255,0.85)";
       ctx.fillText(locDate, 108, startY + 44);
       ctx.shadowBlur = 0;
     }
 
-    // DRAW PHOTO HELPER
     function drawPhoto(x, y, w, h) {
       if (!isNewsImageLoaded || newsImage.width === 0) {
         ctx.fillStyle = "#161d2a";
@@ -657,7 +646,6 @@
       ctx.restore();
     }
 
-    // TEXT WRAPPERS
     function wrapText(text, x, y, maxWidth, lineHeight) {
       const paragraphs = text.split('\n');
       let curY = y;
@@ -730,7 +718,7 @@
       ctx.restore();
     }
 
-    function drawKhaowangLogo(isDarkTheme) {
+    function drawKhaowangLogo(isWhiteBg) {
       const size = 110;
       const x = 64;
       const y = 56;
@@ -742,7 +730,7 @@
       ctx.arc(centerX, centerY, size / 2, 0, Math.PI * 2);
       ctx.fillStyle = "#b31929";
       ctx.fill();
-      ctx.strokeStyle = "rgba(255,255,255,0.25)";
+      ctx.strokeStyle = isWhiteBg ? "rgba(0,0,0,0.12)" : "rgba(255,255,255,0.25)";
       ctx.lineWidth = 2;
       ctx.stroke();
 
@@ -772,7 +760,6 @@
       ctx.restore();
     }
 
-    // PHOTO UPLOAD & DRAG
     function handleImageFile(file) {
       if (!file) return;
       const reader = new FileReader();
@@ -799,7 +786,6 @@
 
     imageUpload.addEventListener('change', (e) => handleImageFile(e.target.files[0]));
 
-    // Drag & Drop
     ['dragenter', 'dragover'].forEach(name => {
       window.addEventListener(name, (e) => {
         e.preventDefault();
@@ -821,7 +807,6 @@
       if (e.dataTransfer && e.dataTransfer.files[0]) handleImageFile(e.dataTransfer.files[0]);
     });
 
-    // Canvas Mouse / Touch Drag to Move
     function getCoords(e) {
       const rect = canvas.getBoundingClientRect();
       const sx = canvasWidth / rect.width;
@@ -868,7 +853,6 @@
 
     window.addEventListener('touchend', () => { isDragging = false; });
 
-    // Slider Listeners
     document.getElementById('sliderRotate').addEventListener('input', (e) => {
       imgRotation = parseFloat(e.target.value);
       document.getElementById('rotateVal').textContent = `${imgRotation}°`;
@@ -904,7 +888,6 @@
       render();
     });
 
-    // Live update listeners
     [
       'inputLine1', 'inputLine2', 'inputLine3', 'inputLine4',
       'inputSplitText', 'selectSplitOrder', 'checkSplitArrow',
@@ -918,7 +901,6 @@
       }
     });
 
-    // Export Function
     function downloadJpg() {
       const link = document.createElement('a');
       link.download = `khaowangdaily-${currentTpl}-${Date.now()}.jpg`;
@@ -934,7 +916,7 @@
       canvas.toBlob((blob) => {
         if (blob && navigator.clipboard && navigator.clipboard.write) {
           navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
-            .then(() => showToast("คัดลอกรูปภาพแล้ว! วางลงโซเชียลได้ทันที"))
+            .then(() => showToast("คัดลอกรูปภาพแล้ว!"))
             .catch(() => downloadJpg());
         } else {
           downloadJpg();
@@ -946,7 +928,6 @@
       canvas.width = canvasWidth;
       canvas.height = canvasHeight;
 
-      // พื้นหลังตัวอย่าง
       const off = document.createElement('canvas');
       off.width = 1080; off.height = 1350;
       const octx = off.getContext('2d');
