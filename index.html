@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>เขาวังเดลี่ Cover Studio - ระบบสร้างภาพปกข่าวทางการ (BBC Standard)</title>
+  <title>เขาวังเดลี่ Cover Studio - ระบบสร้างภาพข่าวมาตรฐานสากล (BBC Style)</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
   
@@ -21,8 +21,7 @@
             brand: {
               DEFAULT: '#b31929',
               dark: '#8b1320',
-              light: '#c41e3a',
-              gold: '#F6C852'
+              light: '#c41e3a'
             }
           },
           fontFamily: {
@@ -37,20 +36,10 @@
   </script>
 
   <style>
-    body {
-      font-family: 'Prompt', sans-serif;
-    }
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #090d16;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #273147;
-      border-radius: 9999px;
-    }
+    body { font-family: 'Prompt', sans-serif; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #090d16; }
+    ::-webkit-scrollbar-thumb { background: #273147; border-radius: 9999px; }
   </style>
 </head>
 
@@ -66,9 +55,9 @@
       <div>
         <div class="flex items-center gap-2">
           <span class="font-extrabold text-white text-base lg:text-lg tracking-wide">เขาวังเดลี่</span>
-          <span class="text-[11px] px-2 py-0.5 rounded-md bg-[#b31929]/20 text-rose-300 border border-rose-500/30 font-medium">Cover Studio Pro</span>
+          <span class="text-[11px] px-2 py-0.5 rounded-md bg-[#b31929]/20 text-rose-300 border border-rose-500/30 font-medium">Cover & Slide Studio</span>
         </div>
-        <p class="text-[11px] text-slate-400 hidden sm:block">สร้างภาพหน้าปกข่าว 4:5, 16:9 และสไลด์สรุปเนื้อหาอัลบั้ม</p>
+        <p class="text-[11px] text-slate-400 hidden sm:block">เครื่องมือสร้างภาพข่าวระดับสากล 4:5 และ 16:9</p>
       </div>
     </div>
 
@@ -88,7 +77,7 @@
   <!-- MAIN WORKSPACE -->
   <main class="flex-1 flex flex-col lg:flex-row lg:overflow-hidden">
     
-    <!-- LEFT PANEL: Canvas Display Viewport -->
+    <!-- LEFT PANEL: Canvas Viewport -->
     <section id="workspaceSection" class="w-full lg:flex-1 bg-slate-950 p-3 sm:p-4 lg:p-6 flex flex-col items-center justify-center relative border-b lg:border-b-0 lg:border-r border-slate-800/80 shrink-0">
       
       <div class="w-full flex items-center justify-between mb-2 text-xs text-slate-400 px-2 max-w-5xl">
@@ -116,7 +105,7 @@
       </div>
 
       <div class="w-full flex items-center justify-between mt-2 px-2 text-xs text-slate-400 max-w-5xl">
-        <span>💡 แตะหรือลากบนรูปเพื่อจัดตำแหน่งภาพ</span>
+        <span>💡 แตะหรือลากบนรูปเพื่อเลื่อนจัดตำแหน่ง</span>
         <div class="flex items-center gap-3">
           <label for="imageUpload" class="text-rose-400 hover:text-rose-300 font-semibold cursor-pointer underline flex items-center gap-1">
             <i data-lucide="image-plus" class="w-3.5 h-3.5"></i> เลือกรูป
@@ -128,402 +117,173 @@
       </div>
     </section>
 
-    <!-- RIGHT PANEL: Settings & Studio Controls -->
+    <!-- RIGHT PANEL: Controls -->
     <aside class="w-full lg:w-[470px] xl:w-[500px] bg-slate-900 flex flex-col lg:overflow-y-auto border-t lg:border-t-0 lg:border-l border-slate-800/80 shrink-0">
       <div class="p-4 lg:p-6 space-y-6">
 
-        <!-- NEW: Template Type Toggle (Cover vs Split Content Slide) -->
-        <div class="space-y-2 p-3 rounded-2xl border border-rose-500/30 bg-slate-950/80 shadow-md">
+        <!-- TEMPLATE SELECTOR (6 รูปแบบตามมาตรฐาน BBC) -->
+        <div class="space-y-2 p-3.5 rounded-2xl border border-rose-500/30 bg-slate-950/80 shadow-md">
           <label class="text-xs font-bold uppercase tracking-wider text-rose-300 flex items-center justify-between">
             <span class="flex items-center gap-1.5">
-              <i data-lucide="layers" class="w-4 h-4 text-rose-500"></i> ประเภทสไลด์ (Template Mode)
+              <i data-lucide="layout-grid" class="w-4 h-4 text-rose-500"></i> เลือกเทมเพลต (Template Style)
             </span>
-            <span class="text-[10px] text-slate-400">เลือกรูปแบบการเล่าเรื่อง</span>
           </label>
           <div class="grid grid-cols-2 gap-2 pt-1">
-            <button type="button" id="btnModeCover" class="mode-select-btn active-mode flex flex-col items-center justify-center p-2.5 rounded-xl border border-rose-600 bg-rose-600/20 text-rose-200 font-bold text-xs transition">
-              <span class="flex items-center gap-1.5"><i data-lucide="image" class="w-3.5 h-3.5"></i> ภาพปกข่าว</span>
-              <span class="text-[10px] text-slate-400 font-normal mt-0.5">ภาพเต็มใบ + พาดหัวหลัก</span>
+            <button type="button" data-tpl="cover" class="tpl-btn active-tpl p-2 rounded-xl border border-rose-600 bg-rose-600/20 text-rose-200 font-semibold text-xs text-left transition">
+              <div class="font-bold">1. ภาพปกข่าว</div>
+              <div class="text-[10px] text-slate-400 font-normal">พาดหัว 1-4 บรรทัด</div>
             </button>
-            <button type="button" id="btnModeSplit" class="mode-select-btn flex flex-col items-center justify-center p-2.5 rounded-xl border border-slate-700 bg-slate-800/70 text-slate-300 hover:bg-slate-800 font-bold text-xs transition">
-              <span class="flex items-center gap-1.5"><i data-lucide="split-square-vertical" class="w-3.5 h-3.5"></i> สไลด์เนื้อหา</span>
-              <span class="text-[10px] text-slate-400 font-normal mt-0.5">ครึ่งบนข้อความ / ล่างรูป</span>
+            <button type="button" data-tpl="split" class="tpl-btn p-2 rounded-xl border border-slate-700 bg-slate-800/70 text-slate-300 hover:bg-slate-800 font-semibold text-xs text-left transition">
+              <div class="font-bold">2. สไลด์เนื้อหา (Split)</div>
+              <div class="text-[10px] text-slate-400 font-normal">แบ่งครึ่งข้อความ & รูป</div>
+            </button>
+            <button type="button" data-tpl="clean-text" class="tpl-btn p-2 rounded-xl border border-slate-700 bg-slate-800/70 text-slate-300 hover:bg-slate-800 font-semibold text-xs text-left transition">
+              <div class="font-bold">3. สไลด์ข้อความล้วน</div>
+              <div class="text-[10px] text-slate-400 font-normal">พื้นหลังขาว คมชัด 100%</div>
+            </button>
+            <button type="button" data-tpl="quote" class="tpl-btn p-2 rounded-xl border border-slate-700 bg-slate-800/70 text-slate-300 hover:bg-slate-800 font-semibold text-xs text-left transition">
+              <div class="font-bold">4. สไลด์โควทคำพูด</div>
+              <div class="text-[10px] text-slate-400 font-normal">เครื่องหมายคำพูด “ ใหญ่</div>
+            </button>
+            <button type="button" data-tpl="location" class="tpl-btn p-2 rounded-xl border border-slate-700 bg-slate-800/70 text-slate-300 hover:bg-slate-800 font-semibold text-xs text-left transition col-span-2">
+              <div class="font-bold">5. ภาพข่าวระบุสถานที่และวันที่ (Location & Date Tag)</div>
+              <div class="text-[10px] text-slate-400 font-normal">ภาพเต็มใบ + จุดแดง ■ แสดงสถานที่/วันที่รายงานข่าว</div>
             </button>
           </div>
         </div>
 
-        <!-- 1. Aspect Ratio Presets (จะใช้งานได้เต็มที่ในโหมดภาพปก) -->
+        <!-- ASPECT RATIO (ใช้ในโหมดภาพปก) -->
         <div id="aspectRatioBox" class="space-y-2">
           <label class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
             <i data-lucide="proportions" class="w-4 h-4 text-[#b31929]"></i> สัดส่วนรูปภาพ
           </label>
           <div class="grid grid-cols-3 gap-2">
-            <button type="button" data-ratio="4:5" class="ratio-btn active-ratio flex flex-col items-center justify-center p-2.5 rounded-xl border border-rose-600 bg-rose-600/15 text-rose-200 font-semibold text-xs transition">
+            <button type="button" data-ratio="4:5" class="ratio-btn active-ratio flex flex-col items-center justify-center p-2 rounded-xl border border-rose-600 bg-rose-600/15 text-rose-200 font-semibold text-xs transition">
               <span class="font-bold text-sm">4:5</span>
               <span class="text-[10px] text-slate-300">แนวตั้งโซเชียล</span>
-              <span class="text-[9px] text-rose-400 mt-0.5">แบบ BBC</span>
             </button>
-            <button type="button" data-ratio="16:9" class="ratio-btn flex flex-col items-center justify-center p-2.5 rounded-xl border border-slate-700 bg-slate-800/70 text-slate-300 hover:bg-slate-800 font-semibold text-xs transition">
+            <button type="button" data-ratio="16:9" class="ratio-btn flex flex-col items-center justify-center p-2 rounded-xl border border-slate-700 bg-slate-800/70 text-slate-300 hover:bg-slate-800 font-semibold text-xs transition">
               <span class="font-bold text-sm">16:9</span>
-              <span class="text-[10px] text-slate-300">ปกเว็บข่าว</span>
-              <span class="text-[9px] text-emerald-400 mt-0.5">รูปคลีน + โลโก้</span>
+              <span class="text-[10px] text-emerald-400">ปกเว็บคลีน</span>
             </button>
-            <button type="button" data-ratio="1:1" class="ratio-btn flex flex-col items-center justify-center p-2.5 rounded-xl border border-slate-700 bg-slate-800/70 text-slate-300 hover:bg-slate-800 font-semibold text-xs transition">
+            <button type="button" data-ratio="1:1" class="ratio-btn flex flex-col items-center justify-center p-2 rounded-xl border border-slate-700 bg-slate-800/70 text-slate-300 hover:bg-slate-800 font-semibold text-xs transition">
               <span class="font-bold text-sm">1:1</span>
               <span class="text-[10px] text-slate-300">จัตุรัส</span>
-              <span class="text-[9px] text-slate-400 mt-0.5">1080×1080</span>
             </button>
           </div>
         </div>
 
-        <div id="cleanNotice169" class="hidden p-3 rounded-xl border border-emerald-500/30 bg-emerald-950/20 text-emerald-300 text-xs flex items-center gap-2">
-          <i data-lucide="check-circle" class="w-4 h-4 shrink-0 text-emerald-400"></i>
-          <span>โหมด 16:9 แสดงภาพคลีน 100% พร้อมโลโก้เขาวังเดลี่ซ้ายบน (ซ่อนตัวหนังสือทั้งหมดอัตโนมัติ)</span>
-        </div>
-
-        <!-- 4:5 Position Presets (เฉพาะโหมดภาพปก) -->
-        <div id="textPlacementBox" class="space-y-2 p-3 rounded-xl border border-slate-800 bg-slate-950/70">
-          <div class="flex items-center justify-between">
-            <label class="text-xs font-bold text-slate-200 flex items-center gap-1.5">
-              <i data-lucide="layout" class="w-3.5 h-3.5 text-rose-500"></i> ตำแหน่งพาดหัวภาพปก
-            </label>
-            <span class="text-[10px] text-slate-400">เลือกแบบพาดหัว</span>
-          </div>
-          <div class="grid grid-cols-2 gap-2">
-            <button type="button" id="btnLayoutBottom" class="layout-preset-btn active-layout flex items-center justify-center gap-2 p-2 rounded-lg border border-rose-500 bg-rose-500/20 text-rose-200 font-bold text-xs transition">
-              <i data-lucide="arrow-down-to-line" class="w-3.5 h-3.5"></i>
-              <span>พาดหัวล่าง</span>
-            </button>
-            <button type="button" id="btnLayoutTop" class="layout-preset-btn flex items-center justify-center gap-2 p-2 rounded-lg border border-slate-700 bg-slate-800/60 text-slate-300 font-bold text-xs hover:bg-slate-800 transition">
-              <i data-lucide="arrow-up-to-line" class="w-3.5 h-3.5"></i>
-              <span>พาดหัวบน</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- SPLIT SLIDE CONTROLS (แสดงเฉพาะเมื่อเลือกโหมดสไลด์เนื้อหา) -->
-        <div id="splitSlideControls" class="hidden space-y-4 p-4 rounded-2xl border border-rose-500/30 bg-slate-950/90 shadow-lg">
-          <div class="flex items-center justify-between">
-            <label class="text-xs font-bold uppercase tracking-wider text-rose-300 flex items-center gap-1.5">
-              <i data-lucide="file-text" class="w-4 h-4 text-rose-500"></i> ข้อความเนื้อหาสไลด์ (Content Text)
-            </label>
-            <span class="text-[10px] text-slate-400">รองรับสัญลักษณ์ • และเว้นวรรค</span>
-          </div>
-
-          <textarea id="inputSplitBody" rows="7" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs sm:text-sm text-white focus:outline-none focus:border-rose-500 leading-relaxed font-prompt" placeholder="พิมพ์ข้อความเนื้อหาที่นี่..."></textarea>
-
-          <div class="grid grid-cols-2 gap-3 pt-1">
-            <div>
-              <div class="flex justify-between text-[11px] text-slate-400 mb-1">
-                <span>ขนาดตัวอักษรเนื้อหา</span>
-                <span id="splitFontSizeVal" class="font-mono text-slate-300">38px</span>
-              </div>
-              <input id="sliderSplitFontSize" type="range" min="24" max="52" value="38" class="w-full accent-rose-600 h-1 bg-slate-800 rounded">
-            </div>
-
-            <div>
-              <div class="flex justify-between text-[11px] text-slate-400 mb-1">
-                <span>สัดส่วนพื้นที่ข้อความ (สูง)</span>
-                <span id="splitRatioVal" class="font-mono text-slate-300">52%</span>
-              </div>
-              <input id="sliderSplitRatio" type="range" min="35" max="65" value="52" class="w-full accent-rose-600 h-1 bg-slate-800 rounded">
-            </div>
-          </div>
-
-          <div class="flex items-center justify-between pt-2 border-t border-slate-800 text-xs">
-            <label class="flex items-center gap-2 cursor-pointer text-slate-300">
-              <input type="checkbox" id="checkShowNextArrow" checked class="accent-[#b31929] rounded">
-              <span>แสดงลูกศรนำสายตาด้านขวา ( > )</span>
-            </label>
-            <button type="button" id="btnInsertBullet" class="text-[11px] text-rose-400 hover:text-rose-300 bg-slate-900 px-2 py-1 rounded border border-slate-700">
-              + ใส่หัวข้อ (•)
-            </button>
-          </div>
-        </div>
-
-        <div id="typographyDivider" class="h-px bg-slate-800"></div>
-
-        <!-- 2. Typography Layout Settings (เฉพาะโหมดภาพปก) -->
-        <div id="typographySection" class="space-y-4">
+        <!-- 1. SETTINGS: COVER SLIDE -->
+        <div id="panelCover" class="space-y-4">
           <div class="flex items-center justify-between">
             <label class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
               <i data-lucide="type" class="w-4 h-4 text-[#b31929]"></i> ข้อความพาดหัวข่าว (1-4 บรรทัด)
             </label>
-            <span class="text-[10px] text-slate-400">เว้นว่างเพื่อซ่อนบรรทัดได้</span>
-          </div>
-
-          <div class="flex items-center justify-between bg-slate-950/70 p-2.5 rounded-xl border border-slate-800 text-xs">
-            <label class="inline-flex items-center gap-2 cursor-pointer text-slate-200 font-medium">
-              <input type="checkbox" id="checkAccentBar" checked class="accent-[#b31929] w-4 h-4 rounded">
-              <span class="flex items-center gap-1.5">
-                <span class="w-2.5 h-4 bg-[#b31929] rounded-none inline-block"></span>
-                แถบสีแดงชิดซ้าย (BBC Accent Bar)
-              </span>
-            </label>
-            <input type="color" id="inputAccentColor" value="#b31929" class="w-6 h-6 rounded cursor-pointer bg-transparent border-0">
-          </div>
-
-          <!-- Line 1 -->
-          <div class="space-y-1.5 bg-slate-950/50 p-3 rounded-xl border border-slate-800/80">
-            <div class="flex items-center justify-between">
-              <label class="text-xs text-white font-semibold flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-white inline-block"></span>
-                บรรทัดที่ 1
-              </label>
-              <div class="flex items-center gap-2">
-                <input type="color" id="inputLine1Color" value="#ffffff" class="w-5 h-5 rounded cursor-pointer bg-transparent border-0" title="เลือกสีข้อความ">
-                <span id="line1SizeVal" class="text-[10px] text-slate-400 font-mono">54px</span>
-                <input id="sliderLine1Size" type="range" min="30" max="100" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
-              </div>
+            <div class="flex items-center gap-1 text-[11px]">
+              <button type="button" id="btnCoverTop" class="px-2 py-0.5 rounded border border-slate-700 bg-slate-800 text-slate-300">บน</button>
+              <button type="button" id="btnCoverBottom" class="px-2 py-0.5 rounded border border-rose-500 bg-rose-500/20 text-rose-200">ล่าง</button>
             </div>
-            <input type="text" id="inputLine1" value="รู้จักการทดสอบสมรรถภาพ" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-sm text-white font-bold focus:outline-none focus:border-rose-500">
           </div>
 
-          <!-- Line 2 -->
-          <div class="space-y-1.5 bg-slate-950/50 p-3 rounded-xl border border-slate-800/80">
-            <div class="flex items-center justify-between">
-              <label class="text-xs text-white font-semibold flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-white inline-block"></span>
-                บรรทัดที่ 2
-              </label>
-              <div class="flex items-center gap-2">
-                <input type="color" id="inputLine2Color" value="#ffffff" class="w-5 h-5 rounded cursor-pointer bg-transparent border-0" title="เลือกสีข้อความ">
-                <span id="line2SizeVal" class="text-[10px] text-slate-400 font-mono">54px</span>
-                <input id="sliderLine2Size" type="range" min="30" max="100" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
-              </div>
-            </div>
-            <input type="text" id="inputLine2" value="ร่างกายอย่างง่ายที่ช่วยประเมิน" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-sm text-white font-bold focus:outline-none focus:border-rose-500">
-          </div>
-
-          <!-- Line 3 -->
-          <div class="space-y-1.5 bg-slate-950/50 p-3 rounded-xl border border-slate-800/80">
-            <div class="flex items-center justify-between">
-              <label class="text-xs text-slate-200 font-semibold flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-slate-300 inline-block"></span>
-                บรรทัดที่ 3
-              </label>
-              <div class="flex items-center gap-2">
-                <input type="color" id="inputLine3Color" value="#ffffff" class="w-5 h-5 rounded cursor-pointer bg-transparent border-0" title="เลือกสีข้อความ">
-                <span id="line3SizeVal" class="text-[10px] text-slate-400 font-mono">54px</span>
-                <input id="sliderLine3Size" type="range" min="20" max="100" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
-              </div>
-            </div>
-            <input type="text" id="inputLine3" value="ความเสี่ยงการเสียชีวิต" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-sm text-white font-bold focus:outline-none focus:border-rose-500">
-          </div>
-
-          <!-- Line 4 -->
-          <div class="space-y-1.5 bg-slate-950/50 p-3 rounded-xl border border-slate-800/80">
-            <div class="flex items-center justify-between">
-              <label class="text-xs text-rose-300 font-semibold flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-rose-400 inline-block"></span>
-                บรรทัดที่ 4 (คำถาม / สรุปเสริม)
-              </label>
-              <div class="flex items-center gap-2">
-                <input type="color" id="inputLine4Color" value="#ffffff" class="w-5 h-5 rounded cursor-pointer bg-transparent border-0" title="เลือกสีข้อความ">
-                <span id="line4SizeVal" class="text-[10px] text-slate-400 font-mono">48px</span>
-                <input id="sliderLine4Size" type="range" min="20" max="100" value="48" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
-              </div>
-            </div>
-            <input type="text" id="inputLine4" value="เพียงแค่ใช้นาฬิกาจับเวลา" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-sm text-white font-bold focus:outline-none focus:border-rose-500" placeholder="เว้นว่างได้ถ้ามีเพียง 3 บรรทัด">
+          <div class="space-y-2 bg-slate-950/50 p-3 rounded-xl border border-slate-800/80">
+            <input type="text" id="inputLine1" value="เกม Call of Duty ภาคใหม่" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white" placeholder="บรรทัดที่ 1">
+            <input type="text" id="inputLine2" value="จินตนาการสถานการณ์เกาหลีเหนือ" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white" placeholder="บรรทัดที่ 2">
+            <input type="text" id="inputLine3" value="บุกเกาหลีใต้ เหตุการณ์เช่นนี้" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white" placeholder="บรรทัดที่ 3">
+            <input type="text" id="inputLine4" value="มีโอกาสเกิดขึ้นจริงได้หรือไม่ ?" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white" placeholder="บรรทัดที่ 4 (เว้นว่างได้)">
           </div>
         </div>
 
-        <!-- Global Font Settings -->
-        <div class="grid grid-cols-2 gap-3 pt-1">
-          <div>
-            <label class="text-[11px] text-slate-400 block mb-1">ฟอนต์ตัวหนังสือ</label>
-            <select id="selectFont" class="w-full bg-slate-950 border border-slate-700/80 rounded-xl px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-rose-500">
-              <option value="Prompt" selected>Prompt (โมเดิร์น สไตล์ BBC)</option>
-              <option value="Bai Jamjuree">Bai Jamjuree (ทางการ คมชัด)</option>
-              <option value="Kanit">Kanit (มาตรฐานข่าว)</option>
-              <option value="Sarabun">Sarabun (สุภาพ ชัดเจน)</option>
+        <!-- 2. SETTINGS: SPLIT SLIDE -->
+        <div id="panelSplit" class="hidden space-y-3 p-3.5 rounded-2xl border border-slate-800 bg-slate-950/70">
+          <div class="flex items-center justify-between">
+            <label class="text-xs font-bold text-slate-200">การจัดวางข้อความ & รูป</label>
+            <select id="selectSplitOrder" class="bg-slate-900 border border-slate-700 text-xs px-2 py-1 rounded-lg text-slate-200">
+              <option value="text-top">ข้อความบน / รูปภาพล่าง</option>
+              <option value="text-bottom">รูปภาพบน / ข้อความล่าง</option>
             </select>
           </div>
-          <div id="yOffsetControlBox">
+          <textarea id="inputSplitText" rows="6" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white leading-relaxed" placeholder="พิมพ์ข้อความ..."></textarea>
+          <div class="flex items-center justify-between text-xs">
+            <label class="flex items-center gap-1.5 text-slate-300">
+              <input type="checkbox" id="checkSplitArrow" checked class="accent-[#b31929] rounded">
+              <span>แสดงลูกศรขวา ( > )</span>
+            </label>
+            <button type="button" id="btnSplitAddBullet" class="text-[11px] text-rose-400 bg-slate-900 px-2 py-1 rounded border border-slate-800">+ หัวข้อ (•)</button>
+          </div>
+        </div>
+
+        <!-- 3. SETTINGS: CLEAN TEXT SLIDE (ขาวล้วน) -->
+        <div id="panelCleanText" class="hidden space-y-3 p-3.5 rounded-2xl border border-slate-800 bg-slate-950/70">
+          <label class="text-xs font-bold text-slate-200">ข้อความบนพื้นหลังสีขาว 100%</label>
+          <textarea id="inputCleanText" rows="7" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white leading-relaxed" placeholder="พิมพ์ข้อความสรุปผลวิจัยหรือสถิติ..."></textarea>
+        </div>
+
+        <!-- 4. SETTINGS: QUOTE SLIDE -->
+        <div id="panelQuote" class="hidden space-y-3 p-3.5 rounded-2xl border border-slate-800 bg-slate-950/70">
+          <label class="text-xs font-bold text-slate-200">ข้อความคำพูด (Quote)</label>
+          <textarea id="inputQuoteBody" rows="5" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-2.5 text-xs text-white leading-relaxed" placeholder="เนื้อหาคำพูด..."></textarea>
+          <input type="text" id="inputQuoteAuthor" value="ดร.เมลาเนี สโลน" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white" placeholder="ชื่อผู้พูด">
+          <input type="text" id="inputQuoteRole" value="มหาวิทยาลัยเคมบริดจ์" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white" placeholder="ตำแหน่ง / สังกัด">
+        </div>
+
+        <!-- 5. SETTINGS: LOCATION & DATE TAG -->
+        <div id="panelLocation" class="hidden space-y-3 p-3.5 rounded-2xl border border-slate-800 bg-slate-950/70">
+          <label class="text-xs font-bold text-slate-200">สถานที่และวันที่รายงานข่าว</label>
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 bg-[#b31929] inline-block shrink-0"></span>
+              <input type="text" id="inputLocName" value="จ.กาลิมันตันใต้, อินโดนีเซีย" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-white font-bold" placeholder="ชื่อสถานที่ เช่น อ.ชะอำ, เพชรบุรี">
+            </div>
+            <input type="text" id="inputLocDate" value="24 ต.ค. 2026" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-slate-300" placeholder="วันที่รายงานข่าว">
+          </div>
+        </div>
+
+        <!-- PHOTO TOOLS (หมุน/ซูม/แพน) -->
+        <div id="photoControlsBox" class="space-y-3 bg-slate-950/70 p-3.5 rounded-xl border border-slate-800">
+          <div class="flex items-center justify-between">
+            <label class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+              <i data-lucide="image" class="w-4 h-4 text-[#b31929]"></i> จัดการรูปถ่าย
+            </label>
+            <span id="rotateVal" class="text-xs font-mono text-slate-400">0°</span>
+          </div>
+
+          <div>
             <div class="flex justify-between text-[11px] text-slate-400 mb-1">
-              <span>ปรับระดับแนวตั้ง (Y-Offset)</span>
-              <span id="textTopVal" class="font-mono text-slate-300">0px</span>
+              <span>หมุนแก้ภาพเอียง</span>
+              <button id="btnResetRotate" class="text-rose-400 hover:underline">ตรง (0°)</button>
             </div>
-            <input id="sliderTextTop" type="range" min="-300" max="300" step="5" value="0" class="w-full accent-rose-600 h-1.5 bg-slate-800 rounded mt-2">
-          </div>
-        </div>
-
-        <div class="h-px bg-slate-800"></div>
-
-        <!-- 3. Photo Manipulation -->
-        <div class="space-y-3">
-          <div class="flex items-center justify-between">
-            <label class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
-              <i data-lucide="image" class="w-4 h-4 text-[#b31929]"></i> ภาพประกอบและการจัดตำแหน่ง
-            </label>
-            <label for="imageUpload" class="cursor-pointer text-xs font-semibold text-rose-300 hover:text-white flex items-center gap-1.5 bg-[#b31929]/20 hover:bg-[#b31929]/40 border border-rose-500/30 px-3 py-1.5 rounded-xl transition">
-              <i data-lucide="upload" class="w-3.5 h-3.5"></i> เลือกรูปภาพ
-            </label>
-            <input type="file" id="imageUpload" accept="image/*" class="hidden">
+            <input id="sliderRotate" type="range" min="-45" max="45" step="0.5" value="0" class="w-full accent-rose-600 h-1 bg-slate-800 rounded">
           </div>
 
-          <div class="bg-slate-950/70 p-3.5 rounded-xl border border-slate-800 space-y-3">
-            <div>
-              <div class="flex justify-between text-xs text-slate-400 mb-1">
-                <span>ซูมภาพ (Zoom)</span>
-                <span id="zoomVal" class="font-mono text-slate-300">100%</span>
-              </div>
-              <input id="sliderZoom" type="range" min="0.5" max="3" step="0.05" value="1" class="w-full accent-rose-600 cursor-pointer h-1.5 bg-slate-800 rounded-lg">
-            </div>
-
-            <!-- Straighten & Rotation -->
-            <div class="pt-2 border-t border-slate-800/80 space-y-2">
-              <div class="flex items-center justify-between">
-                <span class="text-xs text-slate-300 font-semibold flex items-center gap-1.5">
-                  <i data-lucide="rotate-cw" class="w-3.5 h-3.5 text-rose-400"></i> ปรับระดับองศาภาพ
-                </span>
-                <span id="rotateVal" class="font-mono text-slate-300 text-xs">0°</span>
-              </div>
-              <input id="sliderRotate" type="range" min="-45" max="45" step="0.5" value="0" class="w-full accent-rose-600 cursor-pointer h-1.5 bg-slate-800 rounded-lg">
-              
-              <div class="grid grid-cols-3 gap-2 pt-1">
-                <button type="button" id="btnRotateLeft90" class="py-1 px-2 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 rounded-lg text-[11px] flex items-center justify-center gap-1">
-                  <i data-lucide="rotate-ccw" class="w-3 h-3"></i> -90°
-                </button>
-                <button type="button" id="btnRotateReset" class="py-1 px-2 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 rounded-lg text-[11px] flex items-center justify-center">
-                  ตรง (0°)
-                </button>
-                <button type="button" id="btnRotateRight90" class="py-1 px-2 bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 rounded-lg text-[11px] flex items-center justify-center gap-1">
-                  +90° <i data-lucide="rotate-cw" class="w-3 h-3"></i>
-                </button>
-              </div>
-            </div>
-
-            <!-- Pan X / Y -->
-            <div class="grid grid-cols-2 gap-3 pt-1 border-t border-slate-800/80">
-              <div>
-                <div class="flex justify-between text-[11px] text-slate-400 mb-1">
-                  <span>เลื่อนแนวนอน (X)</span>
-                  <span id="panXVal" class="font-mono text-slate-400">0</span>
-                </div>
-                <input id="sliderPanX" type="range" min="-800" max="800" step="5" value="0" class="w-full accent-rose-600 cursor-pointer h-1 bg-slate-800 rounded-lg">
-              </div>
-              <div>
-                <div class="flex justify-between text-[11px] text-slate-400 mb-1">
-                  <span>เลื่อนแนวตั้ง (Y)</span>
-                  <span id="panYVal" class="font-mono text-slate-400">0</span>
-                </div>
-                <input id="sliderPanY" type="range" min="-800" max="800" step="5" value="0" class="w-full accent-rose-600 cursor-pointer h-1 bg-slate-800 rounded-lg">
-              </div>
-            </div>
-
-            <!-- Gradient Shadow (ใช้เฉพาะโหมดภาพปก) -->
-            <div id="gradientSectionBox" class="pt-2 border-t border-slate-800/80 space-y-2">
-              <div class="flex justify-between text-xs text-slate-400">
-                <label class="flex items-center gap-1.5 text-slate-200 cursor-pointer">
-                  <input type="checkbox" id="checkTopGradient" checked class="accent-[#b31929] rounded">
-                  <span id="lblGradientShadow">เงาดำไล่เฉดด้านล่าง (Bottom Shadow)</span>
-                </label>
-                <span id="gradientHeightVal" class="font-mono text-slate-300">62%</span>
-              </div>
-              <input id="sliderGradientHeight" type="range" min="20" max="85" step="1" value="62" class="w-full accent-rose-600 cursor-pointer h-1 bg-slate-800 rounded-lg">
-            </div>
-          </div>
-        </div>
-
-        <div class="h-px bg-slate-800"></div>
-
-        <!-- 4. Logo Settings -->
-        <div class="space-y-3">
-          <div class="flex items-center justify-between">
-            <label class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
-              <i data-lucide="shield" class="w-4 h-4 text-[#b31929]"></i> โลโก้เขาวังเดลี่
-            </label>
-            <label class="flex items-center gap-1.5 text-xs text-slate-300 cursor-pointer">
-              <input type="checkbox" id="checkShowLogo" checked class="accent-[#b31929] rounded">
-              <span>แสดงโลโก้</span>
-            </label>
-          </div>
-
-          <div class="bg-slate-950/70 p-3.5 rounded-xl border border-slate-800 space-y-3">
-            <div class="grid grid-cols-2 gap-3">
-              <div>
-                <label class="text-[11px] text-slate-400 block mb-1">ตำแหน่งโลโก้</label>
-                <select id="selectLogoPos" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none">
-                  <option value="top-left" selected>ซ้ายบน (ตามแบบ BBC)</option>
-                  <option value="top-right">ขวาบน</option>
-                  <option value="bottom-left">ซ้ายล่าง</option>
-                  <option value="bottom-right">ขวาล่าง</option>
-                </select>
-              </div>
-
-              <div>
-                <div class="flex justify-between text-[11px] text-slate-400 mb-1">
-                  <span>ขนาดโลโก้</span>
-                  <span id="logoSizeVal" class="font-mono text-slate-300">110px</span>
-                </div>
-                <input id="sliderLogoSize" type="range" min="60" max="180" step="5" value="110" class="w-full accent-rose-600 h-1.5 bg-slate-800 rounded mt-2">
-              </div>
-            </div>
-
-            <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between">
-              <span class="text-[11px] text-slate-400">อัปโหลดไฟล์โลโก้ PNG ใส:</span>
-              <label for="customLogoUpload" class="cursor-pointer text-[11px] font-semibold text-rose-300 hover:text-white bg-slate-800 border border-slate-700 px-2.5 py-1 rounded-lg transition">
-                เลือกไฟล์ PNG...
-              </label>
-              <input type="file" id="customLogoUpload" accept="image/*" class="hidden">
-            </div>
-          </div>
-        </div>
-
-        <!-- 5. Photo Credit Suite -->
-        <div id="creditBoxSection" class="space-y-3 bg-slate-950/70 p-3.5 rounded-xl border border-slate-800">
-          <div class="flex items-center justify-between">
-            <label class="text-xs text-slate-200 font-semibold flex items-center gap-1.5">
-              <i data-lucide="camera" class="w-3.5 h-3.5 text-rose-400"></i>
-              <span>เครดิตเจ้าของรูป (Photo Credit)</span>
-            </label>
-            <span class="text-[10px] text-slate-400">ปรับแต่งทิศทาง</span>
-          </div>
-          
-          <input type="text" id="inputCredit" value="GETTY IMAGES" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-rose-500" placeholder="ใส่เครดิตภาพ หรือเว้นว่างได้">
-
-          <div class="grid grid-cols-2 gap-3 pt-1">
-            <div>
-              <label class="text-[11px] text-slate-400 block mb-1">ทิศทางการวางเครดิต</label>
-              <select id="selectCreditPos" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-2 py-1.5 text-xs text-slate-200 focus:outline-none">
-                <option value="vertical-right-bottom" selected>แนวตั้ง ชิดขวาล่าง (BBC)</option>
-                <option value="vertical-right-top">แนวตั้ง ชิดขวาบน</option>
-                <option value="horizontal-bottom-right">แนวนอน ชิดขวาล่าง</option>
-                <option value="horizontal-bottom-left">แนวนอน ชิดซ้ายล่าง</option>
-              </select>
-            </div>
-
-            <div>
-              <label class="text-[11px] text-slate-400 block mb-1">สีตัวหนังสือ & แถบรอง</label>
-              <select id="selectCreditStyle" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-2 py-1.5 text-xs text-slate-200 focus:outline-none">
-                <option value="white-plain" selected>ตัวหนังสือสีขาว (เงาดำ)</option>
-                <option value="black-plain">ตัวหนังสือสีดำ (เงาขาว)</option>
-                <option value="white-badge">ตัวขาว + แถบดำโปร่งแสง</option>
-                <option value="black-badge">ตัวดำ + แถบขาวโปร่งแสง</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="pt-1">
+          <div>
             <div class="flex justify-between text-[11px] text-slate-400 mb-1">
-              <span>ขนาดตัวหนังสือเครดิต</span>
-              <span id="creditSizeVal" class="font-mono text-slate-300">18px</span>
+              <span>ซูมภาพ (Zoom)</span>
+              <span id="zoomVal" class="font-mono text-slate-300">100%</span>
             </div>
-            <input id="sliderCreditSize" type="range" min="12" max="32" step="1" value="18" class="w-full accent-rose-600 cursor-pointer h-1 bg-slate-800 rounded-lg">
+            <input id="sliderZoom" type="range" min="0.5" max="3" step="0.05" value="1" class="w-full accent-rose-600 h-1 bg-slate-800 rounded">
           </div>
         </div>
 
-        <!-- 6. Export Actions -->
+        <!-- LOGO & CREDIT -->
+        <div class="grid grid-cols-2 gap-3 bg-slate-950/70 p-3.5 rounded-xl border border-slate-800">
+          <div>
+            <label class="text-[11px] text-slate-300 block mb-1 font-semibold">แสดงโลโก้</label>
+            <select id="selectLogoOption" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-xs text-slate-200">
+              <option value="show" selected>แสดงซ้ายบน</option>
+              <option value="hide">ซ่อนโลโก้</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-[11px] text-slate-300 block mb-1 font-semibold">เครดิตภาพถ่าย</label>
+            <input type="text" id="inputCredit" value="GETTY IMAGES" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-xs text-slate-200" placeholder="เครดิตรูป">
+          </div>
+        </div>
+
+        <!-- EXPORT BUTTONS -->
         <div class="pt-2 space-y-2 pb-6">
           <button id="btnDownloadJpg" class="w-full py-3.5 px-4 bg-gradient-to-r from-[#b31929] via-[#c41e3a] to-rose-600 hover:from-[#c41e3a] hover:to-rose-500 text-white font-bold rounded-xl shadow-xl shadow-rose-950/40 flex items-center justify-center gap-2 text-base active:scale-[0.98] transition-all cursor-pointer">
             <i data-lucide="download" class="w-5 h-5 stroke-[2.5]"></i>
             <span>ดาวน์โหลดภาพ (JPG คุณภาพสูง)</span>
-          </button>
-          
-          <button id="btnDownloadPng" class="w-full py-2.5 px-4 bg-slate-800 hover:bg-slate-750 text-slate-200 border border-slate-700/80 font-semibold rounded-xl flex items-center justify-center gap-2 text-xs transition cursor-pointer">
-            <i data-lucide="file-image" class="w-4 h-4 text-slate-400"></i>
-            <span>บันทึกแบบ PNG ไม่บีบอัด (Lossless)</span>
           </button>
         </div>
 
@@ -531,11 +291,12 @@
     </aside>
   </main>
 
-  <!-- Notification Toast -->
   <div id="toastMessage" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900/95 border border-rose-500/50 text-white px-4 py-2.5 rounded-2xl shadow-2xl flex items-center gap-2 text-xs font-medium opacity-0 pointer-events-none transition-all duration-300 z-50">
     <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
-    <span id="toastText">คัดลอกรูปภาพแล้ว!</span>
+    <span id="toastText">บันทึกภาพสำเร็จ!</span>
   </div>
+
+  <input type="file" id="imageUpload" accept="image/*" class="hidden">
 
   <!-- JAVASCRIPT ENGINE -->
   <script>
@@ -547,98 +308,11 @@
     const dropZone = document.getElementById('dropZone');
     const dropOverlay = document.getElementById('dropOverlay');
     const modeTitle = document.getElementById('modeTitle');
-
-    const btnModeCover = document.getElementById('btnModeCover');
-    const btnModeSplit = document.getElementById('btnModeSplit');
-    const aspectRatioBox = document.getElementById('aspectRatioBox');
-    const textPlacementBox = document.getElementById('textPlacementBox');
-    const splitSlideControls = document.getElementById('splitSlideControls');
-    const inputSplitBody = document.getElementById('inputSplitBody');
-    const sliderSplitFontSize = document.getElementById('sliderSplitFontSize');
-    const splitFontSizeVal = document.getElementById('splitFontSizeVal');
-    const sliderSplitRatio = document.getElementById('sliderSplitRatio');
-    const splitRatioVal = document.getElementById('splitRatioVal');
-    const checkShowNextArrow = document.getElementById('checkShowNextArrow');
-    const btnInsertBullet = document.getElementById('btnInsertBullet');
-    const yOffsetControlBox = document.getElementById('yOffsetControlBox');
-
     const imageUpload = document.getElementById('imageUpload');
-    const customLogoUpload = document.getElementById('customLogoUpload');
-    const btnLayoutTop = document.getElementById('btnLayoutTop');
-    const btnLayoutBottom = document.getElementById('btnLayoutBottom');
 
-    const cleanNotice169 = document.getElementById('cleanNotice169');
-    const typographySection = document.getElementById('typographySection');
-    const typographyDivider = document.getElementById('typographyDivider');
-    const gradientSectionBox = document.getElementById('gradientSectionBox');
-    const creditBoxSection = document.getElementById('creditBoxSection');
-
-    const sliderZoom = document.getElementById('sliderZoom');
-    const zoomVal = document.getElementById('zoomVal');
-    const sliderRotate = document.getElementById('sliderRotate');
-    const rotateVal = document.getElementById('rotateVal');
-    const btnRotateLeft90 = document.getElementById('btnRotateLeft90');
-    const btnRotateReset = document.getElementById('btnRotateReset');
-    const btnRotateRight90 = document.getElementById('btnRotateRight90');
-
-    const sliderPanX = document.getElementById('sliderPanX');
-    const sliderPanY = document.getElementById('sliderPanY');
-    const panXVal = document.getElementById('panXVal');
-    const panYVal = document.getElementById('panYVal');
-    const checkTopGradient = document.getElementById('checkTopGradient');
-    const sliderGradientHeight = document.getElementById('sliderGradientHeight');
-    const gradientHeightVal = document.getElementById('gradientHeightVal');
-    const lblGradientShadow = document.getElementById('lblGradientShadow');
-
-    const checkAccentBar = document.getElementById('checkAccentBar');
-    const inputAccentColor = document.getElementById('inputAccentColor');
-    
-    const inputLine1 = document.getElementById('inputLine1');
-    const inputLine1Color = document.getElementById('inputLine1Color');
-    const sliderLine1Size = document.getElementById('sliderLine1Size');
-    const line1SizeVal = document.getElementById('line1SizeVal');
-
-    const inputLine2 = document.getElementById('inputLine2');
-    const inputLine2Color = document.getElementById('inputLine2Color');
-    const sliderLine2Size = document.getElementById('sliderLine2Size');
-    const line2SizeVal = document.getElementById('line2SizeVal');
-
-    const inputLine3 = document.getElementById('inputLine3');
-    const inputLine3Color = document.getElementById('inputLine3Color');
-    const sliderLine3Size = document.getElementById('sliderLine3Size');
-    const line3SizeVal = document.getElementById('line3SizeVal');
-
-    const inputLine4 = document.getElementById('inputLine4');
-    const inputLine4Color = document.getElementById('inputLine4Color');
-    const sliderLine4Size = document.getElementById('sliderLine4Size');
-    const line4SizeVal = document.getElementById('line4SizeVal');
-
-    const selectFont = document.getElementById('selectFont');
-    const sliderTextTop = document.getElementById('sliderTextTop');
-    const textTopVal = document.getElementById('textTopVal');
-
-    const checkShowLogo = document.getElementById('checkShowLogo');
-    const selectLogoPos = document.getElementById('selectLogoPos');
-    const sliderLogoSize = document.getElementById('sliderLogoSize');
-    const logoSizeVal = document.getElementById('logoSizeVal');
-    
-    const inputCredit = document.getElementById('inputCredit');
-    const selectCreditPos = document.getElementById('selectCreditPos');
-    const selectCreditStyle = document.getElementById('selectCreditStyle');
-    const sliderCreditSize = document.getElementById('sliderCreditSize');
-    const creditSizeVal = document.getElementById('creditSizeVal');
-
-    const btnResetPhotoPos = document.getElementById('btnResetPhotoPos');
-    const btnDownloadJpg = document.getElementById('btnDownloadJpg');
-    const btnDownloadTopJpg = document.getElementById('btnDownloadTopJpg');
-    const btnDownloadPng = document.getElementById('btnDownloadPng');
-    const btnCopyImage = document.getElementById('btnCopyImage');
-    const toastMessage = document.getElementById('toastMessage');
-    const toastText = document.getElementById('toastText');
-
-    let templateMode = "cover"; // "cover" หรือ "split"
+    let currentTpl = "cover"; // cover, split, clean-text, quote, location
     let currentRatio = "4:5";
-    let textPosition = "bottom";
+    let coverPos = "bottom"; // top, bottom
     let canvasWidth = 1080;
     let canvasHeight = 1350;
 
@@ -649,945 +323,645 @@
     let imgOffsetY = 0;
     let imgRotation = 0;
 
-    let customLogoImg = new Image();
-    let hasCustomLogo = false;
-
     let isDragging = false;
     let startPointerX = 0;
     let startPointerY = 0;
 
-    // ตัวอย่างข้อความเริ่มต้นของโหมด Split
-    inputSplitBody.value = `การประเมินค่า HRR เบื้องต้น ทำได้ตามขั้นตอนต่อไปนี้:\n\n• คำนวณอัตราการเต้นหัวใจสูงสุดของตนเอง โดยนำ 220 ลบด้วยอายุ\n• ออกกำลังกายให้อัตราการเต้นของหัวใจเพิ่มขึ้นในระดับ 70-85% ของค่าสูงสุด\n• วัดชีพจรทันทีหลังหยุดพัก (อาจใช้นิ้วแตะลำคอ นับครั้งที่ใจเต้นใน 10 วินาที แล้วคูณด้วย 6)\n• พักครบ 1 นาที แล้ววัดชีพจรอีกครั้ง จากนั้นนำค่าชีพจรที่ได้มาลบกัน`;
+    // Default Contents
+    document.getElementById('inputSplitText').value = "งานวิจัยของมหาวิทยาลัยเคมบริดจ์ในสหราชอาณาจักรพบว่า ผู้หญิงมีแนวโน้มต้องรอนานกว่าผู้ชายอย่างมีนัยสำคัญในการได้รับการวินิจฉัยโรคภูมิคุ้มกันทำลายตนเอง\n\n• ผู้หญิง 43.3% ระบุว่าอาการถูกเข้าใจผิดว่าเกิดจากจิตใจ\n• เทียบกับผู้ชายเพียง 32.7%";
+    document.getElementById('inputCleanText').value = "งานวิจัยซึ่งตีพิมพ์ในวารสารทางการแพทย์ เดอะแลนเซ็ต (The Lancet)\nมีผู้เข้าร่วมกว่า 6,600 คน ส่วนใหญ่เป็นผู้หญิงจากสหราชอาณาจักร\n\nข้อจำกัดประการหนึ่งของการศึกษานี้ คือเป็นการศึกษาจากแบบสำรวจออนไลน์ ซึ่งอาศัยการรายงานประสบการณ์การได้รับการวินิจฉัยโดยผู้เข้าร่วมเอง";
+    document.getElementById('inputQuoteBody').value = "ตอนนี้เราจำเป็นต้องทำการศึกษา เพื่อพัฒนาการสื่อสารระหว่างแพทย์กับผู้ป่วย และเพื่อให้การสนับสนุนผู้คนในการเยียวยาตนเอง";
 
-    function showToast(message) {
-      toastText.textContent = message;
-      toastMessage.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-2');
-      toastMessage.classList.add('opacity-100', 'translate-y-0');
+    function showToast(msg) {
+      document.getElementById('toastText').textContent = msg;
+      const t = document.getElementById('toastMessage');
+      t.classList.remove('opacity-0', 'pointer-events-none');
+      t.classList.add('opacity-100');
       setTimeout(() => {
-        toastMessage.classList.remove('opacity-100', 'translate-y-0');
-        toastMessage.classList.add('opacity-0', 'pointer-events-none', '-translate-y-2');
-      }, 3000);
+        t.classList.remove('opacity-100');
+        t.classList.add('opacity-0', 'pointer-events-none');
+      }, 2500);
     }
 
-    function updateCanvasScreenSize() {
-      const isDesktop = window.innerWidth >= 1024;
-      if (isDesktop) {
-        if (currentRatio === "16:9") {
-          canvas.style.maxHeight = "64vh";
-          canvas.style.maxWidth = "96%";
-        } else if (currentRatio === "4:5") {
-          canvas.style.maxHeight = "80vh";
-          canvas.style.maxWidth = "96%";
+    function switchTemplate(tpl) {
+      currentTpl = tpl;
+      
+      document.querySelectorAll('.tpl-btn').forEach(btn => {
+        if (btn.dataset.tpl === tpl) {
+          btn.className = "tpl-btn active-tpl p-2 rounded-xl border border-rose-600 bg-rose-600/20 text-rose-200 font-semibold text-xs text-left transition " + (tpl === 'location' ? 'col-span-2' : '');
         } else {
-          canvas.style.maxHeight = "72vh";
-          canvas.style.maxWidth = "96%";
-        }
-      } else {
-        canvas.style.maxHeight = "36vh";
-        canvas.style.maxWidth = "100%";
-      }
-    }
-
-    window.addEventListener('resize', updateCanvasScreenSize);
-
-    // สลับโหมด ภาพปก (Cover) vs สไลด์เนื้อหา (Split Slide)
-    function setTemplateMode(mode) {
-      templateMode = mode;
-      if (mode === "cover") {
-        btnModeCover.className = "mode-select-btn active-mode flex flex-col items-center justify-center p-2.5 rounded-xl border border-rose-600 bg-rose-600/20 text-rose-200 font-bold text-xs transition";
-        btnModeSplit.className = "mode-select-btn flex flex-col items-center justify-center p-2.5 rounded-xl border border-slate-700 bg-slate-800/70 text-slate-300 hover:bg-slate-800 font-bold text-xs transition";
-        
-        aspectRatioBox.classList.remove('hidden');
-        textPlacementBox.classList.remove('hidden');
-        typographySection.classList.remove('hidden');
-        typographyDivider.classList.remove('hidden');
-        gradientSectionBox.classList.remove('hidden');
-        splitSlideControls.classList.add('hidden');
-        yOffsetControlBox.classList.remove('hidden');
-        
-        modeTitle.textContent = "Live Preview (Cover Slide)";
-        setAspectRatio(currentRatio);
-      } else {
-        btnModeSplit.className = "mode-select-btn active-mode flex flex-col items-center justify-center p-2.5 rounded-xl border border-rose-600 bg-rose-600/20 text-rose-200 font-bold text-xs transition";
-        btnModeCover.className = "mode-select-btn flex flex-col items-center justify-center p-2.5 rounded-xl border border-slate-700 bg-slate-800/70 text-slate-300 hover:bg-slate-800 font-bold text-xs transition";
-        
-        // โหมด Split จะล็อกสัดส่วนเป็น 4:5 ตามมาตรฐานโซเชียล
-        currentRatio = "4:5";
-        canvasWidth = 1080;
-        canvasHeight = 1350;
-        canvas.width = canvasWidth;
-        canvas.height = canvasHeight;
-        canvasDimensionBadge.textContent = "1080 × 1350 px (4:5 Content Slide)";
-        modeTitle.textContent = "Live Preview (Split Content Slide)";
-        
-        aspectRatioBox.classList.add('hidden');
-        textPlacementBox.classList.add('hidden');
-        cleanNotice169.classList.add('hidden');
-        typographySection.classList.add('hidden');
-        typographyDivider.classList.add('hidden');
-        gradientSectionBox.classList.add('hidden');
-        splitSlideControls.classList.remove('hidden');
-        yOffsetControlBox.classList.add('hidden');
-
-        updateCanvasScreenSize();
-      }
-      renderCover();
-    }
-
-    btnModeCover.addEventListener('click', () => setTemplateMode('cover'));
-    btnModeSplit.addEventListener('click', () => setTemplateMode('split'));
-
-    btnInsertBullet.addEventListener('click', () => {
-      const cur = inputSplitBody.value;
-      inputSplitBody.value = cur + (cur.endsWith('\n') || cur.length === 0 ? '' : '\n') + '• ';
-      inputSplitBody.focus();
-      renderCover();
-    });
-
-    function setTextPosition(pos) {
-      textPosition = pos;
-      if (pos === 'top') {
-        btnLayoutTop.className = "layout-preset-btn active-layout flex items-center justify-center gap-2 p-2 rounded-lg border border-rose-500 bg-rose-500/20 text-rose-200 font-bold text-xs transition";
-        btnLayoutBottom.className = "layout-preset-btn flex items-center justify-center gap-2 p-2 rounded-lg border border-slate-700 bg-slate-800/60 text-slate-300 font-bold text-xs hover:bg-slate-800 transition";
-        lblGradientShadow.textContent = "เงาดำไล่เฉดด้านบน (Top Shadow)";
-      } else {
-        btnLayoutBottom.className = "layout-preset-btn active-layout flex items-center justify-center gap-2 p-2 rounded-lg border border-rose-500 bg-rose-500/20 text-rose-200 font-bold text-xs transition";
-        btnLayoutTop.className = "layout-preset-btn flex items-center justify-center gap-2 p-2 rounded-lg border border-slate-700 bg-slate-800/60 text-slate-300 font-bold text-xs hover:bg-slate-800 transition";
-        lblGradientShadow.textContent = "เงาดำไล่เฉดด้านล่าง (Bottom Shadow)";
-      }
-      sliderTextTop.value = "0";
-      textTopVal.textContent = "0px";
-      renderCover();
-    }
-
-    btnLayoutTop.addEventListener('click', () => setTextPosition('top'));
-    btnLayoutBottom.addEventListener('click', () => setTextPosition('bottom'));
-
-    function setAspectRatio(ratio) {
-      currentRatio = ratio;
-      if (ratio === "4:5") {
-        canvasWidth = 1080;
-        canvasHeight = 1350;
-        canvasDimensionBadge.textContent = "1080 × 1350 px (4:5 BBC)";
-        modeTitle.textContent = "Live Preview (BBC Format)";
-        sliderLogoSize.value = "110";
-        logoSizeVal.textContent = "110px";
-
-        cleanNotice169.classList.add('hidden');
-        textPlacementBox.classList.remove('hidden');
-        typographySection.classList.remove('hidden');
-        typographyDivider.classList.remove('hidden');
-        gradientSectionBox.classList.remove('hidden');
-        creditBoxSection.classList.remove('hidden');
-
-      } else if (ratio === "16:9") {
-        canvasWidth = 1200;
-        canvasHeight = 675;
-        canvasDimensionBadge.textContent = "1200 × 675 px (16:9 ปกเว็บคลีน)";
-        modeTitle.textContent = "Live Preview (16:9 Clean Photo)";
-        sliderLogoSize.value = "90";
-        logoSizeVal.textContent = "90px";
-
-        cleanNotice169.classList.remove('hidden');
-        textPlacementBox.classList.add('hidden');
-        typographySection.classList.add('hidden');
-        typographyDivider.classList.add('hidden');
-        gradientSectionBox.classList.add('hidden');
-        creditBoxSection.classList.add('hidden');
-
-      } else if (ratio === "1:1") {
-        canvasWidth = 1080;
-        canvasHeight = 1080;
-        canvasDimensionBadge.textContent = "1080 × 1080 px (1:1 จัตุรัส)";
-        modeTitle.textContent = "Live Preview (1:1 Square)";
-
-        cleanNotice169.classList.add('hidden');
-        textPlacementBox.classList.remove('hidden');
-        typographySection.classList.remove('hidden');
-        typographyDivider.classList.remove('hidden');
-        gradientSectionBox.classList.remove('hidden');
-        creditBoxSection.classList.remove('hidden');
-      }
-
-      sliderTextTop.value = "0";
-      textTopVal.textContent = "0px";
-      canvas.width = canvasWidth;
-      canvas.height = canvasHeight;
-
-      updateCanvasScreenSize();
-
-      document.querySelectorAll('.ratio-btn').forEach(btn => {
-        if (btn.dataset.ratio === ratio) {
-          btn.classList.add('active-ratio', 'border-rose-600', 'bg-rose-600/15', 'text-rose-200');
-          btn.classList.remove('border-slate-700', 'bg-slate-800/70', 'text-slate-300');
-        } else {
-          btn.classList.remove('active-ratio', 'border-rose-600', 'bg-rose-600/15', 'text-rose-200');
-          btn.classList.add('border-slate-700', 'bg-slate-800/70', 'text-slate-300');
+          btn.className = "tpl-btn p-2 rounded-xl border border-slate-700 bg-slate-800/70 text-slate-300 hover:bg-slate-800 font-semibold text-xs text-left transition " + (btn.dataset.tpl === 'location' ? 'col-span-2' : '');
         }
       });
 
-      renderCover();
+      // Show/Hide Panels
+      document.getElementById('panelCover').classList.toggle('hidden', tpl !== 'cover');
+      document.getElementById('panelSplit').classList.toggle('hidden', tpl !== 'split');
+      document.getElementById('panelCleanText').classList.toggle('hidden', tpl !== 'clean-text');
+      document.getElementById('panelQuote').classList.toggle('hidden', tpl !== 'quote');
+      document.getElementById('panelLocation').classList.toggle('hidden', tpl !== 'location');
+
+      document.getElementById('aspectRatioBox').classList.toggle('hidden', tpl !== 'cover');
+      document.getElementById('photoControlsBox').classList.toggle('hidden', tpl === 'clean-text');
+
+      if (tpl === 'cover') {
+        modeTitle.textContent = "Live Preview (ภาพปกข่าว)";
+      } else if (tpl === 'split') {
+        modeTitle.textContent = "Live Preview (สไลด์เนื้อหา Split)";
+      } else if (tpl === 'clean-text') {
+        modeTitle.textContent = "Live Preview (สไลด์ข้อความล้วนพื้นขาว)";
+      } else if (tpl === 'quote') {
+        modeTitle.textContent = "Live Preview (สไลด์โควทคำพูด)";
+      } else if (tpl === 'location') {
+        modeTitle.textContent = "Live Preview (ภาพระบุสถานที่และวันที่)";
+      }
+
+      render();
     }
 
-    function renderCover() {
+    document.querySelectorAll('.tpl-btn').forEach(btn => {
+      btn.addEventListener('click', () => switchTemplate(btn.dataset.tpl));
+    });
+
+    document.getElementById('btnCoverTop').addEventListener('click', () => {
+      coverPos = 'top';
+      document.getElementById('btnCoverTop').className = "px-2 py-0.5 rounded border border-rose-500 bg-rose-500/20 text-rose-200";
+      document.getElementById('btnCoverBottom').className = "px-2 py-0.5 rounded border border-slate-700 bg-slate-800 text-slate-300";
+      render();
+    });
+
+    document.getElementById('btnCoverBottom').addEventListener('click', () => {
+      coverPos = 'bottom';
+      document.getElementById('btnCoverBottom').className = "px-2 py-0.5 rounded border border-rose-500 bg-rose-500/20 text-rose-200";
+      document.getElementById('btnCoverTop').className = "px-2 py-0.5 rounded border border-slate-700 bg-slate-800 text-slate-300";
+      render();
+    });
+
+    document.querySelectorAll('.ratio-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentRatio = btn.dataset.ratio;
+        if (currentRatio === "4:5") {
+          canvasWidth = 1080; canvasHeight = 1350;
+        } else if (currentRatio === "16:9") {
+          canvasWidth = 1200; canvasHeight = 675;
+        } else {
+          canvasWidth = 1080; canvasHeight = 1080;
+        }
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
+        canvasDimensionBadge.textContent = `${canvasWidth} × ${canvasHeight} px (${currentRatio})`;
+
+        document.querySelectorAll('.ratio-btn').forEach(b => {
+          b.className = b === btn 
+            ? "ratio-btn active-ratio flex flex-col items-center justify-center p-2 rounded-xl border border-rose-600 bg-rose-600/15 text-rose-200 font-semibold text-xs transition"
+            : "ratio-btn flex flex-col items-center justify-center p-2 rounded-xl border border-slate-700 bg-slate-800/70 text-slate-300 hover:bg-slate-800 font-semibold text-xs transition";
+        });
+        render();
+      });
+    });
+
+    // RENDER DISPATCHER
+    function render() {
       ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
-      if (templateMode === "split") {
-        renderSplitContentSlide();
+      if (currentTpl === 'clean-text') {
+        renderCleanTextTemplate();
+      } else if (currentTpl === 'quote') {
+        renderQuoteTemplate();
+      } else if (currentTpl === 'location') {
+        renderLocationTemplate();
+      } else if (currentTpl === 'split') {
+        renderSplitTemplate();
       } else {
-        renderCoverSlide();
-      }
-    }
-
-    // เรนเดอร์โหมดภาพปก (Cover Slide)
-    function renderCoverSlide() {
-      ctx.fillStyle = "#0c1017";
-      ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-
-      if (isNewsImageLoaded && newsImage.width > 0) {
-        ctx.save();
-        const centerX = canvasWidth / 2 + imgOffsetX;
-        const centerY = canvasHeight / 2 + imgOffsetY;
-        ctx.translate(centerX, centerY);
-        ctx.rotate((imgRotation * Math.PI) / 180);
-
-        const imgRatio = newsImage.width / newsImage.height;
-        const targetRatio = canvasWidth / canvasHeight;
-        let baseW, baseH;
-
-        if (imgRatio > targetRatio) {
-          baseH = canvasHeight;
-          baseW = baseH * imgRatio;
-        } else {
-          baseW = canvasWidth;
-          baseH = baseW / imgRatio;
-        }
-
-        const rad = Math.abs((imgRotation * Math.PI) / 180);
-        const rotateCompensation = 1 + (Math.sin(rad * 2) * 0.25);
-
-        const finalW = baseW * imgScale * rotateCompensation;
-        const finalH = baseH * imgScale * rotateCompensation;
-
-        ctx.drawImage(newsImage, -finalW / 2, -finalH / 2, finalW, finalH);
-        ctx.restore();
+        renderCoverTemplate();
       }
 
-      if (currentRatio !== "16:9" && checkTopGradient.checked) {
-        const pct = parseInt(sliderGradientHeight.value, 10) / 100;
-        const gradHeight = canvasHeight * pct;
-
-        if (textPosition === 'top') {
-          const grad = ctx.createLinearGradient(0, 0, 0, gradHeight);
-          grad.addColorStop(0, "rgba(5, 7, 10, 0.98)");
-          grad.addColorStop(0.38, "rgba(7, 9, 13, 0.92)");
-          grad.addColorStop(0.70, "rgba(8, 11, 16, 0.60)");
-          grad.addColorStop(0.90, "rgba(8, 11, 16, 0.20)");
-          grad.addColorStop(1, "rgba(8, 11, 16, 0)");
-          ctx.fillStyle = grad;
-          ctx.fillRect(0, 0, canvasWidth, gradHeight);
-        } else {
-          const grad = ctx.createLinearGradient(0, canvasHeight, 0, canvasHeight - gradHeight);
-          grad.addColorStop(0, "rgba(5, 7, 10, 0.98)");
-          grad.addColorStop(0.38, "rgba(7, 9, 13, 0.90)");
-          grad.addColorStop(0.70, "rgba(8, 11, 16, 0.55)");
-          grad.addColorStop(0.90, "rgba(8, 11, 16, 0.18)");
-          grad.addColorStop(1, "rgba(8, 11, 16, 0)");
-          ctx.fillStyle = grad;
-          ctx.fillRect(0, canvasHeight - gradHeight, canvasWidth, gradHeight);
-        }
+      // Draw Logo
+      if (document.getElementById('selectLogoOption').value === 'show') {
+        drawKhaowangLogo(currentTpl === 'clean-text');
       }
 
-      if (checkShowLogo.checked) {
-        drawKhaowangLogo();
-      }
-
-      if (currentRatio !== "16:9") {
-        drawTypographyAndAccent();
+      // Draw Credit
+      if (currentTpl !== 'clean-text') {
         drawCredit();
       }
     }
 
-    // เรนเดอร์โหมดสไลด์เนื้อหา (Split Content Slide)
-    function renderSplitContentSlide() {
-      const splitPct = parseInt(sliderSplitRatio.value, 10) / 100;
-      const topHeight = canvasHeight * splitPct;
-      const bottomHeight = canvasHeight - topHeight;
+    // 1. TEMPLATE: COVER
+    function renderCoverTemplate() {
+      drawPhoto(0, 0, canvasWidth, canvasHeight);
 
-      // 1. วาดรูปภาพประกอบในส่วนครึ่งล่าง
-      ctx.save();
-      ctx.beginPath();
-      ctx.rect(0, topHeight, canvasWidth, bottomHeight);
-      ctx.clip();
+      if (currentRatio !== "16:9") {
+        // Shadow Gradient
+        const grad = ctx.createLinearGradient(0, coverPos === 'top' ? 0 : canvasHeight, 0, coverPos === 'top' ? canvasHeight * 0.6 : canvasHeight * 0.4);
+        grad.addColorStop(0, "rgba(0,0,0,0.95)");
+        grad.addColorStop(0.7, "rgba(0,0,0,0.45)");
+        grad.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-      ctx.fillStyle = "#111620";
-      ctx.fillRect(0, topHeight, canvasWidth, bottomHeight);
+        // Lines
+        const l1 = document.getElementById('inputLine1').value.trim();
+        const l2 = document.getElementById('inputLine2').value.trim();
+        const l3 = document.getElementById('inputLine3').value.trim();
+        const l4 = document.getElementById('inputLine4').value.trim();
+        const lines = [l1, l2, l3, l4].filter(t => t.length > 0);
 
-      if (isNewsImageLoaded && newsImage.width > 0) {
-        const centerX = canvasWidth / 2 + imgOffsetX;
-        const centerY = topHeight + (bottomHeight / 2) + imgOffsetY;
-        
-        ctx.translate(centerX, centerY);
-        ctx.rotate((imgRotation * Math.PI) / 180);
+        if (lines.length > 0) {
+          const fontSize = 54;
+          const totalH = lines.length * (fontSize * 1.38);
+          const startY = coverPos === 'top' ? 220 : (canvasHeight - 160 - totalH);
 
-        const imgRatio = newsImage.width / newsImage.height;
-        const targetRatio = canvasWidth / bottomHeight;
-        let baseW, baseH;
+          // Red Accent Bar
+          ctx.fillStyle = "#b31929";
+          ctx.fillRect(64, startY, 28, totalH);
 
-        if (imgRatio > targetRatio) {
-          baseH = bottomHeight;
-          baseW = baseH * imgRatio;
-        } else {
-          baseW = canvasWidth;
-          baseH = baseW / imgRatio;
+          // Text
+          ctx.font = `700 ${fontSize}px 'Prompt', sans-serif`;
+          ctx.fillStyle = "#ffffff";
+          ctx.shadowColor = "rgba(0,0,0,0.9)";
+          ctx.shadowBlur = 12;
+          lines.forEach((txt, idx) => {
+            ctx.fillText(txt, 118, startY + (idx * fontSize * 1.38) + (fontSize * 0.85));
+          });
+          ctx.shadowBlur = 0;
         }
-
-        const rad = Math.abs((imgRotation * Math.PI) / 180);
-        const rotateCompensation = 1 + (Math.sin(rad * 2) * 0.25);
-        const finalW = baseW * imgScale * rotateCompensation;
-        const finalH = baseH * imgScale * rotateCompensation;
-
-        ctx.drawImage(newsImage, -finalW / 2, -finalH / 2, finalW, finalH);
       }
-      ctx.restore();
-
-      // 2. วาดพื้นหลังสีดำสนิทในส่วนครึ่งบน
-      ctx.fillStyle = "#000000";
-      ctx.fillRect(0, 0, canvasWidth, topHeight);
-
-      // เส้นแบ่งบางๆ ระหว่างส่วนข้อความและรูปภาพ
-      ctx.fillStyle = "#1e293b";
-      ctx.fillRect(0, topHeight - 2, canvasWidth, 2);
-
-      // 3. วาดโลโก้ซ้ายบน
-      if (checkShowLogo.checked) {
-        drawKhaowangLogo();
-      }
-
-      // 4. วาดเนื้อหาข้อความในส่วนครึ่งบน
-      drawSplitTextContent(topHeight);
-
-      // 5. วาดลูกศรนำสายตาด้านขวา ( > )
-      if (checkShowNextArrow.checked) {
-        drawNextArrow(topHeight);
-      }
-
-      // 6. วาดเครดิตภาพถ่าย
-      drawCredit();
     }
 
-    function drawSplitTextContent(topHeight) {
-      const selectedFont = selectFont.value;
-      const fontSize = parseInt(sliderSplitFontSize.value, 10);
-      const lineHeight = fontSize * 1.52;
-      const marginX = 64;
-      const logoSize = parseInt(sliderLogoSize.value, 10);
-      const startY = 48 + logoSize + 40;
-      const maxTextWidth = canvasWidth - (marginX * 2) - 40;
+    // 2. TEMPLATE: SPLIT
+    function renderSplitTemplate() {
+      const isTopText = document.getElementById('selectSplitOrder').value === 'text-top';
+      const splitH = canvasHeight * 0.52;
+      const textH = splitH;
+      const photoH = canvasHeight - splitH;
+
+      const textY = isTopText ? 0 : photoH;
+      const photoY = isTopText ? textH : 0;
+
+      // Draw Photo
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(0, photoY, canvasWidth, photoH);
+      ctx.clip();
+      drawPhoto(0, photoY, canvasWidth, photoH);
+      ctx.restore();
+
+      // Draw Black Background
+      ctx.fillStyle = "#000000";
+      ctx.fillRect(0, textY, canvasWidth, textH);
+
+      // Split Divider Line
+      ctx.fillStyle = "#1e293b";
+      ctx.fillRect(0, isTopText ? textH - 2 : photoH, canvasWidth, 2);
+
+      // Text
+      const raw = document.getElementById('inputSplitText').value;
+      const fontSize = 38;
+      const lineHeight = fontSize * 1.5;
+      const startTextY = (isTopText ? 180 : photoH + 60);
+
+      ctx.font = `500 ${fontSize}px 'Prompt', sans-serif`;
+      ctx.fillStyle = "#ffffff";
+      wrapText(raw, 64, startTextY, canvasWidth - 148, lineHeight);
+
+      // Arrow
+      if (document.getElementById('checkSplitArrow').checked) {
+        drawNextArrow(isTopText ? textH : photoH);
+      }
+    }
+
+    // 3. TEMPLATE: CLEAN TEXT (พื้นหลังขาว 100%)
+    function renderCleanTextTemplate() {
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+      const raw = document.getElementById('inputCleanText').value;
+      const fontSize = 44;
+      const lineHeight = fontSize * 1.6;
+
+      ctx.font = `600 ${fontSize}px 'Prompt', sans-serif`;
+      ctx.fillStyle = "#111827";
+      wrapText(raw, 72, 260, canvasWidth - 144, lineHeight);
+    }
+
+    // 4. TEMPLATE: QUOTE (โควทคำพูด)
+    function renderQuoteTemplate() {
+      // Dark Gradient Background
+      const grad = ctx.createLinearGradient(0, 0, 0, canvasHeight);
+      grad.addColorStop(0, "#1f242d");
+      grad.addColorStop(1, "#0a0c10");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+      // Large Quote Symbol “
+      ctx.font = "800 130px 'Kanit', sans-serif";
+      ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
+      ctx.textAlign = "center";
+      ctx.fillText("“", canvasWidth / 2, 250);
+
+      // Quote Body
+      const quoteText = document.getElementById('inputQuoteBody').value;
+      const fontSize = 42;
+      const lineHeight = fontSize * 1.6;
+
+      ctx.font = `600 ${fontSize}px 'Prompt', sans-serif`;
+      ctx.fillStyle = "#ffffff";
+      wrapTextCentered(quoteText, canvasWidth / 2, 330, canvasWidth - 160, lineHeight);
+
+      // Author & Role
+      const author = document.getElementById('inputQuoteAuthor').value.trim();
+      const role = document.getElementById('inputQuoteRole').value.trim();
+
+      if (author) {
+        ctx.font = "700 28px 'Prompt', sans-serif";
+        ctx.fillStyle = "#ffffff";
+        ctx.fillText(author, canvasWidth / 2, canvasHeight - 210);
+      }
+
+      if (role) {
+        ctx.font = "400 23px 'Prompt', sans-serif";
+        ctx.fillStyle = "rgba(255,255,255,0.7)";
+        ctx.fillText(role, canvasWidth / 2, canvasHeight - 165);
+      }
+      ctx.textAlign = "left";
+    }
+
+    // 5. TEMPLATE: LOCATION & DATE TAG
+    function renderLocationTemplate() {
+      drawPhoto(0, 0, canvasWidth, canvasHeight);
+
+      // Bottom Dark Gradient
+      const grad = ctx.createLinearGradient(0, canvasHeight, 0, canvasHeight - 420);
+      grad.addColorStop(0, "rgba(0,0,0,0.92)");
+      grad.addColorStop(0.65, "rgba(0,0,0,0.45)");
+      grad.addColorStop(1, "rgba(0,0,0,0)");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, canvasHeight - 420, canvasWidth, 420);
+
+      const locName = document.getElementById('inputLocName').value.trim();
+      const locDate = document.getElementById('inputLocDate').value.trim();
+
+      const startY = canvasHeight - 150;
+
+      // Red Square Box
+      ctx.fillStyle = "#b31929";
+      ctx.fillRect(64, startY - 32, 28, 28);
+
+      // Location Name
+      ctx.font = "700 48px 'Prompt', sans-serif";
+      ctx.fillStyle = "#ffffff";
+      ctx.shadowColor = "rgba(0,0,0,0.9)";
+      ctx.shadowBlur = 10;
+      ctx.fillText(locName, 108, startY - 6);
+
+      // Date Tag
+      ctx.font = "600 28px 'Prompt', sans-serif";
+      ctx.fillStyle = "rgba(255,255,255,0.85)";
+      ctx.fillText(locDate, 108, startY + 44);
+      ctx.shadowBlur = 0;
+    }
+
+    // DRAW PHOTO HELPER
+    function drawPhoto(x, y, w, h) {
+      if (!isNewsImageLoaded || newsImage.width === 0) {
+        ctx.fillStyle = "#161d2a";
+        ctx.fillRect(x, y, w, h);
+        return;
+      }
 
       ctx.save();
-      ctx.font = `500 ${fontSize}px '${selectedFont}', sans-serif`;
-      ctx.fillStyle = "#ffffff";
-      ctx.textAlign = "left";
-      ctx.textBaseline = "top";
+      const centerX = x + w / 2 + imgOffsetX;
+      const centerY = y + h / 2 + imgOffsetY;
+      ctx.translate(centerX, centerY);
+      ctx.rotate((imgRotation * Math.PI) / 180);
 
-      const rawText = inputSplitBody.value;
-      const rawLines = rawText.split('\n');
-      let curY = startY;
+      const imgRatio = newsImage.width / newsImage.height;
+      const targetRatio = w / h;
+      let baseW, baseH;
 
-      for (let i = 0; i < rawLines.length; i++) {
-        const paragraph = rawLines[i].trim();
-        if (paragraph.length === 0) {
-          curY += fontSize * 0.7; // บรรทัดว่าง
-          continue;
-        }
+      if (imgRatio > targetRatio) {
+        baseH = h;
+        baseW = baseH * imgRatio;
+      } else {
+        baseW = w;
+        baseH = baseW / imgRatio;
+      }
 
-        // ตัดคำอัตโนมัติให้พอดีขอบเขตหน้าจอ
-        const words = paragraph.split(' ');
-        let currentLine = '';
+      const rad = Math.abs((imgRotation * Math.PI) / 180);
+      const rotateComp = 1 + (Math.sin(rad * 2) * 0.28);
+      const finalW = baseW * imgScale * rotateComp;
+      const finalH = baseH * imgScale * rotateComp;
 
-        for (let w = 0; w < words.length; w++) {
-          const testLine = currentLine.length === 0 ? words[w] : currentLine + ' ' + words[w];
-          const testWidth = ctx.measureText(testLine).width;
+      ctx.drawImage(newsImage, -finalW / 2, -finalH / 2, finalW, finalH);
+      ctx.restore();
+    }
 
-          if (testWidth > maxTextWidth && currentLine.length > 0) {
-            ctx.fillText(currentLine, marginX, curY);
+    // TEXT WRAPPERS
+    function wrapText(text, x, y, maxWidth, lineHeight) {
+      const paragraphs = text.split('\n');
+      let curY = y;
+
+      paragraphs.forEach(p => {
+        if (!p.trim()) { curY += lineHeight * 0.6; return; }
+        const words = p.split(' ');
+        let line = '';
+        for (let i = 0; i < words.length; i++) {
+          const test = line ? line + ' ' + words[i] : words[i];
+          if (ctx.measureText(test).width > maxWidth && line) {
+            ctx.fillText(line, x, curY);
             curY += lineHeight;
-            currentLine = words[w];
+            line = words[i];
           } else {
-            currentLine = testLine;
+            line = test;
           }
         }
-
-        if (currentLine.length > 0) {
-          ctx.fillText(currentLine, marginX, curY);
+        if (line) {
+          ctx.fillText(line, x, curY);
           curY += lineHeight;
         }
-
-        curY += 8; // ระยะห่างระหว่างย่อหน้า
-      }
-
-      ctx.restore();
+        curY += 8;
+      });
     }
 
-    function drawNextArrow(topHeight) {
+    function wrapTextCentered(text, x, y, maxWidth, lineHeight) {
+      const paragraphs = text.split('\n');
+      let curY = y;
+      ctx.textAlign = "center";
+
+      paragraphs.forEach(p => {
+        if (!p.trim()) { curY += lineHeight * 0.6; return; }
+        const words = p.split(' ');
+        let line = '';
+        for (let i = 0; i < words.length; i++) {
+          const test = line ? line + ' ' + words[i] : words[i];
+          if (ctx.measureText(test).width > maxWidth && line) {
+            ctx.fillText(line, x, curY);
+            curY += lineHeight;
+            line = words[i];
+          } else {
+            line = test;
+          }
+        }
+        if (line) {
+          ctx.fillText(line, x, curY);
+          curY += lineHeight;
+        }
+        curY += 10;
+      });
+    }
+
+    function drawNextArrow(y) {
       const arrowX = canvasWidth - 44;
-      const arrowY = topHeight;
-      
       ctx.save();
-      ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
+      ctx.fillStyle = "rgba(0, 0, 0, 0.65)";
       ctx.beginPath();
-      ctx.arc(arrowX, arrowY, 26, 0, Math.PI * 2);
+      ctx.arc(arrowX, y, 26, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.strokeStyle = "#ffffff";
       ctx.lineWidth = 4.5;
       ctx.lineCap = "round";
-      ctx.lineJoin = "round";
-
       ctx.beginPath();
-      ctx.moveTo(arrowX - 6, arrowY - 10);
-      ctx.lineTo(arrowX + 5, arrowY);
-      ctx.lineTo(arrowX - 6, arrowY + 10);
+      ctx.moveTo(arrowX - 5, y - 9);
+      ctx.lineTo(arrowX + 4, y);
+      ctx.lineTo(arrowX - 5, y + 9);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawKhaowangLogo(isDarkTheme) {
+      const size = 110;
+      const x = 64;
+      const y = 56;
+      const centerX = x + size / 2;
+      const centerY = y + size / 2;
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, size / 2, 0, Math.PI * 2);
+      ctx.fillStyle = "#b31929";
+      ctx.fill();
+      ctx.strokeStyle = "rgba(255,255,255,0.25)";
+      ctx.lineWidth = 2;
       ctx.stroke();
 
-      ctx.restore();
-    }
-
-    function drawKhaowangLogo() {
-      const logoSize = parseInt(sliderLogoSize.value, 10);
-      const marginX = currentRatio === "16:9" ? 52 : (currentRatio === "4:5" ? 64 : 54);
-      const marginY = currentRatio === "16:9" ? 44 : (currentRatio === "4:5" ? 64 : 44);
-      let x = 0;
-      let y = 0;
-
-      const pos = selectLogoPos.value;
-      if (pos === 'top-left') {
-        x = marginX;
-        y = marginY;
-      } else if (pos === 'top-right') {
-        x = canvasWidth - marginX - logoSize;
-        y = marginY;
-      } else if (pos === 'bottom-left') {
-        x = marginX;
-        y = canvasHeight - marginY - logoSize;
-      } else {
-        x = canvasWidth - marginX - logoSize;
-        y = canvasHeight - marginY - logoSize;
-      }
-
-      ctx.save();
-
-      if (hasCustomLogo && customLogoImg.width > 0) {
-        ctx.drawImage(customLogoImg, x, y, logoSize, logoSize);
-      } else {
-        const centerX = x + logoSize / 2;
-        const centerY = y + logoSize / 2;
-        const radius = logoSize / 2;
-
-        ctx.shadowColor = "rgba(0, 0, 0, 0.65)";
-        ctx.shadowBlur = 18;
-        ctx.shadowOffsetY = 4;
-
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-        ctx.fillStyle = "#b31929";
-        ctx.fill();
-
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.22)";
-        ctx.lineWidth = Math.max(1.5, logoSize * 0.02);
-        ctx.stroke();
-
-        ctx.shadowBlur = 0;
-        ctx.shadowOffsetY = 0;
-
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillStyle = "#ffffff";
-        
-        const fontSizeTop = Math.round(logoSize * 0.28);
-        const fontSizeBottom = Math.round(logoSize * 0.29);
-        
-        ctx.font = `800 ${fontSizeTop}px 'Kanit', sans-serif`;
-        ctx.fillText("เขาวัง", centerX, centerY - (logoSize * 0.13));
-
-        ctx.font = `800 ${fontSizeBottom}px 'Kanit', sans-serif`;
-        ctx.fillText("เดลี่", centerX, centerY + (logoSize * 0.17));
-      }
-
-      ctx.restore();
-    }
-
-    function drawTypographyAndAccent() {
-      const marginX = currentRatio === "4:5" ? 64 : 50;
-      const yOffset = parseInt(sliderTextTop.value, 10);
-      const selectedFont = selectFont.value;
-
-      const lines = [
-        { text: inputLine1.value.trim(), size: parseInt(sliderLine1Size.value, 10), color: inputLine1Color.value },
-        { text: inputLine2.value.trim(), size: parseInt(sliderLine2Size.value, 10), color: inputLine2Color.value },
-        { text: inputLine3.value.trim(), size: parseInt(sliderLine3Size.value, 10), color: inputLine3Color.value },
-        { text: inputLine4.value.trim(), size: parseInt(sliderLine4Size.value, 10), color: inputLine4Color.value }
-      ];
-
-      const activeLines = lines.filter(l => l.text.length > 0);
-      if (activeLines.length === 0) return;
-
-      let totalBlockHeight = 0;
-      activeLines.forEach((l) => {
-        totalBlockHeight += (l.size * 1.32);
-      });
-
-      let startY = 0;
-      if (textPosition === 'top') {
-        const topMargin = currentRatio === "4:5" ? 215 : 140;
-        startY = topMargin + yOffset;
-      } else {
-        const bottomMargin = currentRatio === "4:5" ? 150 : 110;
-        startY = (canvasHeight - bottomMargin - totalBlockHeight) + yOffset;
-      }
-
-      let currentY = startY;
-      const linePositions = [];
-
-      activeLines.forEach((l) => {
-        const lineY = currentY + l.size * 0.85;
-        linePositions.push({ lineY, ...l });
-        currentY = lineY + (l.size * 0.42);
-      });
-
-      const showAccent = checkAccentBar.checked;
-      const accentWidth = currentRatio === "4:5" ? 30 : 22;
-      const textIndentX = showAccent ? (marginX + accentWidth + 28) : marginX;
-
-      if (showAccent && linePositions.length > 0) {
-        ctx.save();
-        const barTop = startY + 4;
-        const lastLine = linePositions[linePositions.length - 1];
-        const barBottom = lastLine.lineY + 12;
-        const barHeight = Math.max(50, barBottom - barTop);
-
-        ctx.fillStyle = inputAccentColor.value;
-        ctx.fillRect(marginX, barTop, accentWidth, barHeight);
-        ctx.restore();
-      }
-
-      ctx.save();
-      ctx.textAlign = "left";
-      ctx.textBaseline = "alphabetic";
-      ctx.shadowColor = "rgba(0, 0, 0, 0.9)";
-      ctx.shadowBlur = 12;
-      ctx.shadowOffsetY = 2;
-
-      linePositions.forEach((l) => {
-        ctx.font = `700 ${l.size}px '${selectedFont}', sans-serif`;
-        ctx.fillStyle = l.color;
-        ctx.fillText(l.text, textIndentX, l.lineY);
-      });
-
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "800 30px 'Kanit', sans-serif";
+      ctx.fillText("เขาวัง", centerX, centerY - 14);
+      ctx.fillText("เดลี่", centerX, centerY + 18);
       ctx.restore();
     }
 
     function drawCredit() {
-      const credit = inputCredit.value.trim();
+      const credit = document.getElementById('inputCredit').value.trim();
       if (!credit) return;
 
-      const creditFontSize = parseInt(sliderCreditSize.value, 10);
-      const pos = selectCreditPos.value;
-      const style = selectCreditStyle.value;
-
       ctx.save();
-
-      let isBlack = style === 'black-plain' || style === 'black-badge';
-      let hasBadge = style === 'white-badge' || style === 'black-badge';
-
-      let textColor = isBlack ? '#111827' : '#ffffff';
-      let shadowColor = isBlack ? 'rgba(255, 255, 255, 0.75)' : 'rgba(0, 0, 0, 0.9)';
-      let badgeBg = isBlack ? 'rgba(255, 255, 255, 0.82)' : 'rgba(10, 15, 25, 0.78)';
-
-      ctx.font = `600 ${creditFontSize}px 'Prompt', sans-serif`;
-      const textWidth = ctx.measureText(credit.toUpperCase()).width;
-
-      if (pos === 'vertical-right-bottom' || pos === 'vertical-right-top') {
-        const posX = canvasWidth - (currentRatio === "4:5" ? 44 : 32);
-        let posY = (pos === 'vertical-right-top') ? (canvasHeight * 0.28) : (canvasHeight * 0.72);
-
-        ctx.translate(posX, posY);
-        ctx.rotate(-Math.PI / 2);
-
-        if (hasBadge) {
-          const padX = 14;
-          const padY = 6;
-          ctx.fillStyle = badgeBg;
-          ctx.beginPath();
-          ctx.roundRect(-textWidth / 2 - padX, -creditFontSize - padY / 2, textWidth + padX * 2, creditFontSize + padY * 2, 8);
-          ctx.fill();
-        }
-
-        ctx.textAlign = "center";
-        ctx.fillStyle = textColor;
-        ctx.shadowColor = shadowColor;
-        ctx.shadowBlur = hasBadge ? 0 : 8;
-        ctx.letterSpacing = "2px";
-        ctx.fillText(credit.toUpperCase(), 0, 0);
-
-      } else {
-        const bottomY = canvasHeight - (currentRatio === "4:5" ? 48 : 30);
-        let posX = 0;
-
-        if (pos === 'horizontal-bottom-right') {
-          const marginX = currentRatio === "4:5" ? 64 : 50;
-          posX = canvasWidth - marginX;
-          ctx.textAlign = "right";
-
-          if (hasBadge) {
-            const padX = 14;
-            const padY = 6;
-            ctx.fillStyle = badgeBg;
-            ctx.beginPath();
-            ctx.roundRect(posX - textWidth - padX, bottomY - creditFontSize - padY / 2, textWidth + padX * 2, creditFontSize + padY * 2, 8);
-            ctx.fill();
-          }
-        } else {
-          const marginX = currentRatio === "4:5" ? 64 : 50;
-          posX = marginX;
-          ctx.textAlign = "left";
-
-          if (hasBadge) {
-            const padX = 14;
-            const padY = 6;
-            ctx.fillStyle = badgeBg;
-            ctx.beginPath();
-            ctx.roundRect(posX - padX, bottomY - creditFontSize - padY / 2, textWidth + padX * 2, creditFontSize + padY * 2, 8);
-            ctx.fill();
-          }
-        }
-
-        ctx.fillStyle = textColor;
-        ctx.shadowColor = shadowColor;
-        ctx.shadowBlur = hasBadge ? 0 : 8;
-        ctx.fillText(credit, posX, bottomY);
-      }
-
+      ctx.translate(canvasWidth - 40, canvasHeight * 0.7);
+      ctx.rotate(-Math.PI / 2);
+      ctx.textAlign = "center";
+      ctx.font = "600 17px 'Prompt', sans-serif";
+      ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
+      ctx.shadowColor = "rgba(0,0,0,0.9)";
+      ctx.shadowBlur = 8;
+      ctx.letterSpacing = "2px";
+      ctx.fillText(credit.toUpperCase(), 0, 0);
       ctx.restore();
     }
 
+    // PHOTO UPLOAD & DRAG
     function handleImageFile(file) {
       if (!file) return;
       const reader = new FileReader();
-      reader.onload = (event) => {
+      reader.onload = (e) => {
         const img = new Image();
         img.onload = () => {
           newsImage = img;
           isNewsImageLoaded = true;
           imgScale = 1.0;
-          sliderZoom.value = "1";
-          zoomVal.textContent = "100%";
           imgOffsetX = 0;
           imgOffsetY = 0;
-          sliderPanX.value = "0";
-          sliderPanY.value = "0";
-          panXVal.textContent = "0";
-          panYVal.textContent = "0";
           imgRotation = 0;
-          sliderRotate.value = "0";
-          rotateVal.textContent = "0°";
-          renderCover();
+          document.getElementById('sliderRotate').value = "0";
+          document.getElementById('rotateVal').textContent = "0°";
+          document.getElementById('sliderZoom').value = "1";
+          document.getElementById('zoomVal').textContent = "100%";
+          render();
           showToast("อัปโหลดรูปภาพสำเร็จ!");
         };
-        img.src = event.target.result;
+        img.src = e.target.result;
       };
       reader.readAsDataURL(file);
     }
 
     imageUpload.addEventListener('change', (e) => handleImageFile(e.target.files[0]));
 
-    ['dragenter', 'dragover'].forEach(eventName => {
-      window.addEventListener(eventName, (e) => {
+    // Drag & Drop
+    ['dragenter', 'dragover'].forEach(name => {
+      window.addEventListener(name, (e) => {
         e.preventDefault();
         dropOverlay.classList.remove('opacity-0', 'pointer-events-none');
         dropOverlay.classList.add('opacity-100');
-      }, false);
+      });
     });
 
-    ['dragleave', 'drop'].forEach(eventName => {
-      window.addEventListener(eventName, (e) => {
+    ['dragleave', 'drop'].forEach(name => {
+      window.addEventListener(name, (e) => {
         e.preventDefault();
         dropOverlay.classList.remove('opacity-100');
         dropOverlay.classList.add('opacity-0', 'pointer-events-none');
-      }, false);
+      });
     });
 
     window.addEventListener('drop', (e) => {
       e.preventDefault();
-      if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) {
-        handleImageFile(e.dataTransfer.files[0]);
-      }
+      if (e.dataTransfer && e.dataTransfer.files[0]) handleImageFile(e.dataTransfer.files[0]);
     });
 
-    function getCanvasPointerCoords(e) {
+    // Canvas Mouse / Touch Drag to Move
+    function getCoords(e) {
       const rect = canvas.getBoundingClientRect();
-      const scaleX = canvasWidth / rect.width;
-      const scaleY = canvasHeight / rect.height;
-      let clientX = e.touches && e.touches.length > 0 ? e.touches[0].clientX : e.clientX;
-      let clientY = e.touches && e.touches.length > 0 ? e.touches[0].clientY : e.clientY;
-      return {
-        x: (clientX - rect.left) * scaleX,
-        y: (clientY - rect.top) * scaleY
-      };
+      const sx = canvasWidth / rect.width;
+      const sy = canvasHeight / rect.height;
+      const cx = e.touches ? e.touches[0].clientX : e.clientX;
+      const cy = e.touches ? e.touches[0].clientY : e.clientY;
+      return { x: (cx - rect.left) * sx, y: (cy - rect.top) * sy };
     }
 
-    function onPointerStart(e) {
+    canvas.addEventListener('mousedown', (e) => {
       isDragging = true;
-      const coords = getCanvasPointerCoords(e);
-      startPointerX = coords.x - imgOffsetX;
-      startPointerY = coords.y - imgOffsetY;
-    }
+      const c = getCoords(e);
+      startPointerX = c.x - imgOffsetX;
+      startPointerY = c.y - imgOffsetY;
+    });
 
-    function onPointerMove(e) {
+    window.addEventListener('mousemove', (e) => {
       if (!isDragging) return;
-      const coords = getCanvasPointerCoords(e);
-      imgOffsetX = coords.x - startPointerX;
-      imgOffsetY = coords.y - startPointerY;
-      sliderPanX.value = Math.max(-800, Math.min(800, imgOffsetX));
-      sliderPanY.value = Math.max(-800, Math.min(800, imgOffsetY));
-      panXVal.textContent = Math.round(imgOffsetX);
-      panYVal.textContent = Math.round(imgOffsetY);
-      renderCover();
-    }
+      const c = getCoords(e);
+      imgOffsetX = c.x - startPointerX;
+      imgOffsetY = c.y - startPointerY;
+      render();
+    });
 
-    function onPointerEnd() {
-      isDragging = false;
-    }
-
-    canvas.addEventListener('mousedown', onPointerStart);
-    window.addEventListener('mousemove', onPointerMove);
-    window.addEventListener('mouseup', onPointerEnd);
+    window.addEventListener('mouseup', () => { isDragging = false; });
 
     canvas.addEventListener('touchstart', (e) => {
-      if (e.touches.length === 1) onPointerStart(e);
+      if (e.touches.length === 1) {
+        isDragging = true;
+        const c = getCoords(e);
+        startPointerX = c.x - imgOffsetX;
+        startPointerY = c.y - imgOffsetY;
+      }
     }, { passive: true });
 
     window.addEventListener('touchmove', (e) => {
-      if (isDragging && e.touches.length === 1) onPointerMove(e);
+      if (isDragging && e.touches.length === 1) {
+        const c = getCoords(e);
+        imgOffsetX = c.x - startPointerX;
+        imgOffsetY = c.y - startPointerY;
+        render();
+      }
     }, { passive: true });
 
-    window.addEventListener('touchend', onPointerEnd);
+    window.addEventListener('touchend', () => { isDragging = false; });
 
-    document.querySelectorAll('.ratio-btn').forEach(btn => {
-      btn.addEventListener('click', () => setAspectRatio(btn.dataset.ratio));
-    });
-
-    customLogoUpload.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          const img = new Image();
-          img.onload = () => {
-            customLogoImg = img;
-            hasCustomLogo = true;
-            renderCover();
-            showToast("อัปโหลดไฟล์โลโก้ PNG สำเร็จ");
-          };
-          img.src = event.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-
-    sliderZoom.addEventListener('input', (e) => {
-      imgScale = parseFloat(e.target.value);
-      zoomVal.textContent = Math.round(imgScale * 100) + '%';
-      renderCover();
-    });
-
-    sliderRotate.addEventListener('input', (e) => {
+    // Slider Listeners
+    document.getElementById('sliderRotate').addEventListener('input', (e) => {
       imgRotation = parseFloat(e.target.value);
-      rotateVal.textContent = `${imgRotation}°`;
-      renderCover();
+      document.getElementById('rotateVal').textContent = `${imgRotation}°`;
+      render();
     });
 
-    btnRotateLeft90.addEventListener('click', () => {
-      imgRotation = (imgRotation - 90) % 360;
-      sliderRotate.value = imgRotation;
-      rotateVal.textContent = `${imgRotation}°`;
-      renderCover();
-    });
-
-    btnRotateRight90.addEventListener('click', () => {
-      imgRotation = (imgRotation + 90) % 360;
-      sliderRotate.value = imgRotation;
-      rotateVal.textContent = `${imgRotation}°`;
-      renderCover();
-    });
-
-    btnRotateReset.addEventListener('click', () => {
+    document.getElementById('btnResetRotate').addEventListener('click', () => {
       imgRotation = 0;
-      sliderRotate.value = "0";
-      rotateVal.textContent = "0°";
-      renderCover();
+      document.getElementById('sliderRotate').value = "0";
+      document.getElementById('rotateVal').textContent = "0°";
+      render();
     });
 
-    sliderCreditSize.addEventListener('input', (e) => {
-      creditSizeVal.textContent = `${e.target.value}px`;
-      renderCover();
+    document.getElementById('sliderZoom').addEventListener('input', (e) => {
+      imgScale = parseFloat(e.target.value);
+      document.getElementById('zoomVal').textContent = Math.round(imgScale * 100) + '%';
+      render();
     });
 
-    sliderSplitFontSize.addEventListener('input', (e) => {
-      splitFontSizeVal.textContent = `${e.target.value}px`;
-      renderCover();
+    document.getElementById('btnResetPhotoPos').addEventListener('click', () => {
+      imgOffsetX = 0; imgOffsetY = 0; imgScale = 1; imgRotation = 0;
+      document.getElementById('sliderRotate').value = "0";
+      document.getElementById('rotateVal').textContent = "0°";
+      document.getElementById('sliderZoom').value = "1";
+      document.getElementById('zoomVal').textContent = "100%";
+      render();
     });
 
-    sliderSplitRatio.addEventListener('input', (e) => {
-      splitRatioVal.textContent = `${e.target.value}%`;
-      renderCover();
+    document.getElementById('btnSplitAddBullet').addEventListener('click', () => {
+      const el = document.getElementById('inputSplitText');
+      el.value += (el.value.endsWith('\n') || !el.value ? '' : '\n') + '• ';
+      el.focus();
+      render();
     });
 
-    inputSplitBody.addEventListener('input', renderCover);
-    checkShowNextArrow.addEventListener('change', renderCover);
-
-    sliderPanX.addEventListener('input', (e) => {
-      imgOffsetX = parseInt(e.target.value, 10);
-      panXVal.textContent = imgOffsetX;
-      renderCover();
+    // Live update listeners
+    [
+      'inputLine1', 'inputLine2', 'inputLine3', 'inputLine4',
+      'inputSplitText', 'selectSplitOrder', 'checkSplitArrow',
+      'inputCleanText', 'inputQuoteBody', 'inputQuoteAuthor', 'inputQuoteRole',
+      'inputLocName', 'inputLocDate', 'selectLogoOption', 'inputCredit'
+    ].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('input', render);
+        el.addEventListener('change', render);
+      }
     });
 
-    sliderPanY.addEventListener('input', (e) => {
-      imgOffsetY = parseInt(e.target.value, 10);
-      panYVal.textContent = imgOffsetY;
-      renderCover();
-    });
-
-    sliderGradientHeight.addEventListener('input', (e) => {
-      gradientHeightVal.textContent = e.target.value + '%';
-      renderCover();
-    });
-
-    sliderLine1Size.addEventListener('input', (e) => {
-      line1SizeVal.textContent = e.target.value + 'px';
-      renderCover();
-    });
-
-    sliderLine2Size.addEventListener('input', (e) => {
-      line2SizeVal.textContent = e.target.value + 'px';
-      renderCover();
-    });
-
-    sliderLine3Size.addEventListener('input', (e) => {
-      line3SizeVal.textContent = e.target.value + 'px';
-      renderCover();
-    });
-
-    sliderLine4Size.addEventListener('input', (e) => {
-      line4SizeVal.textContent = e.target.value + 'px';
-      renderCover();
-    });
-
-    sliderTextTop.addEventListener('input', (e) => {
-      textTopVal.textContent = e.target.value + 'px';
-      renderCover();
-    });
-
-    sliderLogoSize.addEventListener('input', (e) => {
-      logoSizeVal.textContent = e.target.value + 'px';
-      renderCover();
-    });
-
-    btnResetPhotoPos.addEventListener('click', () => {
-      imgOffsetX = 0;
-      imgOffsetY = 0;
-      imgScale = 1.0;
-      imgRotation = 0;
-      sliderPanX.value = "0";
-      sliderPanY.value = "0";
-      sliderZoom.value = "1";
-      sliderRotate.value = "0";
-      sliderTextTop.value = "0";
-      panXVal.textContent = "0";
-      panYVal.textContent = "0";
-      rotateVal.textContent = "0°";
-      zoomVal.textContent = "100%";
-      textTopVal.textContent = "0px";
-      renderCover();
-    });
-
-    [inputLine1, inputLine2, inputLine3, inputLine4, inputCredit].forEach(el => {
-      el.addEventListener('input', renderCover);
-    });
-
-    [checkAccentBar, inputAccentColor, inputLine1Color, inputLine2Color, inputLine3Color, inputLine4Color, checkTopGradient, checkShowLogo, selectFont, selectLogoPos, selectCreditPos, selectCreditStyle].forEach(el => {
-      el.addEventListener('change', renderCover);
-      el.addEventListener('input', renderCover);
-    });
-
-    function getExportFilename(extension) {
-      const now = new Date();
-      const pad = (n) => String(n).padStart(2, '0');
-      const dateStr = `${now.getFullYear()}${pad(now.getMonth() + 1)}${pad(now.getDate())}`;
-      const timeStr = `${pad(now.getHours())}${pad(now.getMinutes())}`;
-      const typeTag = templateMode === 'split' ? 'split-slide' : currentRatio.replace(':', 'x');
-      const layoutTag = templateMode === 'cover' ? (currentRatio !== '16:9' ? `-${textPosition}` : '-clean') : '';
-      return `khaowangdaily-${typeTag}${layoutTag}-${dateStr}-${timeStr}.${extension}`;
-    }
-
-    function downloadFile(format) {
+    // Export Function
+    function downloadJpg() {
       const link = document.createElement('a');
-      link.download = getExportFilename(format);
-      if (format === 'jpg') {
-        link.href = canvas.toDataURL('image/jpeg', 0.95);
-      } else {
-        link.href = canvas.toDataURL('image/png');
-      }
+      link.download = `khaowangdaily-${currentTpl}-${Date.now()}.jpg`;
+      link.href = canvas.toDataURL('image/jpeg', 0.95);
       link.click();
-      showToast(`ดาวน์โหลดภาพ (${format.toUpperCase()}) สำเร็จ!`);
+      showToast("ดาวน์โหลด JPG สำเร็จ!");
     }
 
-    btnDownloadJpg.addEventListener('click', () => downloadFile('jpg'));
-    btnDownloadTopJpg.addEventListener('click', () => downloadFile('jpg'));
-    btnDownloadPng.addEventListener('click', () => downloadFile('png'));
+    document.getElementById('btnDownloadJpg').addEventListener('click', downloadJpg);
+    document.getElementById('btnDownloadTopJpg').addEventListener('click', downloadJpg);
 
-    btnCopyImage.addEventListener('click', () => {
-      try {
-        canvas.toBlob((blob) => {
-          if (!blob) return;
-          if (navigator.clipboard && navigator.clipboard.write) {
-            const item = new ClipboardItem({ 'image/png': blob });
-            navigator.clipboard.write([item]).then(() => {
-              showToast("คัดลอกรูปภาพแล้ว! วางลง Facebook ได้ทันที");
-            }).catch(() => downloadFile('jpg'));
-          } else {
-            downloadFile('jpg');
-          }
-        }, 'image/png');
-      } catch (err) {
-        downloadFile('jpg');
-      }
+    document.getElementById('btnCopyImage').addEventListener('click', () => {
+      canvas.toBlob((blob) => {
+        if (blob && navigator.clipboard && navigator.clipboard.write) {
+          navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
+            .then(() => showToast("คัดลอกรูปภาพแล้ว! วางลงโซเชียลได้ทันที"))
+            .catch(() => downloadJpg());
+        } else {
+          downloadJpg();
+        }
+      });
     });
 
     window.onload = function() {
-      setTemplateMode("cover");
-      setAspectRatio("4:5");
-      setTextPosition("bottom");
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
 
+      // พื้นหลังตัวอย่าง
       const off = document.createElement('canvas');
-      off.width = 1080;
-      off.height = 1350;
+      off.width = 1080; off.height = 1350;
       const octx = off.getContext('2d');
-      const bgGrad = octx.createLinearGradient(0, 0, 0, off.height);
-      bgGrad.addColorStop(0, '#11171d');
-      bgGrad.addColorStop(0.4, '#24333c');
-      bgGrad.addColorStop(0.7, '#475e6c');
-      bgGrad.addColorStop(1, '#6b7d87');
-      octx.fillStyle = bgGrad;
+      const g = octx.createLinearGradient(0, 0, 0, off.height);
+      g.addColorStop(0, '#1c2430');
+      g.addColorStop(0.5, '#2e3b4e');
+      g.addColorStop(1, '#475b77');
+      octx.fillStyle = g;
       octx.fillRect(0, 0, off.width, off.height);
 
       newsImage.onload = () => {
         isNewsImageLoaded = true;
-        renderCover();
+        render();
       };
       newsImage.src = off.toDataURL('image/jpeg', 0.9);
-      updateCanvasScreenSize();
     };
   </script>
 </body>
