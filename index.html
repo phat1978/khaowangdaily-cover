@@ -41,7 +41,6 @@
     ::-webkit-scrollbar-track { background: #090d16; }
     ::-webkit-scrollbar-thumb { background: #273147; border-radius: 9999px; }
     
-    /* ควบคุมขนาด Canvas ให้ใหญ่เต็มตาบน Desktop และพอดีรอบด้านบน Mobile */
     #coverCanvas {
       width: auto;
       height: auto;
@@ -93,7 +92,7 @@
   <!-- MAIN WORKSPACE -->
   <main class="flex-1 flex flex-col lg:flex-row lg:overflow-hidden">
     
-    <!-- LEFT PANEL: Canvas Viewport (ขยายใหญ่เต็มตาบน Desktop) -->
+    <!-- LEFT PANEL: Canvas Viewport -->
     <section id="workspaceSection" class="w-full lg:flex-1 bg-slate-950 p-2 sm:p-4 lg:p-6 flex flex-col items-center justify-center relative border-b lg:border-b-0 lg:border-r border-slate-800/80 shrink-0">
       
       <div class="w-full flex items-center justify-between mb-2 text-xs text-slate-400 px-3 max-w-5xl">
@@ -109,7 +108,6 @@
         </div>
       </div>
 
-      <!-- Main Canvas Container (ปล่อยเต็มพื้นที่) -->
       <div id="dropZone" class="flex-1 w-full flex items-center justify-center relative transition p-1">
         <div class="relative flex items-center justify-center shadow-2xl rounded-2xl overflow-hidden border border-slate-800/90 bg-slate-900/40 p-1 backdrop-blur max-w-full">
           <canvas id="coverCanvas" class="rounded-xl cursor-grab active:cursor-grabbing select-none shadow-2xl"></canvas>
@@ -191,7 +189,7 @@
           </div>
         </div>
 
-        <!-- 1. SETTINGS: COVER SLIDE -->
+        <!-- 1. SETTINGS: COVER SLIDE (นำชุดควบคุมขนาดฟอนต์ สี แถบแดง และฟอนต์กลับมาครบถ้วน) -->
         <div id="panelCover" class="space-y-4">
           <div class="flex items-center justify-between">
             <label class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
@@ -203,11 +201,88 @@
             </div>
           </div>
 
-          <div class="space-y-2 bg-slate-950/50 p-3 rounded-xl border border-slate-800/80">
-            <input type="text" id="inputLine1" value="เกม Call of Duty ภาคใหม่" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white" placeholder="บรรทัดที่ 1">
-            <input type="text" id="inputLine2" value="จินตนาการสถานการณ์เกาหลีเหนือ" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white" placeholder="บรรทัดที่ 2">
-            <input type="text" id="inputLine3" value="บุกเกาหลีใต้ เหตุการณ์เช่นนี้" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white" placeholder="บรรทัดที่ 3">
-            <input type="text" id="inputLine4" value="มีโอกาสเกิดขึ้นจริงได้หรือไม่ ?" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white" placeholder="บรรทัดที่ 4 (เว้นว่างได้)">
+          <!-- แถบสีแดงชิดซ้าย (BBC Accent Bar) -->
+          <div class="flex items-center justify-between bg-slate-950/70 p-2.5 rounded-xl border border-slate-800 text-xs">
+            <label class="inline-flex items-center gap-2 cursor-pointer text-slate-200 font-medium">
+              <input type="checkbox" id="checkAccentBar" checked class="accent-[#b31929] w-4 h-4 rounded">
+              <span class="flex items-center gap-1.5">
+                <span class="w-2.5 h-4 bg-[#b31929] rounded-none inline-block"></span>
+                แถบสีแดงชิดซ้าย (BBC Accent Bar)
+              </span>
+            </label>
+            <input type="color" id="inputAccentColor" value="#b31929" class="w-6 h-6 rounded cursor-pointer bg-transparent border-0" title="เลือกสีแถบข้าง">
+          </div>
+
+          <!-- บรรทัดที่ 1 -->
+          <div class="space-y-1.5 bg-slate-950/50 p-2.5 rounded-xl border border-slate-800/80">
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-white font-semibold">บรรทัดที่ 1</span>
+              <div class="flex items-center gap-2">
+                <input type="color" id="inputLine1Color" value="#ffffff" class="w-5 h-5 rounded cursor-pointer bg-transparent border-0" title="เลือกสีข้อความ">
+                <span id="line1SizeVal" class="text-[10px] text-slate-400 font-mono">54px</span>
+                <input id="sliderLine1Size" type="range" min="30" max="100" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
+              </div>
+            </div>
+            <input type="text" id="inputLine1" value="หัวหินน้ำทะเลเบียด" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white" placeholder="บรรทัดที่ 1">
+          </div>
+
+          <!-- บรรทัดที่ 2 -->
+          <div class="space-y-1.5 bg-slate-950/50 p-2.5 rounded-xl border border-slate-800/80">
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-white font-semibold">บรรทัดที่ 2</span>
+              <div class="flex items-center gap-2">
+                <input type="color" id="inputLine2Color" value="#ffffff" class="w-5 h-5 rounded cursor-pointer bg-transparent border-0" title="เลือกสีข้อความ">
+                <span id="line2SizeVal" class="text-[10px] text-slate-400 font-mono">54px</span>
+                <input id="sliderLine2Size" type="range" min="30" max="100" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
+              </div>
+            </div>
+            <input type="text" id="inputLine2" value="แนวยาว 4 กิโลเมตร" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white" placeholder="บรรทัดที่ 2">
+          </div>
+
+          <!-- บรรทัดที่ 3 -->
+          <div class="space-y-1.5 bg-slate-950/50 p-2.5 rounded-xl border border-slate-800/80">
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-slate-200 font-semibold">บรรทัดที่ 3</span>
+              <div class="flex items-center gap-2">
+                <input type="color" id="inputLine3Color" value="#ffffff" class="w-5 h-5 rounded cursor-pointer bg-transparent border-0" title="เลือกสีข้อความ">
+                <span id="line3SizeVal" class="text-[10px] text-slate-400 font-mono">54px</span>
+                <input id="sliderLine3Size" type="range" min="20" max="100" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
+              </div>
+            </div>
+            <input type="text" id="inputLine3" value="ชาวบ้านแห่จับสัตว์น้ำคึกคัก" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white" placeholder="บรรทัดที่ 3">
+          </div>
+
+          <!-- บรรทัดที่ 4 -->
+          <div class="space-y-1.5 bg-slate-950/50 p-2.5 rounded-xl border border-slate-800/80">
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-rose-300 font-semibold">บรรทัดที่ 4 (เว้นว่างได้)</span>
+              <div class="flex items-center gap-2">
+                <input type="color" id="inputLine4Color" value="#ffffff" class="w-5 h-5 rounded cursor-pointer bg-transparent border-0" title="เลือกสีข้อความ">
+                <span id="line4SizeVal" class="text-[10px] text-slate-400 font-mono">48px</span>
+                <input id="sliderLine4Size" type="range" min="20" max="100" value="48" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
+              </div>
+            </div>
+            <input type="text" id="inputLine4" value="" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white" placeholder="บรรทัดที่ 4 (เว้นว่างได้ถ้ามีเพียง 3 บรรทัด)">
+          </div>
+
+          <!-- เลือกฟอนต์ & Y-Offset -->
+          <div class="grid grid-cols-2 gap-3 pt-1">
+            <div>
+              <label class="text-[11px] text-slate-400 block mb-1">ฟอนต์ตัวหนังสือ</label>
+              <select id="selectFont" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none">
+                <option value="Prompt" selected>Prompt (โมเดิร์น BBC)</option>
+                <option value="Bai Jamjuree">Bai Jamjuree (คมชัด)</option>
+                <option value="Kanit">Kanit (มาตรฐานข่าว)</option>
+                <option value="Sarabun">Sarabun (สุภาพ ชัดเจน)</option>
+              </select>
+            </div>
+            <div>
+              <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                <span>เลื่อนขึ้น-ลง (Y-Offset)</span>
+                <span id="textTopVal" class="font-mono text-slate-300">0px</span>
+              </div>
+              <input id="sliderTextTop" type="range" min="-300" max="300" step="5" value="0" class="w-full accent-rose-600 h-1.5 bg-slate-800 rounded mt-2">
+            </div>
           </div>
         </div>
 
@@ -345,6 +420,33 @@
     let startPointerX = 0;
     let startPointerY = 0;
 
+    // Elements
+    const checkAccentBar = document.getElementById('checkAccentBar');
+    const inputAccentColor = document.getElementById('inputAccentColor');
+    const selectFont = document.getElementById('selectFont');
+    const sliderTextTop = document.getElementById('sliderTextTop');
+    const textTopVal = document.getElementById('textTopVal');
+
+    const inputLine1 = document.getElementById('inputLine1');
+    const inputLine1Color = document.getElementById('inputLine1Color');
+    const sliderLine1Size = document.getElementById('sliderLine1Size');
+    const line1SizeVal = document.getElementById('line1SizeVal');
+
+    const inputLine2 = document.getElementById('inputLine2');
+    const inputLine2Color = document.getElementById('inputLine2Color');
+    const sliderLine2Size = document.getElementById('sliderLine2Size');
+    const line2SizeVal = document.getElementById('line2SizeVal');
+
+    const inputLine3 = document.getElementById('inputLine3');
+    const inputLine3Color = document.getElementById('inputLine3Color');
+    const sliderLine3Size = document.getElementById('sliderLine3Size');
+    const line3SizeVal = document.getElementById('line3SizeVal');
+
+    const inputLine4 = document.getElementById('inputLine4');
+    const inputLine4Color = document.getElementById('inputLine4Color');
+    const sliderLine4Size = document.getElementById('sliderLine4Size');
+    const line4SizeVal = document.getElementById('line4SizeVal');
+
     document.getElementById('inputSplitText').value = "งานวิจัยของมหาวิทยาลัยเคมบริดจ์ในสหราชอาณาจักรพบว่า ผู้หญิงมีแนวโน้มต้องรอนานกว่าผู้ชายอย่างมีนัยสำคัญในการได้รับการวินิจฉัยโรคภูมิคุ้มกันทำลายตนเอง\n\n• ผู้หญิง 43.3% ระบุว่าอาการถูกเข้าใจผิดว่าเกิดจากจิตใจ\n• เทียบกับผู้ชายเพียง 32.7%";
     document.getElementById('inputCleanText').value = "งานวิจัยซึ่งตีพิมพ์ในวารสารทางการแพทย์ เดอะแลนเซ็ต (The Lancet)\nมีผู้เข้าร่วมกว่า 6,600 คน ส่วนใหญ่เป็นผู้หญิงจากสหราชอาณาจักร\n\nข้อจำกัดประการหนึ่งของการศึกษานี้ คือเป็นการศึกษาจากแบบสำรวจออนไลน์ ซึ่งอาศัยการรายงานประสบการณ์การได้รับการวินิจฉัยโดยผู้เข้าร่วมเอง";
     document.getElementById('inputQuoteBody').value = "ตอนนี้เราจำเป็นต้องทำการศึกษา เพื่อพัฒนาการสื่อสารระหว่างแพทย์กับผู้ป่วย และเพื่อให้การสนับสนุนผู้คนในการเยียวยาตนเอง";
@@ -471,27 +573,52 @@
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-        const l1 = document.getElementById('inputLine1').value.trim();
-        const l2 = document.getElementById('inputLine2').value.trim();
-        const l3 = document.getElementById('inputLine3').value.trim();
-        const l4 = document.getElementById('inputLine4').value.trim();
-        const lines = [l1, l2, l3, l4].filter(t => t.length > 0);
+        const l1 = inputLine1.value.trim();
+        const l2 = inputLine2.value.trim();
+        const l3 = inputLine3.value.trim();
+        const l4 = inputLine4.value.trim();
+
+        const rawLines = [
+          { text: l1, size: parseInt(sliderLine1Size.value, 10), color: inputLine1Color.value },
+          { text: l2, size: parseInt(sliderLine2Size.value, 10), color: inputLine2Color.value },
+          { text: l3, size: parseInt(sliderLine3Size.value, 10), color: inputLine3Color.value },
+          { text: l4, size: parseInt(sliderLine4Size.value, 10), color: inputLine4Color.value }
+        ];
+
+        const lines = rawLines.filter(item => item.text.length > 0);
 
         if (lines.length > 0) {
-          const fontSize = 54;
-          const totalH = lines.length * (fontSize * 1.38);
-          const startY = coverPos === 'top' ? 220 : (canvasHeight - 160 - totalH);
+          const yOffset = parseInt(sliderTextTop.value, 10);
+          const font = selectFont.value;
 
-          ctx.fillStyle = "#b31929";
-          ctx.fillRect(64, startY, 28, totalH);
+          let totalH = 0;
+          lines.forEach(l => { totalH += (l.size * 1.34); });
 
-          ctx.font = `700 ${fontSize}px 'Prompt', sans-serif`;
-          ctx.fillStyle = "#ffffff";
+          let startY = coverPos === 'top' ? (220 + yOffset) : (canvasHeight - 160 - totalH + yOffset);
+
+          const showBar = checkAccentBar.checked;
+          const barWidth = 28;
+          const textX = showBar ? (64 + barWidth + 24) : 64;
+
+          if (showBar) {
+            ctx.fillStyle = inputAccentColor.value;
+            ctx.fillRect(64, startY, barWidth, totalH);
+          }
+
+          ctx.textAlign = "left";
+          ctx.textBaseline = "alphabetic";
           ctx.shadowColor = "rgba(0,0,0,0.9)";
           ctx.shadowBlur = 12;
-          lines.forEach((txt, idx) => {
-            ctx.fillText(txt, 118, startY + (idx * fontSize * 1.38) + (fontSize * 0.85));
+
+          let curY = startY;
+          lines.forEach(l => {
+            const lineY = curY + (l.size * 0.85);
+            ctx.font = `700 ${l.size}px '${font}', sans-serif`;
+            ctx.fillStyle = l.color;
+            ctx.fillText(l.text, textX, lineY);
+            curY += (l.size * 1.34);
           });
+
           ctx.shadowBlur = 0;
         }
       }
@@ -881,6 +1008,27 @@
       render();
     });
 
+    sliderLine1Size.addEventListener('input', (e) => {
+      line1SizeVal.textContent = e.target.value + 'px';
+      render();
+    });
+    sliderLine2Size.addEventListener('input', (e) => {
+      line2SizeVal.textContent = e.target.value + 'px';
+      render();
+    });
+    sliderLine3Size.addEventListener('input', (e) => {
+      line3SizeVal.textContent = e.target.value + 'px';
+      render();
+    });
+    sliderLine4Size.addEventListener('input', (e) => {
+      line4SizeVal.textContent = e.target.value + 'px';
+      render();
+    });
+    sliderTextTop.addEventListener('input', (e) => {
+      textTopVal.textContent = e.target.value + 'px';
+      render();
+    });
+
     document.getElementById('btnSplitAddBullet').addEventListener('click', () => {
       const el = document.getElementById('inputSplitText');
       el.value += (el.value.endsWith('\n') || !el.value ? '' : '\n') + '• ';
@@ -890,6 +1038,8 @@
 
     [
       'inputLine1', 'inputLine2', 'inputLine3', 'inputLine4',
+      'inputLine1Color', 'inputLine2Color', 'inputLine3Color', 'inputLine4Color',
+      'checkAccentBar', 'inputAccentColor', 'selectFont',
       'inputSplitText', 'selectSplitOrder', 'checkSplitArrow',
       'inputCleanText', 'inputQuoteBody', 'inputQuoteAuthor', 'inputQuoteRole',
       'inputLocName', 'inputLocDate', 'selectLogoOption', 'inputCredit'
