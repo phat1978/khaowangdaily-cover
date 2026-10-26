@@ -83,14 +83,12 @@
         <span class="hidden md:inline">คัดลอก</span>
       </button>
 
-      <!-- ปุ่ม WebP ด้านบน -->
       <button id="btnDownloadTopWebp" class="inline-flex items-center gap-1.5 px-3 py-2 bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs rounded-xl shadow-md active:scale-95 transition-all" title="บันทึก WebP ขนาดเบา สำหรับขึ้นเว็บ">
         <i data-lucide="globe" class="w-3.5 h-3.5"></i>
         <span>WebP (เว็บ)</span>
       </button>
 
-      <!-- ปุ่ม JPG ด้านบน -->
-      <button id="btnDownloadTopJpg" class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-gradient-to-r from-[#b31929] to-[#c41e3a] hover:from-[#c41e3a] hover:to-rose-600 text-white font-bold text-xs rounded-xl shadow-lg shadow-rose-950/40 active:scale-95 transition-all" title="บันทึก JPG สำหรับโซเชียล">
+      <button id="btnDownloadTopJpg" class="inline-flex items-center gap-1.5 px-3 py-2 bg-gradient-to-r from-[#b31929] to-[#c41e3a] hover:from-[#c41e3a] hover:to-rose-600 text-white font-bold text-xs rounded-xl shadow-lg shadow-rose-950/40 active:scale-95 transition-all" title="บันทึก JPG สำหรับโซเชียล">
         <i data-lucide="download" class="w-3.5 h-3.5 stroke-[2.5]"></i>
         <span>JPG (โซเชียล)</span>
       </button>
@@ -365,31 +363,71 @@
           </div>
         </div>
 
-        <!-- LOGO & CREDIT -->
-        <div class="grid grid-cols-2 gap-3 bg-slate-950/70 p-3.5 rounded-xl border border-slate-800">
-          <div>
-            <label class="text-[11px] text-slate-300 block mb-1 font-semibold">แสดงโลโก้</label>
-            <select id="selectLogoOption" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-xs text-slate-200">
-              <option value="show" selected>แสดงซ้ายบน</option>
-              <option value="hide">ซ่อนโลโก้</option>
-            </select>
+        <!-- LOGO SETTINGS -->
+        <div class="bg-slate-950/70 p-3.5 rounded-xl border border-slate-800 flex items-center justify-between">
+          <label class="text-xs text-slate-200 font-semibold flex items-center gap-1.5">
+            <i data-lucide="shield" class="w-4 h-4 text-[#b31929]"></i>
+            <span>แสดงโลโก้เขาวังเดลี่</span>
+          </label>
+          <select id="selectLogoOption" class="bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1 text-xs text-slate-200 focus:outline-none">
+            <option value="show" selected>แสดงซ้ายบน</option>
+            <option value="hide">ซ่อนโลโก้</option>
+          </select>
+        </div>
+
+        <!-- PHOTO CREDIT SUITE (นำชุดปรับขนาด สี และตำแหน่งกลับมาครบถ้วน) -->
+        <div id="creditBoxSection" class="space-y-3 bg-slate-950/70 p-3.5 rounded-xl border border-slate-800">
+          <div class="flex items-center justify-between">
+            <label class="text-xs text-slate-200 font-semibold flex items-center gap-1.5">
+              <i data-lucide="camera" class="w-3.5 h-3.5 text-rose-400"></i>
+              <span>เครดิตเจ้าของรูป (Photo Credit)</span>
+            </label>
+            <span class="text-[10px] text-slate-400">ปรับหลบหลีกภาพ</span>
           </div>
-          <div>
-            <label class="text-[11px] text-slate-300 block mb-1 font-semibold">เครดิตภาพถ่าย</label>
-            <input type="text" id="inputCredit" value="GETTY IMAGES" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2 py-1 text-xs text-slate-200" placeholder="เครดิตรูป">
+          
+          <input type="text" id="inputCredit" value="GETTY IMAGES" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-rose-500" placeholder="ใส่เครดิตภาพ หรือเว้นว่างได้">
+
+          <!-- ตำแหน่งการวาง & สไตล์สี/แถบรอง -->
+          <div class="grid grid-cols-2 gap-3 pt-1">
+            <div>
+              <label class="text-[11px] text-slate-400 block mb-1">ทิศทางการวางเครดิต</label>
+              <select id="selectCreditPos" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-2 py-1.5 text-xs text-slate-200 focus:outline-none">
+                <option value="vertical-right-bottom" selected>แนวตั้ง ชิดขวาล่าง (BBC)</option>
+                <option value="vertical-right-top">แนวตั้ง ชิดขวาบน</option>
+                <option value="horizontal-bottom-right">แนวนอน ชิดขวาล่าง</option>
+                <option value="horizontal-bottom-left">แนวนอน ชิดซ้ายล่าง</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="text-[11px] text-slate-400 block mb-1">สีตัวหนังสือ & แถบรอง</label>
+              <select id="selectCreditStyle" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-2 py-1.5 text-xs text-slate-200 focus:outline-none">
+                <option value="white-plain" selected>ตัวหนังสือสีขาว (เงาดำ)</option>
+                <option value="black-plain">ตัวหนังสือสีดำ (เงาขาว)</option>
+                <option value="white-badge">ตัวขาว + แถบดำโปร่งแสง</option>
+                <option value="black-badge">ตัวดำ + แถบขาวโปร่งแสง</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- ตัวปรับขนาดฟอนต์เครดิตภาพ -->
+          <div class="pt-1">
+            <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+              <span>ขนาดตัวหนังสือเครดิต</span>
+              <span id="creditSizeVal" class="font-mono text-slate-300">18px</span>
+            </div>
+            <input id="sliderCreditSize" type="range" min="12" max="32" step="1" value="18" class="w-full accent-rose-600 cursor-pointer h-1 bg-slate-800 rounded-lg">
           </div>
         </div>
 
-        <!-- EXPORT BUTTONS (มีทั้ง JPG และ WebP) -->
+        <!-- EXPORT BUTTONS (มีทั้ง JPG, WebP และ PNG) -->
         <div class="pt-2 space-y-2 pb-6">
           <div class="grid grid-cols-2 gap-2">
-            <!-- ปุ่ม JPG ด้านล่าง -->
             <button id="btnDownloadJpg" class="w-full py-3 px-3 bg-gradient-to-r from-[#b31929] via-[#c41e3a] to-rose-600 hover:from-[#c41e3a] hover:to-rose-500 text-white font-bold rounded-xl shadow-xl shadow-rose-950/40 flex items-center justify-center gap-1.5 text-xs sm:text-sm active:scale-[0.98] transition-all cursor-pointer">
               <i data-lucide="download" class="w-4 h-4 stroke-[2.5]"></i>
               <span>โหลด JPG (โซเชียล)</span>
             </button>
             
-            <!-- ปุ่ม WebP ด้านล่าง -->
             <button id="btnDownloadWebp" class="w-full py-3 px-3 bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold rounded-xl shadow-xl shadow-emerald-950/40 flex items-center justify-center gap-1.5 text-xs sm:text-sm active:scale-[0.98] transition-all cursor-pointer">
               <i data-lucide="globe" class="w-4 h-4 stroke-[2.5]"></i>
               <span>โหลด WebP (ขึ้นเว็บ)</span>
@@ -469,6 +507,12 @@
     const sliderLine4Size = document.getElementById('sliderLine4Size');
     const line4SizeVal = document.getElementById('line4SizeVal');
 
+    const inputCredit = document.getElementById('inputCredit');
+    const selectCreditPos = document.getElementById('selectCreditPos');
+    const selectCreditStyle = document.getElementById('selectCreditStyle');
+    const sliderCreditSize = document.getElementById('sliderCreditSize');
+    const creditSizeVal = document.getElementById('creditSizeVal');
+
     document.getElementById('inputSplitText').value = "งานวิจัยของมหาวิทยาลัยเคมบริดจ์ในสหราชอาณาจักรพบว่า ผู้หญิงมีแนวโน้มต้องรอนานกว่าผู้ชายอย่างมีนัยสำคัญในการได้รับการวินิจฉัยโรคภูมิคุ้มกันทำลายตนเอง\n\n• ผู้หญิง 43.3% ระบุว่าอาการถูกเข้าใจผิดว่าเกิดจากจิตใจ\n• เทียบกับผู้ชายเพียง 32.7%";
     document.getElementById('inputCleanText').value = "งานวิจัยซึ่งตีพิมพ์ในวารสารทางการแพทย์ เดอะแลนเซ็ต (The Lancet)\nมีผู้เข้าร่วมกว่า 6,600 คน ส่วนใหญ่เป็นผู้หญิงจากสหราชอาณาจักร\n\nข้อจำกัดประการหนึ่งของการศึกษานี้ คือเป็นการศึกษาจากแบบสำรวจออนไลน์ ซึ่งอาศัยการรายงานประสบการณ์การได้รับการวินิจฉัยโดยผู้เข้าร่วมเอง";
     document.getElementById('inputQuoteBody').value = "ตอนนี้เราจำเป็นต้องทำการศึกษา เพื่อพัฒนาการสื่อสารระหว่างแพทย์กับผู้ป่วย และเพื่อให้การสนับสนุนผู้คนในการเยียวยาตนเอง";
@@ -503,6 +547,7 @@
 
       document.getElementById('aspectRatioBox').classList.toggle('hidden', tpl !== 'cover');
       document.getElementById('photoControlsBox').classList.toggle('hidden', tpl === 'clean-text');
+      document.getElementById('creditBoxSection').classList.toggle('hidden', tpl === 'clean-text');
 
       if (tpl === 'cover') {
         modeTitle.textContent = "Live Preview (ภาพปกข่าว)";
@@ -892,20 +937,88 @@
       ctx.restore();
     }
 
+    // DRAW PHOTO CREDIT SUITE (รอบทิศ + ปรับสี + แถบรองหลัง + ขนาดฟอนต์)
     function drawCredit() {
-      const credit = document.getElementById('inputCredit').value.trim();
+      const credit = inputCredit.value.trim();
       if (!credit) return;
 
+      const creditFontSize = parseInt(sliderCreditSize.value, 10);
+      const pos = selectCreditPos.value;
+      const style = selectCreditStyle.value;
+
       ctx.save();
-      ctx.translate(canvasWidth - 40, canvasHeight * 0.7);
-      ctx.rotate(-Math.PI / 2);
-      ctx.textAlign = "center";
-      ctx.font = "600 17px 'Prompt', sans-serif";
-      ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
-      ctx.shadowColor = "rgba(0,0,0,0.9)";
-      ctx.shadowBlur = 8;
-      ctx.letterSpacing = "2px";
-      ctx.fillText(credit.toUpperCase(), 0, 0);
+
+      let isBlack = style === 'black-plain' || style === 'black-badge';
+      let hasBadge = style === 'white-badge' || style === 'black-badge';
+
+      let textColor = isBlack ? '#111827' : '#ffffff';
+      let shadowColor = isBlack ? 'rgba(255, 255, 255, 0.75)' : 'rgba(0, 0, 0, 0.9)';
+      let badgeBg = isBlack ? 'rgba(255, 255, 255, 0.85)' : 'rgba(10, 15, 25, 0.80)';
+
+      ctx.font = `600 ${creditFontSize}px 'Prompt', sans-serif`;
+      const textWidth = ctx.measureText(credit.toUpperCase()).width;
+
+      if (pos === 'vertical-right-bottom' || pos === 'vertical-right-top') {
+        const posX = canvasWidth - (currentRatio === "4:5" ? 40 : 30);
+        let posY = (pos === 'vertical-right-top') ? (canvasHeight * 0.28) : (canvasHeight * 0.70);
+
+        ctx.translate(posX, posY);
+        ctx.rotate(-Math.PI / 2);
+
+        if (hasBadge) {
+          const padX = 14;
+          const padY = 6;
+          ctx.fillStyle = badgeBg;
+          ctx.beginPath();
+          ctx.roundRect(-textWidth / 2 - padX, -creditFontSize - padY / 2, textWidth + padX * 2, creditFontSize + padY * 2, 8);
+          ctx.fill();
+        }
+
+        ctx.textAlign = "center";
+        ctx.fillStyle = textColor;
+        ctx.shadowColor = shadowColor;
+        ctx.shadowBlur = hasBadge ? 0 : 8;
+        ctx.letterSpacing = "2px";
+        ctx.fillText(credit.toUpperCase(), 0, 0);
+
+      } else {
+        const bottomY = canvasHeight - (currentRatio === "4:5" ? 44 : 26);
+        let posX = 0;
+
+        if (pos === 'horizontal-bottom-right') {
+          const marginX = currentRatio === "4:5" ? 64 : 40;
+          posX = canvasWidth - marginX;
+          ctx.textAlign = "right";
+
+          if (hasBadge) {
+            const padX = 14;
+            const padY = 6;
+            ctx.fillStyle = badgeBg;
+            ctx.beginPath();
+            ctx.roundRect(posX - textWidth - padX, bottomY - creditFontSize - padY / 2, textWidth + padX * 2, creditFontSize + padY * 2, 8);
+            ctx.fill();
+          }
+        } else {
+          const marginX = currentRatio === "4:5" ? 64 : 40;
+          posX = marginX;
+          ctx.textAlign = "left";
+
+          if (hasBadge) {
+            const padX = 14;
+            const padY = 6;
+            ctx.fillStyle = badgeBg;
+            ctx.beginPath();
+            ctx.roundRect(posX - padX, bottomY - creditFontSize - padY / 2, textWidth + padX * 2, creditFontSize + padY * 2, 8);
+            ctx.fill();
+          }
+        }
+
+        ctx.fillStyle = textColor;
+        ctx.shadowColor = shadowColor;
+        ctx.shadowBlur = hasBadge ? 0 : 8;
+        ctx.fillText(credit, posX, bottomY);
+      }
+
       ctx.restore();
     }
 
@@ -1050,6 +1163,10 @@
       textTopVal.textContent = e.target.value + 'px';
       render();
     });
+    sliderCreditSize.addEventListener('input', (e) => {
+      creditSizeVal.textContent = e.target.value + 'px';
+      render();
+    });
 
     document.getElementById('btnSplitAddBullet').addEventListener('click', () => {
       const el = document.getElementById('inputSplitText');
@@ -1064,7 +1181,8 @@
       'checkAccentBar', 'inputAccentColor', 'selectFont',
       'inputSplitText', 'selectSplitOrder', 'checkSplitArrow',
       'inputCleanText', 'inputQuoteBody', 'inputQuoteAuthor', 'inputQuoteRole',
-      'inputLocName', 'inputLocDate', 'selectLogoOption', 'inputCredit'
+      'inputLocName', 'inputLocDate', 'selectLogoOption',
+      'inputCredit', 'selectCreditPos', 'selectCreditStyle'
     ].forEach(id => {
       const el = document.getElementById(id);
       if (el) {
@@ -1073,7 +1191,7 @@
       }
     });
 
-    // EXPORT HANDLERS (รองรับทั้ง JPG, WebP และ PNG)
+    // EXPORT HANDLERS (JPG, WebP, PNG)
     function exportFile(format) {
       const link = document.createElement('a');
       link.download = `khaowangdaily-${currentTpl}-${Date.now()}.${format}`;
@@ -1091,18 +1209,14 @@
       link.click();
     }
 
-    // JPG Event Listeners
     document.getElementById('btnDownloadJpg').addEventListener('click', () => exportFile('jpg'));
     document.getElementById('btnDownloadTopJpg').addEventListener('click', () => exportFile('jpg'));
 
-    // WebP Event Listeners
     document.getElementById('btnDownloadWebp').addEventListener('click', () => exportFile('webp'));
     document.getElementById('btnDownloadTopWebp').addEventListener('click', () => exportFile('webp'));
 
-    // PNG Event Listener
     document.getElementById('btnDownloadPng').addEventListener('click', () => exportFile('png'));
 
-    // Copy to Clipboard
     document.getElementById('btnCopyImage').addEventListener('click', () => {
       canvas.toBlob((blob) => {
         if (blob && navigator.clipboard && navigator.clipboard.write) {
