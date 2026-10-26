@@ -76,15 +76,23 @@
       </div>
     </div>
 
+    <!-- Export Buttons Top Bar -->
     <div class="flex items-center gap-2">
-      <button id="btnCopyImage" class="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-xl text-slate-200 bg-slate-800 hover:bg-slate-750 border border-slate-700 transition shadow-sm active:scale-95" title="คัดลอกรูปภาพ">
+      <button id="btnCopyImage" class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-xl text-slate-200 bg-slate-800 hover:bg-slate-750 border border-slate-700 transition shadow-sm active:scale-95" title="คัดลอกรูปภาพ">
         <i data-lucide="copy" class="w-4 h-4 text-rose-400"></i>
-        <span class="hidden md:inline">คัดลอกภาพ</span>
+        <span class="hidden md:inline">คัดลอก</span>
       </button>
 
-      <button id="btnDownloadTopJpg" class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#b31929] to-[#c41e3a] hover:from-[#c41e3a] hover:to-rose-600 text-white font-bold text-xs lg:text-sm rounded-xl shadow-lg shadow-rose-950/40 active:scale-95 transition-all">
-        <i data-lucide="download" class="w-4 h-4 stroke-[2.5]"></i>
-        <span>ดาวน์โหลด JPG</span>
+      <!-- ปุ่ม WebP ด้านบน -->
+      <button id="btnDownloadTopWebp" class="inline-flex items-center gap-1.5 px-3 py-2 bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs rounded-xl shadow-md active:scale-95 transition-all" title="บันทึก WebP ขนาดเบา สำหรับขึ้นเว็บ">
+        <i data-lucide="globe" class="w-3.5 h-3.5"></i>
+        <span>WebP (เว็บ)</span>
+      </button>
+
+      <!-- ปุ่ม JPG ด้านบน -->
+      <button id="btnDownloadTopJpg" class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-gradient-to-r from-[#b31929] to-[#c41e3a] hover:from-[#c41e3a] hover:to-rose-600 text-white font-bold text-xs rounded-xl shadow-lg shadow-rose-950/40 active:scale-95 transition-all" title="บันทึก JPG สำหรับโซเชียล">
+        <i data-lucide="download" class="w-3.5 h-3.5 stroke-[2.5]"></i>
+        <span>JPG (โซเชียล)</span>
       </button>
     </div>
   </header>
@@ -189,7 +197,7 @@
           </div>
         </div>
 
-        <!-- 1. SETTINGS: COVER SLIDE (นำชุดควบคุมขนาดฟอนต์ สี แถบแดง และฟอนต์กลับมาครบถ้วน) -->
+        <!-- 1. SETTINGS: COVER SLIDE -->
         <div id="panelCover" class="space-y-4">
           <div class="flex items-center justify-between">
             <label class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
@@ -372,11 +380,25 @@
           </div>
         </div>
 
-        <!-- EXPORT BUTTONS -->
+        <!-- EXPORT BUTTONS (มีทั้ง JPG และ WebP) -->
         <div class="pt-2 space-y-2 pb-6">
-          <button id="btnDownloadJpg" class="w-full py-3.5 px-4 bg-gradient-to-r from-[#b31929] via-[#c41e3a] to-rose-600 hover:from-[#c41e3a] hover:to-rose-500 text-white font-bold rounded-xl shadow-xl shadow-rose-950/40 flex items-center justify-center gap-2 text-base active:scale-[0.98] transition-all cursor-pointer">
-            <i data-lucide="download" class="w-5 h-5 stroke-[2.5]"></i>
-            <span>ดาวน์โหลดภาพ (JPG คุณภาพสูง)</span>
+          <div class="grid grid-cols-2 gap-2">
+            <!-- ปุ่ม JPG ด้านล่าง -->
+            <button id="btnDownloadJpg" class="w-full py-3 px-3 bg-gradient-to-r from-[#b31929] via-[#c41e3a] to-rose-600 hover:from-[#c41e3a] hover:to-rose-500 text-white font-bold rounded-xl shadow-xl shadow-rose-950/40 flex items-center justify-center gap-1.5 text-xs sm:text-sm active:scale-[0.98] transition-all cursor-pointer">
+              <i data-lucide="download" class="w-4 h-4 stroke-[2.5]"></i>
+              <span>โหลด JPG (โซเชียล)</span>
+            </button>
+            
+            <!-- ปุ่ม WebP ด้านล่าง -->
+            <button id="btnDownloadWebp" class="w-full py-3 px-3 bg-gradient-to-r from-emerald-700 to-teal-600 hover:from-emerald-600 hover:to-teal-500 text-white font-bold rounded-xl shadow-xl shadow-emerald-950/40 flex items-center justify-center gap-1.5 text-xs sm:text-sm active:scale-[0.98] transition-all cursor-pointer">
+              <i data-lucide="globe" class="w-4 h-4 stroke-[2.5]"></i>
+              <span>โหลด WebP (ขึ้นเว็บ)</span>
+            </button>
+          </div>
+          
+          <button id="btnDownloadPng" class="w-full py-2 px-4 bg-slate-800 hover:bg-slate-750 text-slate-300 border border-slate-700/80 font-medium rounded-xl flex items-center justify-center gap-2 text-xs transition cursor-pointer">
+            <i data-lucide="file-image" class="w-3.5 h-3.5 text-slate-400"></i>
+            <span>บันทึกแบบ PNG ไม่บีบอัด (Lossless)</span>
           </button>
         </div>
 
@@ -1051,25 +1073,44 @@
       }
     });
 
-    function downloadJpg() {
+    // EXPORT HANDLERS (รองรับทั้ง JPG, WebP และ PNG)
+    function exportFile(format) {
       const link = document.createElement('a');
-      link.download = `khaowangdaily-${currentTpl}-${Date.now()}.jpg`;
-      link.href = canvas.toDataURL('image/jpeg', 0.95);
+      link.download = `khaowangdaily-${currentTpl}-${Date.now()}.${format}`;
+      
+      if (format === 'webp') {
+        link.href = canvas.toDataURL('image/webp', 0.92);
+        showToast("ดาวน์โหลด WebP (ไฟล์เบา เหมาะกับเว็บ) สำเร็จ!");
+      } else if (format === 'png') {
+        link.href = canvas.toDataURL('image/png');
+        showToast("ดาวน์โหลด PNG สำเร็จ!");
+      } else {
+        link.href = canvas.toDataURL('image/jpeg', 0.95);
+        showToast("ดาวน์โหลด JPG (เหมาะกับโซเชียล) สำเร็จ!");
+      }
       link.click();
-      showToast("ดาวน์โหลด JPG สำเร็จ!");
     }
 
-    document.getElementById('btnDownloadJpg').addEventListener('click', downloadJpg);
-    document.getElementById('btnDownloadTopJpg').addEventListener('click', downloadJpg);
+    // JPG Event Listeners
+    document.getElementById('btnDownloadJpg').addEventListener('click', () => exportFile('jpg'));
+    document.getElementById('btnDownloadTopJpg').addEventListener('click', () => exportFile('jpg'));
 
+    // WebP Event Listeners
+    document.getElementById('btnDownloadWebp').addEventListener('click', () => exportFile('webp'));
+    document.getElementById('btnDownloadTopWebp').addEventListener('click', () => exportFile('webp'));
+
+    // PNG Event Listener
+    document.getElementById('btnDownloadPng').addEventListener('click', () => exportFile('png'));
+
+    // Copy to Clipboard
     document.getElementById('btnCopyImage').addEventListener('click', () => {
       canvas.toBlob((blob) => {
         if (blob && navigator.clipboard && navigator.clipboard.write) {
           navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
             .then(() => showToast("คัดลอกรูปภาพแล้ว!"))
-            .catch(() => downloadJpg());
+            .catch(() => exportFile('jpg'));
         } else {
-          downloadJpg();
+          exportFile('jpg');
         }
       });
     });
