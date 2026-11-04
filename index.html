@@ -1,3 +1,14 @@
+นี่คือโค้ดไฟล์ **`index.html`** ตัวเต็มที่ได้รับการอัปเกรดเพื่อเพิ่มสัดส่วนภาพประกอบเนื้อหา **3:2 (640×427 px)** และ **1:1 (600×600 px)** เข้าสู่แผงควบคุมสัดส่วนภาพเรียบร้อยแล้ว
+
+โดยในโค้ดชุดนี้:
+
+1. **เพิ่มปุ่มสัดส่วน 3:2:** ปรับ Canvas เป็น **640 × 427 px** เหมาะสำหรับภาพข่าวแนวนอนช่วงเนื้อหา ไม่ดันโฆษณา Sidebar ด้านขวาตก
+2. **ปรับปรุงปุ่มสัดส่วน 1:1:** ปรับ Canvas ขนาดมาตรฐานเป็น **600 × 600 px** สำหรับภาพสินค้า ของฝาก และภาพบุคคล
+3. **ปรับสเกลอัตโนมัติ:** เมื่อสลับมาโหมด 3:2 หรือ 1:1 ระบบจะปรับขนาดฟอนต์พาดหัว แถบสีแดง BBC และเครดิตภาพให้เล็กลงสมส่วนกับขนาดภาพเนื้อหาทันที
+
+สามารถคัดลอกโค้ดทั้งหมดด้านล่างนี้ไปวางทับในไฟล์ `index.html` บน GitHub ได้เลยครับ:
+
+```html
 <!DOCTYPE html>
 <html lang="th" class="h-full bg-slate-950">
 <head>
@@ -72,7 +83,7 @@
           <span class="font-extrabold text-white text-base lg:text-lg tracking-wide">เขาวังเดลี่</span>
           <span class="text-[11px] px-2 py-0.5 rounded-md bg-[#b31929]/20 text-rose-300 border border-rose-500/30 font-medium">Cover & Slide Studio</span>
         </div>
-        <p class="text-[11px] text-slate-400 hidden sm:block">เครื่องมือสร้างภาพข่าวระดับสากล 4:5 และ 16:9</p>
+        <p class="text-[11px] text-slate-400 hidden sm:block">เครื่องมือสร้างภาพข่าวระดับสากล 16:9, 4:5, 3:2 และ 1:1</p>
       </div>
     </div>
 
@@ -174,19 +185,23 @@
           </div>
         </div>
 
-        <!-- ASPECT RATIO -->
+        <!-- ASPECT RATIO (เพิ่ม 3:2 และปรับปรุง 1:1) -->
         <div id="aspectRatioBox" class="space-y-2">
           <label class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
             <i data-lucide="proportions" class="w-4 h-4 text-[#b31929]"></i> สัดส่วนรูปภาพ
           </label>
-          <div class="grid grid-cols-3 gap-2">
+          <div class="grid grid-cols-4 gap-2">
             <button type="button" data-ratio="4:5" class="ratio-btn active-ratio flex flex-col items-center justify-center p-2 rounded-xl border border-rose-600 bg-rose-600/15 text-rose-200 font-semibold text-xs transition">
               <span class="font-bold text-sm">4:5</span>
               <span class="text-[10px] text-slate-300">แนวตั้งโซเชียล</span>
             </button>
             <button type="button" data-ratio="16:9" class="ratio-btn flex flex-col items-center justify-center p-2 rounded-xl border border-slate-700 bg-slate-800/70 text-slate-300 hover:bg-slate-800 font-semibold text-xs transition">
               <span class="font-bold text-sm">16:9</span>
-              <span class="text-[10px] text-emerald-400">ปกเว็บคลีน</span>
+              <span class="text-[10px] text-emerald-400">ปกเว็บ</span>
+            </button>
+            <button type="button" data-ratio="3:2" class="ratio-btn flex flex-col items-center justify-center p-2 rounded-xl border border-slate-700 bg-slate-800/70 text-slate-300 hover:bg-slate-800 font-semibold text-xs transition">
+              <span class="font-bold text-sm">3:2</span>
+              <span class="text-[10px] text-amber-300">เนื้อหาข่าว</span>
             </button>
             <button type="button" data-ratio="1:1" class="ratio-btn flex flex-col items-center justify-center p-2 rounded-xl border border-slate-700 bg-slate-800/70 text-slate-300 hover:bg-slate-800 font-semibold text-xs transition">
               <span class="font-bold text-sm">1:1</span>
@@ -226,7 +241,7 @@
               <div class="flex items-center gap-2">
                 <input type="color" id="inputLine1Color" value="#ffffff" class="w-5 h-5 rounded cursor-pointer bg-transparent border-0" title="เลือกสีข้อความ">
                 <span id="line1SizeVal" class="text-[10px] text-slate-400 font-mono">54px</span>
-                <input id="sliderLine1Size" type="range" min="30" max="100" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
+                <input id="sliderLine1Size" type="range" min="18" max="100" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
               </div>
             </div>
             <input type="text" id="inputLine1" value="หัวหินน้ำทะเลเบียด" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white" placeholder="บรรทัดที่ 1">
@@ -239,7 +254,7 @@
               <div class="flex items-center gap-2">
                 <input type="color" id="inputLine2Color" value="#ffffff" class="w-5 h-5 rounded cursor-pointer bg-transparent border-0" title="เลือกสีข้อความ">
                 <span id="line2SizeVal" class="text-[10px] text-slate-400 font-mono">54px</span>
-                <input id="sliderLine2Size" type="range" min="30" max="100" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
+                <input id="sliderLine2Size" type="range" min="18" max="100" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
               </div>
             </div>
             <input type="text" id="inputLine2" value="แนวยาว 4 กิโลเมตร" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white" placeholder="บรรทัดที่ 2">
@@ -252,7 +267,7 @@
               <div class="flex items-center gap-2">
                 <input type="color" id="inputLine3Color" value="#ffffff" class="w-5 h-5 rounded cursor-pointer bg-transparent border-0" title="เลือกสีข้อความ">
                 <span id="line3SizeVal" class="text-[10px] text-slate-400 font-mono">54px</span>
-                <input id="sliderLine3Size" type="range" min="20" max="100" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
+                <input id="sliderLine3Size" type="range" min="18" max="100" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
               </div>
             </div>
             <input type="text" id="inputLine3" value="ชาวบ้านแห่จับสัตว์น้ำคึกคัก" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white" placeholder="บรรทัดที่ 3">
@@ -265,7 +280,7 @@
               <div class="flex items-center gap-2">
                 <input type="color" id="inputLine4Color" value="#ffffff" class="w-5 h-5 rounded cursor-pointer bg-transparent border-0" title="เลือกสีข้อความ">
                 <span id="line4SizeVal" class="text-[10px] text-slate-400 font-mono">48px</span>
-                <input id="sliderLine4Size" type="range" min="20" max="100" value="48" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
+                <input id="sliderLine4Size" type="range" min="16" max="100" value="48" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
               </div>
             </div>
             <input type="text" id="inputLine4" value="" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white" placeholder="บรรทัดที่ 4 (เว้นว่างได้ถ้ามีเพียง 3 บรรทัด)">
@@ -375,7 +390,7 @@
           </select>
         </div>
 
-        <!-- PHOTO CREDIT SUITE (นำชุดปรับขนาด สี และตำแหน่งกลับมาครบถ้วน) -->
+        <!-- PHOTO CREDIT SUITE -->
         <div id="creditBoxSection" class="space-y-3 bg-slate-950/70 p-3.5 rounded-xl border border-slate-800">
           <div class="flex items-center justify-between">
             <label class="text-xs text-slate-200 font-semibold flex items-center gap-1.5">
@@ -416,11 +431,11 @@
               <span>ขนาดตัวหนังสือเครดิต</span>
               <span id="creditSizeVal" class="font-mono text-slate-300">18px</span>
             </div>
-            <input id="sliderCreditSize" type="range" min="12" max="32" step="1" value="18" class="w-full accent-rose-600 cursor-pointer h-1 bg-slate-800 rounded-lg">
+            <input id="sliderCreditSize" type="range" min="10" max="32" step="1" value="18" class="w-full accent-rose-600 cursor-pointer h-1 bg-slate-800 rounded-lg">
           </div>
         </div>
 
-        <!-- EXPORT BUTTONS (มีทั้ง JPG, WebP และ PNG) -->
+        <!-- EXPORT BUTTONS -->
         <div class="pt-2 space-y-2 pb-6">
           <div class="grid grid-cols-2 gap-2">
             <button id="btnDownloadJpg" class="w-full py-3 px-3 bg-gradient-to-r from-[#b31929] via-[#c41e3a] to-rose-600 hover:from-[#c41e3a] hover:to-rose-500 text-white font-bold rounded-xl shadow-xl shadow-rose-950/40 flex items-center justify-center gap-1.5 text-xs sm:text-sm active:scale-[0.98] transition-all cursor-pointer">
@@ -585,13 +600,17 @@
     document.querySelectorAll('.ratio-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         currentRatio = btn.dataset.ratio;
+        
         if (currentRatio === "4:5") {
           canvasWidth = 1080; canvasHeight = 1350;
         } else if (currentRatio === "16:9") {
           canvasWidth = 1200; canvasHeight = 675;
+        } else if (currentRatio === "3:2") {
+          canvasWidth = 640; canvasHeight = 427;
         } else {
-          canvasWidth = 1080; canvasHeight = 1080;
+          canvasWidth = 600; canvasHeight = 600;
         }
+        
         canvas.width = canvasWidth;
         canvas.height = canvasHeight;
         canvasDimensionBadge.textContent = `${canvasWidth} × ${canvasHeight} px (${currentRatio})`;
@@ -632,6 +651,10 @@
     function renderCoverTemplate() {
       drawPhoto(0, 0, canvasWidth, canvasHeight);
 
+      // กำหนดมาตราส่วนลดหลั่นสำหรับภาพเนื้อหา (3:2 หรือ 1:1)
+      const isCompact = (currentRatio === "3:2" || currentRatio === "1:1");
+      const scale = isCompact ? (canvasWidth / 1080) : 1.0;
+
       if (currentRatio !== "16:9") {
         const grad = ctx.createLinearGradient(0, coverPos === 'top' ? 0 : canvasHeight, 0, coverPos === 'top' ? canvasHeight * 0.6 : canvasHeight * 0.4);
         grad.addColorStop(0, "rgba(0,0,0,0.95)");
@@ -646,36 +669,39 @@
         const l4 = inputLine4.value.trim();
 
         const rawLines = [
-          { text: l1, size: parseInt(sliderLine1Size.value, 10), color: inputLine1Color.value },
-          { text: l2, size: parseInt(sliderLine2Size.value, 10), color: inputLine2Color.value },
-          { text: l3, size: parseInt(sliderLine3Size.value, 10), color: inputLine3Color.value },
-          { text: l4, size: parseInt(sliderLine4Size.value, 10), color: inputLine4Color.value }
+          { text: l1, size: Math.round(parseInt(sliderLine1Size.value, 10) * scale), color: inputLine1Color.value },
+          { text: l2, size: Math.round(parseInt(sliderLine2Size.value, 10) * scale), color: inputLine2Color.value },
+          { text: l3, size: Math.round(parseInt(sliderLine3Size.value, 10) * scale), color: inputLine3Color.value },
+          { text: l4, size: Math.round(parseInt(sliderLine4Size.value, 10) * scale), color: inputLine4Color.value }
         ];
 
         const lines = rawLines.filter(item => item.text.length > 0);
 
         if (lines.length > 0) {
-          const yOffset = parseInt(sliderTextTop.value, 10);
+          const yOffset = Math.round(parseInt(sliderTextTop.value, 10) * scale);
           const font = selectFont.value;
 
           let totalH = 0;
           lines.forEach(l => { totalH += (l.size * 1.34); });
 
-          let startY = coverPos === 'top' ? (220 + yOffset) : (canvasHeight - 160 - totalH + yOffset);
+          const baseMarginBottom = isCompact ? 36 : 160;
+          const baseMarginTop = isCompact ? 60 : 220;
+          let startY = coverPos === 'top' ? (baseMarginTop + yOffset) : (canvasHeight - baseMarginBottom - totalH + yOffset);
 
           const showBar = checkAccentBar.checked;
-          const barWidth = 28;
-          const textX = showBar ? (64 + barWidth + 24) : 64;
+          const barWidth = isCompact ? 12 : 28;
+          const padLeft = isCompact ? 28 : 64;
+          const textX = showBar ? (padLeft + barWidth + (isCompact ? 10 : 24)) : padLeft;
 
           if (showBar) {
             ctx.fillStyle = inputAccentColor.value;
-            ctx.fillRect(64, startY, barWidth, totalH);
+            ctx.fillRect(padLeft, startY, barWidth, totalH);
           }
 
           ctx.textAlign = "left";
           ctx.textBaseline = "alphabetic";
           ctx.shadowColor = "rgba(0,0,0,0.9)";
-          ctx.shadowBlur = 12;
+          ctx.shadowBlur = isCompact ? 6 : 12;
 
           let curY = startY;
           lines.forEach(l => {
@@ -913,9 +939,10 @@
     }
 
     function drawKhaowangLogo(isWhiteBg) {
-      const size = 110;
-      const x = 64;
-      const y = 56;
+      const isCompact = (currentRatio === "3:2" || currentRatio === "1:1");
+      const size = isCompact ? 60 : 110;
+      const x = isCompact ? 24 : 64;
+      const y = isCompact ? 20 : 56;
       const centerX = x + size / 2;
       const centerY = y + size / 2;
 
@@ -925,24 +952,26 @@
       ctx.fillStyle = "#b31929";
       ctx.fill();
       ctx.strokeStyle = isWhiteBg ? "rgba(0,0,0,0.12)" : "rgba(255,255,255,0.25)";
-      ctx.lineWidth = 2;
+      ctx.lineWidth = isCompact ? 1.5 : 2;
       ctx.stroke();
 
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillStyle = "#ffffff";
-      ctx.font = "800 30px 'Kanit', sans-serif";
-      ctx.fillText("เขาวัง", centerX, centerY - 14);
-      ctx.fillText("เดลี่", centerX, centerY + 18);
+      ctx.font = `800 ${isCompact ? 16 : 30}px 'Kanit', sans-serif`;
+      ctx.fillText("เขาวัง", centerX, centerY - (isCompact ? 7 : 14));
+      ctx.fillText("เดลี่", centerX, centerY + (isCompact ? 9 : 18));
       ctx.restore();
     }
 
-    // DRAW PHOTO CREDIT SUITE (รอบทิศ + ปรับสี + แถบรองหลัง + ขนาดฟอนต์)
+    // DRAW PHOTO CREDIT SUITE
     function drawCredit() {
       const credit = inputCredit.value.trim();
       if (!credit) return;
 
-      const creditFontSize = parseInt(sliderCreditSize.value, 10);
+      const isCompact = (currentRatio === "3:2" || currentRatio === "1:1");
+      const scale = isCompact ? (canvasWidth / 1080) : 1.0;
+      const creditFontSize = Math.max(10, Math.round(parseInt(sliderCreditSize.value, 10) * (isCompact ? 0.75 : 1.0)));
       const pos = selectCreditPos.value;
       const style = selectCreditStyle.value;
 
@@ -959,18 +988,18 @@
       const textWidth = ctx.measureText(credit.toUpperCase()).width;
 
       if (pos === 'vertical-right-bottom' || pos === 'vertical-right-top') {
-        const posX = canvasWidth - (currentRatio === "4:5" ? 40 : 30);
+        const posX = canvasWidth - (currentRatio === "4:5" ? 40 : (isCompact ? 18 : 30));
         let posY = (pos === 'vertical-right-top') ? (canvasHeight * 0.28) : (canvasHeight * 0.70);
 
         ctx.translate(posX, posY);
         ctx.rotate(-Math.PI / 2);
 
         if (hasBadge) {
-          const padX = 14;
-          const padY = 6;
+          const padX = isCompact ? 8 : 14;
+          const padY = isCompact ? 4 : 6;
           ctx.fillStyle = badgeBg;
           ctx.beginPath();
-          ctx.roundRect(-textWidth / 2 - padX, -creditFontSize - padY / 2, textWidth + padX * 2, creditFontSize + padY * 2, 8);
+          ctx.roundRect(-textWidth / 2 - padX, -creditFontSize - padY / 2, textWidth + padX * 2, creditFontSize + padY * 2, 6);
           ctx.fill();
         }
 
@@ -982,33 +1011,33 @@
         ctx.fillText(credit.toUpperCase(), 0, 0);
 
       } else {
-        const bottomY = canvasHeight - (currentRatio === "4:5" ? 44 : 26);
+        const bottomY = canvasHeight - (currentRatio === "4:5" ? 44 : (isCompact ? 16 : 26));
         let posX = 0;
 
         if (pos === 'horizontal-bottom-right') {
-          const marginX = currentRatio === "4:5" ? 64 : 40;
+          const marginX = currentRatio === "4:5" ? 64 : (isCompact ? 20 : 40);
           posX = canvasWidth - marginX;
           ctx.textAlign = "right";
 
           if (hasBadge) {
-            const padX = 14;
-            const padY = 6;
+            const padX = isCompact ? 8 : 14;
+            const padY = isCompact ? 4 : 6;
             ctx.fillStyle = badgeBg;
             ctx.beginPath();
-            ctx.roundRect(posX - textWidth - padX, bottomY - creditFontSize - padY / 2, textWidth + padX * 2, creditFontSize + padY * 2, 8);
+            ctx.roundRect(posX - textWidth - padX, bottomY - creditFontSize - padY / 2, textWidth + padX * 2, creditFontSize + padY * 2, 6);
             ctx.fill();
           }
         } else {
-          const marginX = currentRatio === "4:5" ? 64 : 40;
+          const marginX = currentRatio === "4:5" ? 64 : (isCompact ? 20 : 40);
           posX = marginX;
           ctx.textAlign = "left";
 
           if (hasBadge) {
-            const padX = 14;
-            const padY = 6;
+            const padX = isCompact ? 8 : 14;
+            const padY = isCompact ? 4 : 6;
             ctx.fillStyle = badgeBg;
             ctx.beginPath();
-            ctx.roundRect(posX - padX, bottomY - creditFontSize - padY / 2, textWidth + padX * 2, creditFontSize + padY * 2, 8);
+            ctx.roundRect(posX - padX, bottomY - creditFontSize - padY / 2, textWidth + padX * 2, creditFontSize + padY * 2, 6);
             ctx.fill();
           }
         }
@@ -1194,10 +1223,11 @@
     // EXPORT HANDLERS (JPG, WebP, PNG)
     function exportFile(format) {
       const link = document.createElement('a');
-      link.download = `khaowangdaily-${currentTpl}-${Date.now()}.${format}`;
+      const ratioName = currentRatio.replace(':', '-');
+      link.download = `kwd-${currentTpl}-${ratioName}-${Date.now()}.${format}`;
       
       if (format === 'webp') {
-        link.href = canvas.toDataURL('image/webp', 0.92);
+        link.href = canvas.toDataURL('image/webp', 0.90);
         showToast("ดาวน์โหลด WebP (ไฟล์เบา เหมาะกับเว็บ) สำเร็จ!");
       } else if (format === 'png') {
         link.href = canvas.toDataURL('image/png');
@@ -1252,3 +1282,5 @@
   </script>
 </body>
 </html>
+
+```
