@@ -72,7 +72,7 @@
           <span class="font-extrabold text-white text-base lg:text-lg tracking-wide">เขาวังเดลี่</span>
           <span class="text-[11px] px-2 py-0.5 rounded-md bg-[#b31929]/20 text-rose-300 border border-rose-500/30 font-medium">Cover & Slide Studio</span>
         </div>
-        <p class="text-[11px] text-slate-400 hidden sm:block">เครื่องมือสร้างภาพข่าวระดับสากล 16:9, 4:5, 3:2 และ 1:1</p>
+        <p class="text-[11px] text-slate-400 hidden sm:block">เครื่องมือสร้างภาพข่าวระดับสากล 4:5, 16:9, 3:2 และ 1:1</p>
       </div>
     </div>
 
@@ -152,8 +152,8 @@
           </label>
           <div class="grid grid-cols-2 gap-2 pt-1">
             <button type="button" data-tpl="cover" class="tpl-btn active-tpl p-2 rounded-xl border border-rose-600 bg-rose-600/20 text-rose-200 font-semibold text-xs text-left transition">
-              <div class="font-bold">1. ภาพปกข่าว</div>
-              <div class="text-[10px] text-slate-400 font-normal">พาดหัว 1-4 บรรทัด</div>
+              <div class="font-bold">1. ภาพข่าว / ปกข่าว</div>
+              <div class="text-[10px] text-slate-400 font-normal">คลีนเว็บ หรือ ใส่พาดหัว</div>
             </button>
             <button type="button" data-tpl="split" class="tpl-btn p-2 rounded-xl border border-slate-700 bg-slate-800/70 text-slate-300 hover:bg-slate-800 font-semibold text-xs text-left transition">
               <div class="font-bold">2. สไลด์เนื้อหา (Split)</div>
@@ -174,7 +174,7 @@
           </div>
         </div>
 
-        <!-- ASPECT RATIO (เพิ่ม 3:2 และปรับปรุง 1:1) -->
+        <!-- ASPECT RATIO -->
         <div id="aspectRatioBox" class="space-y-2">
           <label class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
             <i data-lucide="proportions" class="w-4 h-4 text-[#b31929]"></i> สัดส่วนรูปภาพ
@@ -182,11 +182,11 @@
           <div class="grid grid-cols-4 gap-2">
             <button type="button" data-ratio="4:5" class="ratio-btn active-ratio flex flex-col items-center justify-center p-2 rounded-xl border border-rose-600 bg-rose-600/15 text-rose-200 font-semibold text-xs transition">
               <span class="font-bold text-sm">4:5</span>
-              <span class="text-[10px] text-slate-300">แนวตั้งโซเชียล</span>
+              <span class="text-[10px] text-slate-300">โซเชียล</span>
             </button>
             <button type="button" data-ratio="16:9" class="ratio-btn flex flex-col items-center justify-center p-2 rounded-xl border border-slate-700 bg-slate-800/70 text-slate-300 hover:bg-slate-800 font-semibold text-xs transition">
               <span class="font-bold text-sm">16:9</span>
-              <span class="text-[10px] text-emerald-400">ปกเว็บ</span>
+              <span class="text-[10px] text-emerald-400">ปกเว็บคลีน</span>
             </button>
             <button type="button" data-ratio="3:2" class="ratio-btn flex flex-col items-center justify-center p-2 rounded-xl border border-slate-700 bg-slate-800/70 text-slate-300 hover:bg-slate-800 font-semibold text-xs transition">
               <span class="font-bold text-sm">3:2</span>
@@ -194,12 +194,12 @@
             </button>
             <button type="button" data-ratio="1:1" class="ratio-btn flex flex-col items-center justify-center p-2 rounded-xl border border-slate-700 bg-slate-800/70 text-slate-300 hover:bg-slate-800 font-semibold text-xs transition">
               <span class="font-bold text-sm">1:1</span>
-              <span class="text-[10px] text-slate-300">จัตุรัส</span>
+              <span class="text-[10px] text-sky-300">จัตุรัสคลีน</span>
             </button>
           </div>
         </div>
 
-        <!-- 1. SETTINGS: COVER SLIDE -->
+        <!-- 1. SETTINGS: COVER SLIDE (แสดงเฉพาะโหมดโซเชียล 4:5) -->
         <div id="panelCover" class="space-y-4">
           <div class="flex items-center justify-between">
             <label class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
@@ -230,7 +230,7 @@
               <div class="flex items-center gap-2">
                 <input type="color" id="inputLine1Color" value="#ffffff" class="w-5 h-5 rounded cursor-pointer bg-transparent border-0" title="เลือกสีข้อความ">
                 <span id="line1SizeVal" class="text-[10px] text-slate-400 font-mono">54px</span>
-                <input id="sliderLine1Size" type="range" min="18" max="100" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
+                <input id="sliderLine1Size" type="range" min="30" max="100" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
               </div>
             </div>
             <input type="text" id="inputLine1" value="หัวหินน้ำทะเลเบียด" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white" placeholder="บรรทัดที่ 1">
@@ -243,7 +243,7 @@
               <div class="flex items-center gap-2">
                 <input type="color" id="inputLine2Color" value="#ffffff" class="w-5 h-5 rounded cursor-pointer bg-transparent border-0" title="เลือกสีข้อความ">
                 <span id="line2SizeVal" class="text-[10px] text-slate-400 font-mono">54px</span>
-                <input id="sliderLine2Size" type="range" min="18" max="100" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
+                <input id="sliderLine2Size" type="range" min="30" max="100" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
               </div>
             </div>
             <input type="text" id="inputLine2" value="แนวยาว 4 กิโลเมตร" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white" placeholder="บรรทัดที่ 2">
@@ -256,7 +256,7 @@
               <div class="flex items-center gap-2">
                 <input type="color" id="inputLine3Color" value="#ffffff" class="w-5 h-5 rounded cursor-pointer bg-transparent border-0" title="เลือกสีข้อความ">
                 <span id="line3SizeVal" class="text-[10px] text-slate-400 font-mono">54px</span>
-                <input id="sliderLine3Size" type="range" min="18" max="100" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
+                <input id="sliderLine3Size" type="range" min="20" max="100" value="54" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
               </div>
             </div>
             <input type="text" id="inputLine3" value="ชาวบ้านแห่จับสัตว์น้ำคึกคัก" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white" placeholder="บรรทัดที่ 3">
@@ -269,7 +269,7 @@
               <div class="flex items-center gap-2">
                 <input type="color" id="inputLine4Color" value="#ffffff" class="w-5 h-5 rounded cursor-pointer bg-transparent border-0" title="เลือกสีข้อความ">
                 <span id="line4SizeVal" class="text-[10px] text-slate-400 font-mono">48px</span>
-                <input id="sliderLine4Size" type="range" min="16" max="100" value="48" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
+                <input id="sliderLine4Size" type="range" min="20" max="100" value="48" class="w-16 accent-rose-600 h-1 bg-slate-800 rounded">
               </div>
             </div>
             <input type="text" id="inputLine4" value="" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white" placeholder="บรรทัดที่ 4 (เว้นว่างได้ถ้ามีเพียง 3 บรรทัด)">
@@ -367,8 +367,8 @@
           </div>
         </div>
 
-        <!-- LOGO SETTINGS -->
-        <div class="bg-slate-950/70 p-3.5 rounded-xl border border-slate-800 flex items-center justify-between">
+        <!-- LOGO SETTINGS (จะแสดงเฉพาะเมื่อใช้สัดส่วน 4:5 โซเชียล) -->
+        <div id="logoControlsBox" class="bg-slate-950/70 p-3.5 rounded-xl border border-slate-800 flex items-center justify-between">
           <label class="text-xs text-slate-200 font-semibold flex items-center gap-1.5">
             <i data-lucide="shield" class="w-4 h-4 text-[#b31929]"></i>
             <span>แสดงโลโก้เขาวังเดลี่</span>
@@ -379,7 +379,7 @@
           </select>
         </div>
 
-        <!-- PHOTO CREDIT SUITE -->
+        <!-- PHOTO CREDIT SUITE (คงอยู่สำหรับทุกสัดส่วนภาพ) -->
         <div id="creditBoxSection" class="space-y-3 bg-slate-950/70 p-3.5 rounded-xl border border-slate-800">
           <div class="flex items-center justify-between">
             <label class="text-xs text-slate-200 font-semibold flex items-center gap-1.5">
@@ -532,6 +532,41 @@
       }, 2500);
     }
 
+    function updateControlPanels() {
+      const isSocialCover = (currentTpl === 'cover' && currentRatio === '4:5');
+      document.getElementById('panelCover').classList.toggle('hidden', !isSocialCover);
+      document.getElementById('logoControlsBox').classList.toggle('hidden', currentRatio !== '4:5');
+
+      document.getElementById('panelSplit').classList.toggle('hidden', currentTpl !== 'split');
+      document.getElementById('panelCleanText').classList.toggle('hidden', currentTpl !== 'clean-text');
+      document.getElementById('panelQuote').classList.toggle('hidden', currentTpl !== 'quote');
+      document.getElementById('panelLocation').classList.toggle('hidden', currentTpl !== 'location');
+
+      document.getElementById('aspectRatioBox').classList.toggle('hidden', currentTpl !== 'cover');
+      document.getElementById('photoControlsBox').classList.toggle('hidden', currentTpl === 'clean-text');
+      document.getElementById('creditBoxSection').classList.toggle('hidden', currentTpl === 'clean-text');
+
+      if (currentTpl === 'cover') {
+        if (currentRatio === '4:5') {
+          modeTitle.textContent = "Live Preview (ภาพโซเชียล 4:5 พร้อมพาดหัว & โลโก้)";
+        } else if (currentRatio === '16:9') {
+          modeTitle.textContent = "Live Preview (ภาพปกเว็บ 16:9 คลีนตา)";
+        } else if (currentRatio === '3:2') {
+          modeTitle.textContent = "Live Preview (ภาพประกอบข่าว 3:2 คลีนตา)";
+        } else {
+          modeTitle.textContent = "Live Preview (ภาพจัตุรัส 1:1 คลีนตา)";
+        }
+      } else if (currentTpl === 'split') {
+        modeTitle.textContent = "Live Preview (สไลด์เนื้อหา Split)";
+      } else if (currentTpl === 'clean-text') {
+        modeTitle.textContent = "Live Preview (สไลด์ข้อความล้วนพื้นขาว)";
+      } else if (currentTpl === 'quote') {
+        modeTitle.textContent = "Live Preview (สไลด์โควทคำพูด)";
+      } else if (currentTpl === 'location') {
+        modeTitle.textContent = "Live Preview (ภาพระบุสถานที่และวันที่)";
+      }
+    }
+
     function switchTemplate(tpl) {
       currentTpl = tpl;
       
@@ -543,28 +578,7 @@
         }
       });
 
-      document.getElementById('panelCover').classList.toggle('hidden', tpl !== 'cover');
-      document.getElementById('panelSplit').classList.toggle('hidden', tpl !== 'split');
-      document.getElementById('panelCleanText').classList.toggle('hidden', tpl !== 'clean-text');
-      document.getElementById('panelQuote').classList.toggle('hidden', tpl !== 'quote');
-      document.getElementById('panelLocation').classList.toggle('hidden', tpl !== 'location');
-
-      document.getElementById('aspectRatioBox').classList.toggle('hidden', tpl !== 'cover');
-      document.getElementById('photoControlsBox').classList.toggle('hidden', tpl === 'clean-text');
-      document.getElementById('creditBoxSection').classList.toggle('hidden', tpl === 'clean-text');
-
-      if (tpl === 'cover') {
-        modeTitle.textContent = "Live Preview (ภาพปกข่าว)";
-      } else if (tpl === 'split') {
-        modeTitle.textContent = "Live Preview (สไลด์เนื้อหา Split)";
-      } else if (tpl === 'clean-text') {
-        modeTitle.textContent = "Live Preview (สไลด์ข้อความล้วนพื้นขาว)";
-      } else if (tpl === 'quote') {
-        modeTitle.textContent = "Live Preview (สไลด์โควทคำพูด)";
-      } else if (tpl === 'location') {
-        modeTitle.textContent = "Live Preview (ภาพระบุสถานที่และวันที่)";
-      }
-
+      updateControlPanels();
       render();
     }
 
@@ -609,6 +623,8 @@
             ? "ratio-btn active-ratio flex flex-col items-center justify-center p-2 rounded-xl border border-rose-600 bg-rose-600/15 text-rose-200 font-semibold text-xs transition"
             : "ratio-btn flex flex-col items-center justify-center p-2 rounded-xl border border-slate-700 bg-slate-800/70 text-slate-300 hover:bg-slate-800 font-semibold text-xs transition";
         });
+
+        updateControlPanels();
         render();
       });
     });
@@ -628,10 +644,13 @@
         renderCoverTemplate();
       }
 
-      if (document.getElementById('selectLogoOption').value === 'show') {
+      // วาดโลโก้เฉพาะเมื่ออยู่ในสัดส่วน 4:5 (โซเชียล) และเลือกแสดงโลโก้เท่านั้น
+      // สัดส่วน 16:9, 3:2, 1:1 จะไม่มีโลโก้เลย เป็นภาพคลีน 100%
+      if (currentRatio === "4:5" && document.getElementById('selectLogoOption').value === 'show') {
         drawKhaowangLogo(currentTpl === 'clean-text');
       }
 
+      // วาดเครดิตภาพในทุกสัดส่วน (ยกเว้นหน้าข้อความล้วน)
       if (currentTpl !== 'clean-text') {
         drawCredit();
       }
@@ -640,11 +659,9 @@
     function renderCoverTemplate() {
       drawPhoto(0, 0, canvasWidth, canvasHeight);
 
-      // กำหนดมาตราส่วนลดหลั่นสำหรับภาพเนื้อหา (3:2 หรือ 1:1)
-      const isCompact = (currentRatio === "3:2" || currentRatio === "1:1");
-      const scale = isCompact ? (canvasWidth / 1080) : 1.0;
-
-      if (currentRatio !== "16:9") {
+      // ข้อความพาดหัวและแถบสีแดง จะแสดงเฉพาะสัดส่วน 4:5 โซเชียลเท่านั้น
+      // สัดส่วน 16:9, 3:2, 1:1 เป็นภาพคลีน เหมาะกับการใช้บนเว็บไซต์
+      if (currentRatio === "4:5") {
         const grad = ctx.createLinearGradient(0, coverPos === 'top' ? 0 : canvasHeight, 0, coverPos === 'top' ? canvasHeight * 0.6 : canvasHeight * 0.4);
         grad.addColorStop(0, "rgba(0,0,0,0.95)");
         grad.addColorStop(0.7, "rgba(0,0,0,0.45)");
@@ -658,39 +675,36 @@
         const l4 = inputLine4.value.trim();
 
         const rawLines = [
-          { text: l1, size: Math.round(parseInt(sliderLine1Size.value, 10) * scale), color: inputLine1Color.value },
-          { text: l2, size: Math.round(parseInt(sliderLine2Size.value, 10) * scale), color: inputLine2Color.value },
-          { text: l3, size: Math.round(parseInt(sliderLine3Size.value, 10) * scale), color: inputLine3Color.value },
-          { text: l4, size: Math.round(parseInt(sliderLine4Size.value, 10) * scale), color: inputLine4Color.value }
+          { text: l1, size: parseInt(sliderLine1Size.value, 10), color: inputLine1Color.value },
+          { text: l2, size: parseInt(sliderLine2Size.value, 10), color: inputLine2Color.value },
+          { text: l3, size: parseInt(sliderLine3Size.value, 10), color: inputLine3Color.value },
+          { text: l4, size: parseInt(sliderLine4Size.value, 10), color: inputLine4Color.value }
         ];
 
         const lines = rawLines.filter(item => item.text.length > 0);
 
         if (lines.length > 0) {
-          const yOffset = Math.round(parseInt(sliderTextTop.value, 10) * scale);
+          const yOffset = parseInt(sliderTextTop.value, 10);
           const font = selectFont.value;
 
           let totalH = 0;
           lines.forEach(l => { totalH += (l.size * 1.34); });
 
-          const baseMarginBottom = isCompact ? 36 : 160;
-          const baseMarginTop = isCompact ? 60 : 220;
-          let startY = coverPos === 'top' ? (baseMarginTop + yOffset) : (canvasHeight - baseMarginBottom - totalH + yOffset);
+          let startY = coverPos === 'top' ? (220 + yOffset) : (canvasHeight - 160 - totalH + yOffset);
 
           const showBar = checkAccentBar.checked;
-          const barWidth = isCompact ? 12 : 28;
-          const padLeft = isCompact ? 28 : 64;
-          const textX = showBar ? (padLeft + barWidth + (isCompact ? 10 : 24)) : padLeft;
+          const barWidth = 28;
+          const textX = showBar ? (64 + barWidth + 24) : 64;
 
           if (showBar) {
             ctx.fillStyle = inputAccentColor.value;
-            ctx.fillRect(padLeft, startY, barWidth, totalH);
+            ctx.fillRect(64, startY, barWidth, totalH);
           }
 
           ctx.textAlign = "left";
           ctx.textBaseline = "alphabetic";
           ctx.shadowColor = "rgba(0,0,0,0.9)";
-          ctx.shadowBlur = isCompact ? 6 : 12;
+          ctx.shadowBlur = 12;
 
           let curY = startY;
           lines.forEach(l => {
@@ -928,10 +942,9 @@
     }
 
     function drawKhaowangLogo(isWhiteBg) {
-      const isCompact = (currentRatio === "3:2" || currentRatio === "1:1");
-      const size = isCompact ? 60 : 110;
-      const x = isCompact ? 24 : 64;
-      const y = isCompact ? 20 : 56;
+      const size = 110;
+      const x = 64;
+      const y = 56;
       const centerX = x + size / 2;
       const centerY = y + size / 2;
 
@@ -941,15 +954,15 @@
       ctx.fillStyle = "#b31929";
       ctx.fill();
       ctx.strokeStyle = isWhiteBg ? "rgba(0,0,0,0.12)" : "rgba(255,255,255,0.25)";
-      ctx.lineWidth = isCompact ? 1.5 : 2;
+      ctx.lineWidth = 2;
       ctx.stroke();
 
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       ctx.fillStyle = "#ffffff";
-      ctx.font = `800 ${isCompact ? 16 : 30}px 'Kanit', sans-serif`;
-      ctx.fillText("เขาวัง", centerX, centerY - (isCompact ? 7 : 14));
-      ctx.fillText("เดลี่", centerX, centerY + (isCompact ? 9 : 18));
+      ctx.font = "800 30px 'Kanit', sans-serif";
+      ctx.fillText("เขาวัง", centerX, centerY - 14);
+      ctx.fillText("เดลี่", centerX, centerY + 18);
       ctx.restore();
     }
 
@@ -959,8 +972,9 @@
       if (!credit) return;
 
       const isCompact = (currentRatio === "3:2" || currentRatio === "1:1");
-      const scale = isCompact ? (canvasWidth / 1080) : 1.0;
-      const creditFontSize = Math.max(10, Math.round(parseInt(sliderCreditSize.value, 10) * (isCompact ? 0.75 : 1.0)));
+      const creditFontSize = isCompact 
+        ? Math.max(10, Math.round(parseInt(sliderCreditSize.value, 10) * 0.72))
+        : parseInt(sliderCreditSize.value, 10);
       const pos = selectCreditPos.value;
       const style = selectCreditStyle.value;
 
@@ -977,7 +991,7 @@
       const textWidth = ctx.measureText(credit.toUpperCase()).width;
 
       if (pos === 'vertical-right-bottom' || pos === 'vertical-right-top') {
-        const posX = canvasWidth - (currentRatio === "4:5" ? 40 : (isCompact ? 18 : 30));
+        const posX = canvasWidth - (currentRatio === "4:5" ? 40 : (isCompact ? 16 : 28));
         let posY = (pos === 'vertical-right-top') ? (canvasHeight * 0.28) : (canvasHeight * 0.70);
 
         ctx.translate(posX, posY);
@@ -985,7 +999,7 @@
 
         if (hasBadge) {
           const padX = isCompact ? 8 : 14;
-          const padY = isCompact ? 4 : 6;
+          const padY = isCompact ? 3 : 6;
           ctx.fillStyle = badgeBg;
           ctx.beginPath();
           ctx.roundRect(-textWidth / 2 - padX, -creditFontSize - padY / 2, textWidth + padX * 2, creditFontSize + padY * 2, 6);
@@ -1000,30 +1014,30 @@
         ctx.fillText(credit.toUpperCase(), 0, 0);
 
       } else {
-        const bottomY = canvasHeight - (currentRatio === "4:5" ? 44 : (isCompact ? 16 : 26));
+        const bottomY = canvasHeight - (currentRatio === "4:5" ? 44 : (isCompact ? 14 : 26));
         let posX = 0;
 
         if (pos === 'horizontal-bottom-right') {
-          const marginX = currentRatio === "4:5" ? 64 : (isCompact ? 20 : 40);
+          const marginX = currentRatio === "4:5" ? 64 : (isCompact ? 16 : 36);
           posX = canvasWidth - marginX;
           ctx.textAlign = "right";
 
           if (hasBadge) {
             const padX = isCompact ? 8 : 14;
-            const padY = isCompact ? 4 : 6;
+            const padY = isCompact ? 3 : 6;
             ctx.fillStyle = badgeBg;
             ctx.beginPath();
             ctx.roundRect(posX - textWidth - padX, bottomY - creditFontSize - padY / 2, textWidth + padX * 2, creditFontSize + padY * 2, 6);
             ctx.fill();
           }
         } else {
-          const marginX = currentRatio === "4:5" ? 64 : (isCompact ? 20 : 40);
+          const marginX = currentRatio === "4:5" ? 64 : (isCompact ? 16 : 36);
           posX = marginX;
           ctx.textAlign = "left";
 
           if (hasBadge) {
             const padX = isCompact ? 8 : 14;
-            const padY = isCompact ? 4 : 6;
+            const padY = isCompact ? 3 : 6;
             ctx.fillStyle = badgeBg;
             ctx.beginPath();
             ctx.roundRect(posX - padX, bottomY - creditFontSize - padY / 2, textWidth + padX * 2, creditFontSize + padY * 2, 6);
@@ -1264,6 +1278,7 @@
 
       newsImage.onload = () => {
         isNewsImageLoaded = true;
+        updateControlPanels();
         render();
       };
       newsImage.src = off.toDataURL('image/jpeg', 0.9);
