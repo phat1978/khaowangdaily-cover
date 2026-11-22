@@ -79,7 +79,6 @@
 
     <!-- Quick Mode Switcher & Export Buttons Top Bar -->
     <div class="flex items-center gap-2">
-      <!-- ปุ่มสลับโหมดด่วนบนแถบเมนู -->
       <div class="hidden md:flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800 mr-1">
         <button type="button" id="topQuickCover" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-[#b31929] text-white transition">โหมดปกข่าว</button>
         <button type="button" id="topQuickAd" class="px-2.5 py-1 rounded-lg text-xs font-bold text-slate-300 hover:text-white transition">แบนเนอร์ 300×250</button>
@@ -360,7 +359,6 @@
             <span class="text-[10px] text-slate-400">ส่งออก 600×500 px</span>
           </div>
 
-          <!-- ปุ่มเลือกพรีเซ็ตสำเร็จรูป -->
           <div class="grid grid-cols-2 gap-1.5">
             <button type="button" data-adpreset="ads" class="ad-preset-btn p-2 rounded-lg border border-amber-500/50 bg-amber-500/20 text-amber-100 text-[11px] font-bold text-left transition">
               📢 ขายพื้นที่โฆษณา (/ads/)
@@ -376,7 +374,6 @@
             </button>
           </div>
 
-          <!-- โลโก้ตัวอักษร เขาวังเดลี่ -->
           <div class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
             <div class="flex items-center justify-between">
               <span class="text-[11px] font-bold text-slate-200">โลโก้หัวแบนเนอร์ (เขาวังเดลี่)</span>
@@ -397,7 +394,6 @@
             </div>
           </div>
 
-          <!-- เลือกสไตล์ Layout & โทนสีพื้นหลัง -->
           <div class="grid grid-cols-2 gap-2">
             <div>
               <label class="text-[11px] text-slate-400 block mb-1">รูปแบบการจัดวาง</label>
@@ -417,7 +413,6 @@
             </div>
           </div>
 
-          <!-- ตัวเลือกภาพถ่ายประกอบแบนเนอร์ -->
           <div class="flex items-center justify-between bg-slate-900 p-2 rounded-xl border border-slate-800 text-[11px]">
             <label class="inline-flex items-center gap-1.5 text-slate-300 cursor-pointer">
               <input type="checkbox" id="checkAdUsePhoto" class="accent-amber-500 rounded">
@@ -429,7 +424,6 @@
             </label>
           </div>
 
-          <!-- ช่องกรอกข้อความแบนเนอร์ -->
           <div class="space-y-2">
             <div>
               <label class="text-[11px] text-slate-400 block mb-1">ป้ายหมวดหมู่เล็ก (เว้นว่างได้)</label>
@@ -489,24 +483,27 @@
           </select>
         </div>
 
-        <!-- PHOTO CREDIT SUITE -->
+        <!-- PHOTO CREDIT & ANTI-CROP WATERMARK SUITE -->
         <div id="creditBoxSection" class="space-y-3 bg-slate-950/70 p-3.5 rounded-xl border border-slate-800">
           <div class="flex items-center justify-between">
             <label class="text-xs text-slate-200 font-semibold flex items-center gap-1.5">
               <i data-lucide="camera" class="w-3.5 h-3.5 text-rose-400"></i>
-              <span>เครดิตเจ้าของรูป (Photo Credit)</span>
+              <span>เครดิตภาพ & ลายน้ำกันครอป</span>
             </label>
-            <span class="text-[10px] text-slate-400">ปรับหลบหลีกภาพ</span>
+            <button type="button" id="btnResetCreditOffset" class="text-[10px] text-rose-400 hover:underline">รีเซ็ตตำแหน่ง</button>
           </div>
           
-          <input type="text" id="inputCredit" value="เขาวังเดลี่" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-rose-500" placeholder="ใส่เครดิตภาพ หรือเว้นว่างได้">
+          <input type="text" id="inputCredit" value="KHAOWANGDAILY" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-rose-500" placeholder="ใส่เครดิตภาพ หรือเว้นว่างได้">
 
           <div class="grid grid-cols-2 gap-3 pt-1">
             <div>
-              <label class="text-[11px] text-slate-400 block mb-1">ทิศทางการวางเครดิต</label>
+              <label class="text-[11px] text-slate-400 block mb-1">ตำแหน่งวาง (กันครอป)</label>
               <select id="selectCreditPos" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-2 py-1.5 text-xs text-slate-200 focus:outline-none">
                 <option value="vertical-right-bottom" selected>แนวตั้ง ชิดขวาล่าง (BBC)</option>
                 <option value="vertical-right-top">แนวตั้ง ชิดขวาบน</option>
+                <option value="anchor-mid-right">แนวตั้ง กลางภาพเยื้องขวา (กันครอป)</option>
+                <option value="anchor-mid-left">แนวตั้ง กลางภาพเยื้องซ้าย (กันครอป)</option>
+                <option value="anchor-center-bottom">แนวนอน กึ่งกลางเหนือพาดหัว (กันครอป)</option>
                 <option value="horizontal-bottom-right">แนวนอน ชิดขวาล่าง</option>
                 <option value="horizontal-bottom-left">แนวนอน ชิดซ้ายล่าง</option>
               </select>
@@ -523,12 +520,49 @@
             </div>
           </div>
 
+          <!-- ความโปร่งแสง & โหมดผสมสี (Blend Mode) -->
+          <div class="grid grid-cols-2 gap-3 pt-1">
+            <div>
+              <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                <span>ความโปร่งแสง</span>
+                <span id="creditOpacityVal" class="font-mono text-slate-300">90%</span>
+              </div>
+              <input id="sliderCreditOpacity" type="range" min="15" max="100" step="5" value="90" class="w-full accent-rose-600 cursor-pointer h-1 bg-slate-800 rounded-lg">
+            </div>
+
+            <div>
+              <label class="text-[11px] text-slate-400 block mb-1">โหมดซึมกลืนภาพ</label>
+              <select id="selectCreditBlend" class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-2 py-1 text-xs text-slate-200 focus:outline-none">
+                <option value="source-over" selected>ปกติ (Normal)</option>
+                <option value="overlay">กลืนพื้นผิว (Overlay - เนียนลบยาก)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- ขนาด & ปรับขยับละเอียด X/Y -->
           <div class="pt-1">
             <div class="flex justify-between text-[11px] text-slate-400 mb-1">
               <span>ขนาดตัวหนังสือเครดิต</span>
               <span id="creditSizeVal" class="font-mono text-slate-300">18px</span>
             </div>
             <input id="sliderCreditSize" type="range" min="10" max="32" step="1" value="18" class="w-full accent-rose-600 cursor-pointer h-1 bg-slate-800 rounded-lg">
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 pt-1">
+            <div>
+              <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                <span>ขยับ ซ้าย-ขวา (X)</span>
+                <span id="creditOffsetXVal" class="font-mono text-slate-300">0</span>
+              </div>
+              <input id="sliderCreditOffsetX" type="range" min="-450" max="450" step="5" value="0" class="w-full accent-rose-600 cursor-pointer h-1 bg-slate-800 rounded-lg">
+            </div>
+            <div>
+              <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                <span>ขยับ บน-ล่าง (Y)</span>
+                <span id="creditOffsetYVal" class="font-mono text-slate-300">0</span>
+              </div>
+              <input id="sliderCreditOffsetY" type="range" min="-500" max="500" step="5" value="0" class="w-full accent-rose-600 cursor-pointer h-1 bg-slate-800 rounded-lg">
+            </div>
           </div>
         </div>
 
@@ -588,7 +622,6 @@
     let imgOffsetY = 0;
     let imgRotation = 0;
 
-    // โลโก้สำหรับแบนเนอร์ 300x250
     let adLogoImg = new Image();
     let isAdLogoLoaded = false;
 
@@ -623,11 +656,19 @@
     const sliderLine4Size = document.getElementById('sliderLine4Size');
     const line4SizeVal = document.getElementById('line4SizeVal');
 
+    // Credit & Watermark Elements
     const inputCredit = document.getElementById('inputCredit');
     const selectCreditPos = document.getElementById('selectCreditPos');
     const selectCreditStyle = document.getElementById('selectCreditStyle');
     const sliderCreditSize = document.getElementById('sliderCreditSize');
     const creditSizeVal = document.getElementById('creditSizeVal');
+    const sliderCreditOpacity = document.getElementById('sliderCreditOpacity');
+    const creditOpacityVal = document.getElementById('creditOpacityVal');
+    const selectCreditBlend = document.getElementById('selectCreditBlend');
+    const sliderCreditOffsetX = document.getElementById('sliderCreditOffsetX');
+    const creditOffsetXVal = document.getElementById('creditOffsetXVal');
+    const sliderCreditOffsetY = document.getElementById('sliderCreditOffsetY');
+    const creditOffsetYVal = document.getElementById('creditOffsetYVal');
 
     document.getElementById('inputSplitText').value = "งานวิจัยของมหาวิทยาลัยเคมบริดจ์ในสหราชอาณาจักรพบว่า ผู้หญิงมีแนวโน้มต้องรอนานกว่าผู้ชายอย่างมีนัยสำคัญในการได้รับการวินิจฉัยโรคภูมิคุ้มกันทำลายตนเอง\n\n• ผู้หญิง 43.3% ระบุว่าอาการถูกเข้าใจผิดว่าเกิดจากจิตใจ\n• เทียบกับผู้ชายเพียง 32.7%";
     document.getElementById('inputCleanText').value = "งานวิจัยซึ่งตีพิมพ์ในวารสารทางการแพทย์ เดอะแลนเซ็ต (The Lancet)\nมีผู้เข้าร่วมกว่า 6,600 คน ส่วนใหญ่เป็นผู้หญิงจากสหราชอาณาจักร\n\nข้อจำกัดประการหนึ่งของการศึกษานี้ คือเป็นการศึกษาจากแบบสำรวจออนไลน์ ซึ่งอาศัยการรายงานประสบการณ์การได้รับการวินิจฉัยโดยผู้เข้าร่วมเอง";
@@ -661,7 +702,6 @@
       document.getElementById('photoControlsBox').classList.toggle('hidden', currentTpl === 'clean-text');
       document.getElementById('creditBoxSection').classList.toggle('hidden', currentTpl === 'clean-text' || isAdBbc);
 
-      // อัปเดตสถานะปุ่มสลับโหมดบนแถบเมนูบนสุด
       const topQuickCover = document.getElementById('topQuickCover');
       const topQuickAd = document.getElementById('topQuickAd');
       if (isAdBbc) {
@@ -732,7 +772,6 @@
     document.getElementById('topQuickCover').addEventListener('click', () => switchTemplate('cover'));
     document.getElementById('topQuickAd').addEventListener('click', () => switchTemplate('ad-bbc'));
 
-    // พรีเซ็ตข้อความสำหรับโหมดแบนเนอร์ 300x250
     const adPresets = {
       ads: {
         theme: 'crimson',
@@ -798,7 +837,6 @@
       });
     });
 
-    // อัปโหลดโลโก้สำหรับแบนเนอร์ 300x250
     document.getElementById('adLogoUpload').addEventListener('change', (e) => {
       const file = e.target.files[0];
       if (!file) return;
@@ -883,7 +921,6 @@
       }
     }
 
-    // ฟังก์ชันวาดแบนเนอร์โฆษณา 300x250 (600x500 Retina) สไตล์ BBC
     function renderAdBbcTemplate() {
       const W = 600;
       const H = 500;
@@ -900,20 +937,17 @@
       };
       const pal = palettes[theme] || palettes.crimson;
 
-      // 1. วาดพื้นหลังไล่เฉดสีเข้มสไตล์ BBC
       const bgGrad = ctx.createRadialGradient(W * 0.78, H * 0.35, 30, W * 0.5, H * 0.5, W * 0.85);
       bgGrad.addColorStop(0, pal.c1);
       bgGrad.addColorStop(1, pal.c2);
       ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, W, H);
 
-      // 2. วาดภาพถ่าย (ถ้าเปิดใช้งาน)
       if (usePhoto && isUserUploadedPhoto && isNewsImageLoaded) {
         ctx.save();
         if (isGray) ctx.filter = 'grayscale(100%) contrast(115%)';
 
         if (layout === 'split-right') {
-          // แบ่งภาพถ่ายด้านขวาเหมือนแบนเนอร์ World of Secrets ของ BBC
           ctx.beginPath();
           ctx.moveTo(W * 0.56, 0);
           ctx.lineTo(W, 0);
@@ -925,14 +959,12 @@
           drawPhoto(W * 0.45, 0, W * 0.58, H);
           ctx.filter = 'none';
 
-          // เงาขอบรอยตัดให้กลมกลืน
           const edgeGrad = ctx.createLinearGradient(W * 0.48, 0, W * 0.65, 0);
           edgeGrad.addColorStop(0, pal.c2);
           edgeGrad.addColorStop(1, 'rgba(0,0,0,0)');
           ctx.fillStyle = edgeGrad;
           ctx.fillRect(W * 0.45, 0, W * 0.25, H);
         } else {
-          // ภาพเต็มพื้นหลังพร้อมฟิลเตอร์สีเข้ม
           drawPhoto(0, 0, W, H);
           ctx.filter = 'none';
           ctx.fillStyle = pal.c2;
@@ -942,7 +974,6 @@
         }
         ctx.restore();
       } else {
-        // กราฟิกวงกลมบางๆ เพิ่มมิติเมื่อไม่ได้ใส่ภาพถ่าย
         ctx.save();
         ctx.strokeStyle = 'rgba(255,255,255,0.05)';
         ctx.lineWidth = 28;
@@ -962,7 +993,6 @@
       const alignX = isSplitRight ? 36 : W / 2;
       ctx.textAlign = isSplitRight ? 'left' : 'center';
 
-      // 3. วาดโลโก้ "เขาวังเดลี่" ด้านบน
       const logoH = parseInt(document.getElementById('sliderAdLogoSize').value, 10);
       const invertWhite = document.getElementById('checkAdLogoWhite').checked;
       let topCursorY = 34;
@@ -981,7 +1011,6 @@
         ctx.restore();
         topCursorY += drawH + 14;
       } else {
-        // ถ้ายังไม่ได้อัปโหลดไฟล์โลโก้ ให้วาดตัวหนังสือ "เขาวังเดลี่" คมชัดเป็นค่าเริ่มต้น
         ctx.save();
         ctx.font = `800 ${Math.round(logoH * 0.72)}px 'Kanit', sans-serif`;
         ctx.fillStyle = '#ffffff';
@@ -991,7 +1020,6 @@
         topCursorY += Math.round(logoH * 0.78) + 12;
       }
 
-      // 4. ป้ายหมวดหมู่เล็ก (ถ้ามี)
       const tag = document.getElementById('inputAdTag').value.trim();
       if (tag) {
         ctx.save();
@@ -1003,7 +1031,6 @@
         topCursorY += 32;
       }
 
-      // 5. พาดหัวหลัก (Headline 2 บรรทัด)
       const h1 = document.getElementById('inputAdHead1').value.trim();
       const h2 = document.getElementById('inputAdHead2').value.trim();
       const headFont = (theme === 'charcoal') ? "'Noto Serif Thai', serif" : "'Prompt', sans-serif";
@@ -1027,7 +1054,6 @@
       }
       ctx.restore();
 
-      // 6. คำขยายความ (Sub-headline)
       const sub = document.getElementById('inputAdSub').value.trim();
       if (sub) {
         ctx.save();
@@ -1036,7 +1062,6 @@
         ctx.textBaseline = 'top';
         const maxSubW = isSplitRight ? (W * 0.48) : (W - 64);
         
-        // ตัดบรรทัดอัตโนมัติถ้ายาวเกิน
         const words = sub.split(' ');
         let line = '';
         let subY = textY + 10;
@@ -1054,7 +1079,6 @@
         ctx.restore();
       }
 
-      // 7. ปุ่มกดสีดำสนิทด้านล่าง (CTA Button แบบ BBC)
       const cta = document.getElementById('inputAdCta').value.trim();
       if (cta) {
         ctx.save();
@@ -1071,7 +1095,6 @@
         ctx.fill();
         ctx.shadowBlur = 0;
 
-        // ไอคอนสามเหลี่ยมสีแดง + ข้อความสีขาว
         ctx.font = "700 22px 'Prompt', sans-serif";
         const label = "▶  " + cta;
         ctx.textAlign = 'center';
@@ -1392,6 +1415,7 @@
       ctx.restore();
     }
 
+    // ฟังก์ชันวาดเครดิตและลายน้ำกันครอป
     function drawCredit() {
       const credit = inputCredit.value.trim();
       if (!credit) return;
@@ -1402,8 +1426,14 @@
         : parseInt(sliderCreditSize.value, 10);
       const pos = selectCreditPos.value;
       const style = selectCreditStyle.value;
+      const opacity = parseInt(sliderCreditOpacity.value, 10) / 100;
+      const blendMode = selectCreditBlend.value;
+      const offsetX = parseInt(sliderCreditOffsetX.value, 10);
+      const offsetY = parseInt(sliderCreditOffsetY.value, 10);
 
       ctx.save();
+      ctx.globalAlpha = opacity;
+      ctx.globalCompositeOperation = blendMode;
 
       let isBlack = style === 'black-plain' || style === 'black-badge';
       let hasBadge = style === 'white-badge' || style === 'black-badge';
@@ -1415,9 +1445,35 @@
       ctx.font = `600 ${creditFontSize}px 'Prompt', sans-serif`;
       const textWidth = ctx.measureText(credit.toUpperCase()).width;
 
-      if (pos === 'vertical-right-bottom' || pos === 'vertical-right-top') {
-        const posX = canvasWidth - (currentRatio === "4:5" ? 40 : (isCompact ? 16 : 28));
-        let posY = (pos === 'vertical-right-top') ? (canvasHeight * 0.28) : (canvasHeight * 0.70);
+      const isVertical = (
+        pos === 'vertical-right-bottom' ||
+        pos === 'vertical-right-top' ||
+        pos === 'anchor-mid-right' ||
+        pos === 'anchor-mid-left'
+      );
+
+      if (isVertical) {
+        let posX = 0;
+        let posY = 0;
+
+        if (pos === 'vertical-right-bottom') {
+          posX = canvasWidth - (currentRatio === "4:5" ? 40 : (isCompact ? 16 : 28));
+          posY = canvasHeight * 0.70;
+        } else if (pos === 'vertical-right-top') {
+          posX = canvasWidth - (currentRatio === "4:5" ? 40 : (isCompact ? 16 : 28));
+          posY = canvasHeight * 0.28;
+        } else if (pos === 'anchor-mid-right') {
+          // วางเกาะวัตถุหลักด้านขวา (ครอปทิ้งไม่ได้)
+          posX = canvasWidth * 0.76;
+          posY = canvasHeight * 0.46;
+        } else if (pos === 'anchor-mid-left') {
+          // วางเกาะวัตถุหลักด้านซ้าย (ครอปทิ้งไม่ได้)
+          posX = canvasWidth * 0.24;
+          posY = canvasHeight * 0.46;
+        }
+
+        posX += offsetX;
+        posY += offsetY;
 
         ctx.translate(posX, posY);
         ctx.rotate(-Math.PI / 2);
@@ -1433,18 +1489,33 @@
 
         ctx.textAlign = "center";
         ctx.fillStyle = textColor;
-        ctx.shadowColor = shadowColor;
-        ctx.shadowBlur = hasBadge ? 0 : 8;
+        ctx.shadowColor = (hasBadge || blendMode === 'overlay') ? 'transparent' : shadowColor;
+        ctx.shadowBlur = (hasBadge || blendMode === 'overlay') ? 0 : 8;
         ctx.letterSpacing = "2px";
         ctx.fillText(credit.toUpperCase(), 0, 0);
 
       } else {
-        const bottomY = canvasHeight - (currentRatio === "4:5" ? 44 : (isCompact ? 14 : 26));
+        let bottomY = canvasHeight - (currentRatio === "4:5" ? 44 : (isCompact ? 14 : 26));
         let posX = 0;
 
-        if (pos === 'horizontal-bottom-right') {
+        if (pos === 'anchor-center-bottom') {
+          // กึ่งกลางเหนือพาดหัวข่าว (กันครอป 16:9)
+          posX = (canvasWidth / 2) + offsetX;
+          bottomY = (currentRatio === "4:5" ? canvasHeight * 0.68 : canvasHeight * 0.85) + offsetY;
+          ctx.textAlign = "center";
+
+          if (hasBadge) {
+            const padX = isCompact ? 8 : 14;
+            const padY = isCompact ? 3 : 6;
+            ctx.fillStyle = badgeBg;
+            ctx.beginPath();
+            ctx.roundRect(posX - textWidth / 2 - padX, bottomY - creditFontSize - padY / 2, textWidth + padX * 2, creditFontSize + padY * 2, 6);
+            ctx.fill();
+          }
+        } else if (pos === 'horizontal-bottom-right') {
           const marginX = currentRatio === "4:5" ? 64 : (isCompact ? 16 : 36);
-          posX = canvasWidth - marginX;
+          posX = canvasWidth - marginX + offsetX;
+          bottomY += offsetY;
           ctx.textAlign = "right";
 
           if (hasBadge) {
@@ -1457,7 +1528,8 @@
           }
         } else {
           const marginX = currentRatio === "4:5" ? 64 : (isCompact ? 16 : 36);
-          posX = marginX;
+          posX = marginX + offsetX;
+          bottomY += offsetY;
           ctx.textAlign = "left";
 
           if (hasBadge) {
@@ -1471,8 +1543,8 @@
         }
 
         ctx.fillStyle = textColor;
-        ctx.shadowColor = shadowColor;
-        ctx.shadowBlur = hasBadge ? 0 : 8;
+        ctx.shadowColor = (hasBadge || blendMode === 'overlay') ? 'transparent' : shadowColor;
+        ctx.shadowBlur = (hasBadge || blendMode === 'overlay') ? 0 : 8;
         ctx.fillText(credit, posX, bottomY);
       }
 
@@ -1609,7 +1681,39 @@
     sliderLine3Size.addEventListener('input', (e) => { line3SizeVal.textContent = e.target.value + 'px'; render(); });
     sliderLine4Size.addEventListener('input', (e) => { line4SizeVal.textContent = e.target.value + 'px'; render(); });
     sliderTextTop.addEventListener('input', (e) => { textTopVal.textContent = e.target.value + 'px'; render(); });
+    
+    // Credit & Watermark Sliders
     sliderCreditSize.addEventListener('input', (e) => { creditSizeVal.textContent = e.target.value + 'px'; render(); });
+    sliderCreditOpacity.addEventListener('input', (e) => { creditOpacityVal.textContent = e.target.value + '%'; render(); });
+    sliderCreditOffsetX.addEventListener('input', (e) => { creditOffsetXVal.textContent = e.target.value; render(); });
+    sliderCreditOffsetY.addEventListener('input', (e) => { creditOffsetYVal.textContent = e.target.value; render(); });
+
+    // ปรับค่าอัตโนมัติเมื่อเลือกตำแหน่งกันครอป (ให้ดูเนียนทันที)
+    selectCreditPos.addEventListener('change', (e) => {
+      const val = e.target.value;
+      sliderCreditOffsetX.value = 0;
+      sliderCreditOffsetY.value = 0;
+      creditOffsetXVal.textContent = '0';
+      creditOffsetYVal.textContent = '0';
+
+      if (val.startsWith('anchor-')) {
+        sliderCreditOpacity.value = 45;
+        creditOpacityVal.textContent = '45%';
+      } else {
+        sliderCreditOpacity.value = 90;
+        creditOpacityVal.textContent = '90%';
+        selectCreditBlend.value = 'source-over';
+      }
+      render();
+    });
+
+    document.getElementById('btnResetCreditOffset').addEventListener('click', () => {
+      sliderCreditOffsetX.value = 0;
+      sliderCreditOffsetY.value = 0;
+      creditOffsetXVal.textContent = '0';
+      creditOffsetYVal.textContent = '0';
+      render();
+    });
 
     document.getElementById('btnSplitAddBullet').addEventListener('click', () => {
       const el = document.getElementById('inputSplitText');
@@ -1625,7 +1729,7 @@
       'inputSplitText', 'selectSplitOrder', 'checkSplitArrow',
       'inputCleanText', 'inputQuoteBody', 'inputQuoteAuthor', 'inputQuoteRole',
       'inputLocName', 'inputLocDate', 'selectLogoOption',
-      'inputCredit', 'selectCreditPos', 'selectCreditStyle',
+      'inputCredit', 'selectCreditPos', 'selectCreditStyle', 'selectCreditBlend',
       'selectAdLayout', 'selectAdTheme', 'checkAdUsePhoto', 'checkAdGrayscale',
       'checkAdLogoWhite', 'sliderAdLogoSize', 'inputAdTag',
       'inputAdHead1', 'inputAdHead2', 'inputAdSub', 'inputAdCta'
