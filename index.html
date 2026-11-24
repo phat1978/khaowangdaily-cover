@@ -77,16 +77,22 @@
       </div>
     </div>
 
-    <!-- Quick Mode Switcher & Export Buttons Top Bar -->
+    <!-- Quick Mode Switcher, Batch WebP Link & Export Buttons Top Bar -->
     <div class="flex items-center gap-2">
-      <div class="hidden md:flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800 mr-1">
+      <div class="hidden xl:flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800 mr-1">
         <button type="button" id="topQuickCover" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-[#b31929] text-white transition">โหมดปกข่าว</button>
         <button type="button" id="topQuickAd" class="px-2.5 py-1 rounded-lg text-xs font-bold text-slate-300 hover:text-white transition">แบนเนอร์ 300×250</button>
       </div>
 
+      <!-- ปุ่มลิงก์ข้ามไปหน้าแปลงไฟล์ WebP แบบกลุ่ม (คลังที่ 2) -->
+      <a href="https://phat1978.github.io/khaowangdaily-photo-webp/" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-xl text-emerald-300 bg-emerald-950/60 hover:bg-emerald-900/80 border border-emerald-500/40 transition shadow-sm active:scale-95" title="เปิดระบบแปลงไฟล์ WebP แบบกลุ่ม (3-5+ ภาพ)">
+        <i data-lucide="images" class="w-4 h-4 text-emerald-400"></i>
+        <span class="hidden sm:inline">แปลงไฟล์ WebP</span>
+      </a>
+
       <button id="btnCopyImage" class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-xl text-slate-200 bg-slate-800 hover:bg-slate-750 border border-slate-700 transition shadow-sm active:scale-95" title="คัดลอกรูปภาพ">
         <i data-lucide="copy" class="w-4 h-4 text-rose-400"></i>
-        <span class="hidden md:inline">คัดลอก</span>
+        <span class="hidden lg:inline">คัดลอก</span>
       </button>
 
       <button id="btnDownloadTopWebp" class="inline-flex items-center gap-1.5 px-3 py-2 bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs rounded-xl shadow-md active:scale-95 transition-all" title="บันทึก WebP ขนาดเบา สำหรับขึ้นเว็บ">
@@ -1463,11 +1469,9 @@
           posX = canvasWidth - (currentRatio === "4:5" ? 40 : (isCompact ? 16 : 28));
           posY = canvasHeight * 0.28;
         } else if (pos === 'anchor-mid-right') {
-          // วางเกาะวัตถุหลักด้านขวา (ครอปทิ้งไม่ได้)
           posX = canvasWidth * 0.76;
           posY = canvasHeight * 0.46;
         } else if (pos === 'anchor-mid-left') {
-          // วางเกาะวัตถุหลักด้านซ้าย (ครอปทิ้งไม่ได้)
           posX = canvasWidth * 0.24;
           posY = canvasHeight * 0.46;
         }
@@ -1499,7 +1503,6 @@
         let posX = 0;
 
         if (pos === 'anchor-center-bottom') {
-          // กึ่งกลางเหนือพาดหัวข่าว (กันครอป 16:9)
           posX = (canvasWidth / 2) + offsetX;
           bottomY = (currentRatio === "4:5" ? canvasHeight * 0.68 : canvasHeight * 0.85) + offsetY;
           ctx.textAlign = "center";
@@ -1688,7 +1691,6 @@
     sliderCreditOffsetX.addEventListener('input', (e) => { creditOffsetXVal.textContent = e.target.value; render(); });
     sliderCreditOffsetY.addEventListener('input', (e) => { creditOffsetYVal.textContent = e.target.value; render(); });
 
-    // ปรับค่าอัตโนมัติเมื่อเลือกตำแหน่งกันครอป (ให้ดูเนียนทันที)
     selectCreditPos.addEventListener('change', (e) => {
       const val = e.target.value;
       sliderCreditOffsetX.value = 0;
